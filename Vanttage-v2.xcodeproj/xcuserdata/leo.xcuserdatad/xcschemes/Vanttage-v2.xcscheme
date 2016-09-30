@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B3E1BB301D9E92420086FF9D"
+               BuildableName = "Vanttage-v2.app"
+               BlueprintName = "Vanttage-v2"
+               ReferencedContainer = "container:Vanttage-v2.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -12,7 +28,36 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B3E1BB471D9E92420086FF9D"
+               BuildableName = "Vanttage-v2Tests.xctest"
+               BlueprintName = "Vanttage-v2Tests"
+               ReferencedContainer = "container:Vanttage-v2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B3E1BB521D9E92420086FF9D"
+               BuildableName = "Vanttage-v2UITests.xctest"
+               BlueprintName = "Vanttage-v2UITests"
+               ReferencedContainer = "container:Vanttage-v2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B3E1BB301D9E92420086FF9D"
+            BuildableName = "Vanttage-v2.app"
+            BlueprintName = "Vanttage-v2"
+            ReferencedContainer = "container:Vanttage-v2.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -26,6 +71,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B3E1BB301D9E92420086FF9D"
+            BuildableName = "Vanttage-v2.app"
+            BlueprintName = "Vanttage-v2"
+            ReferencedContainer = "container:Vanttage-v2.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -35,6 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B3E1BB301D9E92420086FF9D"
+            BuildableName = "Vanttage-v2.app"
+            BlueprintName = "Vanttage-v2"
+            ReferencedContainer = "container:Vanttage-v2.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
