@@ -8,13 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		B3E1BB351D9E92420086FF9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB341D9E92420086FF9D /* AppDelegate.swift */; };
-		B3E1BB371D9E92420086FF9D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB361D9E92420086FF9D /* ViewController.swift */; };
 		B3E1BB3A1D9E92420086FF9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E1BB381D9E92420086FF9D /* Main.storyboard */; };
 		B3E1BB3D1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB3B1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld */; };
 		B3E1BB3F1D9E92420086FF9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3E1BB3E1D9E92420086FF9D /* Assets.xcassets */; };
 		B3E1BB421D9E92420086FF9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E1BB401D9E92420086FF9D /* LaunchScreen.storyboard */; };
 		B3E1BB4D1D9E92420086FF9D /* Vanttage_v2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB4C1D9E92420086FF9D /* Vanttage_v2Tests.swift */; };
 		B3E1BB581D9E92420086FF9D /* Vanttage_v2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB571D9E92420086FF9D /* Vanttage_v2UITests.swift */; };
+		B3E1BB681D9E972C0086FF9D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB671D9E972C0086FF9D /* LoginViewController.swift */; };
+		B3E1BB6B1D9E97510086FF9D /* LembrarSenhaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB6A1D9E97510086FF9D /* LembrarSenhaViewController.swift */; };
+		B3E1BB761D9E98050086FF9D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB751D9E98050086FF9D /* SWRevealViewController.m */; };
+		B3E1BB781D9E98420086FF9D /* CriarContaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB771D9E98420086FF9D /* CriarContaViewController.swift */; };
+		B3E1BB7A1D9E98610086FF9D /* cell1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB791D9E98610086FF9D /* cell1TableViewCell.swift */; };
+		B3E1BB7C1D9E986B0086FF9D /* cell2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB7B1D9E986B0086FF9D /* cell2TableViewCell.swift */; };
+		B3E1BB7E1D9E98760086FF9D /* cell3TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB7D1D9E98760086FF9D /* cell3TableViewCell.swift */; };
+		B3E1BB801D9E99270086FF9D /* layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB7F1D9E99270086FF9D /* layout.swift */; };
+		B3E1BB821D9E9A030086FF9D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB811D9E9A030086FF9D /* Color.swift */; };
+		B3E1BB841D9E9A5D0086FF9D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB831D9E9A5D0086FF9D /* MenuTableViewController.swift */; };
+		B3E1BB861D9E9A880086FF9D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB851D9E9A880086FF9D /* MapViewController.swift */; };
+		B3E1BB881D9E9AB70086FF9D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB871D9E9AB70086FF9D /* HomeViewController.swift */; };
+		B3E1BB8A1D9E9ADD0086FF9D /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB891D9E9ADD0086FF9D /* HomeTableViewCell.swift */; };
+		B3E1BB8C1D9E9B090086FF9D /* CartaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB8B1D9E9B090086FF9D /* CartaoViewController.swift */; };
+		B3E1BB8E1D9E9B2D0086FF9D /* CartaoLandScapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB8D1D9E9B2D0086FF9D /* CartaoLandScapeViewController.swift */; };
+		B3E1BB901D9E9B500086FF9D /* EditarPerfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB8F1D9E9B500086FF9D /* EditarPerfilViewController.swift */; };
+		B3E1BB921D9E9BB30086FF9D /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB911D9E9BB30086FF9D /* PopUpViewController.swift */; };
+		B3E1BB941D9E9BCE0086FF9D /* SobreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB931D9E9BCE0086FF9D /* SobreViewController.swift */; };
+		B3E1BB961D9EA7030086FF9D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB951D9EA7030086FF9D /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +55,6 @@
 /* Begin PBXFileReference section */
 		B3E1BB311D9E92420086FF9D /* Vanttage-v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vanttage-v2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E1BB341D9E92420086FF9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B3E1BB361D9E92420086FF9D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B3E1BB391D9E92420086FF9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B3E1BB3C1D9E92420086FF9D /* Vanttage_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vanttage_v2.xcdatamodel; sourceTree = "<group>"; };
 		B3E1BB3E1D9E92420086FF9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +66,27 @@
 		B3E1BB531D9E92420086FF9D /* Vanttage-v2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vanttage-v2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E1BB571D9E92420086FF9D /* Vanttage_v2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vanttage_v2UITests.swift; sourceTree = "<group>"; };
 		B3E1BB591D9E92420086FF9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3E1BB671D9E972C0086FF9D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B3E1BB6A1D9E97510086FF9D /* LembrarSenhaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LembrarSenhaViewController.swift; sourceTree = "<group>"; };
+		B3E1BB731D9E97E20086FF9D /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		B3E1BB741D9E98050086FF9D /* Vanttage-v2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vanttage-v2-Bridging-Header.h"; sourceTree = "<group>"; };
+		B3E1BB751D9E98050086FF9D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		B3E1BB771D9E98420086FF9D /* CriarContaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CriarContaViewController.swift; sourceTree = "<group>"; };
+		B3E1BB791D9E98610086FF9D /* cell1TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell1TableViewCell.swift; sourceTree = "<group>"; };
+		B3E1BB7B1D9E986B0086FF9D /* cell2TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell2TableViewCell.swift; sourceTree = "<group>"; };
+		B3E1BB7D1D9E98760086FF9D /* cell3TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell3TableViewCell.swift; sourceTree = "<group>"; };
+		B3E1BB7F1D9E99270086FF9D /* layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = layout.swift; sourceTree = "<group>"; };
+		B3E1BB811D9E9A030086FF9D /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B3E1BB831D9E9A5D0086FF9D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		B3E1BB851D9E9A880086FF9D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B3E1BB871D9E9AB70086FF9D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B3E1BB891D9E9ADD0086FF9D /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		B3E1BB8B1D9E9B090086FF9D /* CartaoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartaoViewController.swift; sourceTree = "<group>"; };
+		B3E1BB8D1D9E9B2D0086FF9D /* CartaoLandScapeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartaoLandScapeViewController.swift; sourceTree = "<group>"; };
+		B3E1BB8F1D9E9B500086FF9D /* EditarPerfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditarPerfilViewController.swift; sourceTree = "<group>"; };
+		B3E1BB911D9E9BB30086FF9D /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		B3E1BB931D9E9BCE0086FF9D /* SobreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SobreViewController.swift; sourceTree = "<group>"; };
+		B3E1BB951D9EA7030086FF9D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +137,15 @@
 		B3E1BB331D9E92420086FF9D /* Vanttage-v2 */ = {
 			isa = PBXGroup;
 			children = (
+				B3E1BB721D9E97BE0086FF9D /* Frameworks */,
+				B3E1BB661D9E97010086FF9D /* Controller */,
+				B3E1BB651D9E94D80086FF9D /* View */,
 				B3E1BB341D9E92420086FF9D /* AppDelegate.swift */,
-				B3E1BB361D9E92420086FF9D /* ViewController.swift */,
-				B3E1BB381D9E92420086FF9D /* Main.storyboard */,
 				B3E1BB3E1D9E92420086FF9D /* Assets.xcassets */,
-				B3E1BB401D9E92420086FF9D /* LaunchScreen.storyboard */,
 				B3E1BB431D9E92420086FF9D /* Info.plist */,
 				B3E1BB3B1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld */,
+				B3E1BB7F1D9E99270086FF9D /* layout.swift */,
+				B3E1BB811D9E9A030086FF9D /* Color.swift */,
 			);
 			path = "Vanttage-v2";
 			sourceTree = "<group>";
@@ -126,6 +166,104 @@
 				B3E1BB591D9E92420086FF9D /* Info.plist */,
 			);
 			path = "Vanttage-v2UITests";
+			sourceTree = "<group>";
+		};
+		B3E1BB651D9E94D80086FF9D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB381D9E92420086FF9D /* Main.storyboard */,
+				B3E1BB401D9E92420086FF9D /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		B3E1BB661D9E97010086FF9D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB711D9E97A60086FF9D /* EditarPerfil */,
+				B3E1BB701D9E978D0086FF9D /* Cartao */,
+				B3E1BB6F1D9E97850086FF9D /* Home */,
+				B3E1BB6E1D9E97760086FF9D /* Map */,
+				B3E1BB6D1D9E976D0086FF9D /* Menu */,
+				B3E1BB6C1D9E975F0086FF9D /* CriarConta */,
+				B3E1BB691D9E97380086FF9D /* login */,
+				B3E1BB911D9E9BB30086FF9D /* PopUpViewController.swift */,
+				B3E1BB931D9E9BCE0086FF9D /* SobreViewController.swift */,
+				B3E1BB951D9EA7030086FF9D /* MenuViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		B3E1BB691D9E97380086FF9D /* login */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB671D9E972C0086FF9D /* LoginViewController.swift */,
+				B3E1BB6A1D9E97510086FF9D /* LembrarSenhaViewController.swift */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		B3E1BB6C1D9E975F0086FF9D /* CriarConta */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB771D9E98420086FF9D /* CriarContaViewController.swift */,
+				B3E1BB791D9E98610086FF9D /* cell1TableViewCell.swift */,
+				B3E1BB7B1D9E986B0086FF9D /* cell2TableViewCell.swift */,
+				B3E1BB7D1D9E98760086FF9D /* cell3TableViewCell.swift */,
+			);
+			name = CriarConta;
+			sourceTree = "<group>";
+		};
+		B3E1BB6D1D9E976D0086FF9D /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB831D9E9A5D0086FF9D /* MenuTableViewController.swift */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		B3E1BB6E1D9E97760086FF9D /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB851D9E9A880086FF9D /* MapViewController.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		B3E1BB6F1D9E97850086FF9D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB871D9E9AB70086FF9D /* HomeViewController.swift */,
+				B3E1BB891D9E9ADD0086FF9D /* HomeTableViewCell.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		B3E1BB701D9E978D0086FF9D /* Cartao */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB8B1D9E9B090086FF9D /* CartaoViewController.swift */,
+				B3E1BB8D1D9E9B2D0086FF9D /* CartaoLandScapeViewController.swift */,
+			);
+			name = Cartao;
+			sourceTree = "<group>";
+		};
+		B3E1BB711D9E97A60086FF9D /* EditarPerfil */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB8F1D9E9B500086FF9D /* EditarPerfilViewController.swift */,
+			);
+			name = EditarPerfil;
+			sourceTree = "<group>";
+		};
+		B3E1BB721D9E97BE0086FF9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB731D9E97E20086FF9D /* SWRevealViewController.h */,
+				B3E1BB751D9E98050086FF9D /* SWRevealViewController.m */,
+				B3E1BB741D9E98050086FF9D /* Vanttage-v2-Bridging-Header.h */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +335,7 @@
 					B3E1BB301D9E92420086FF9D = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 4BG8H329LG;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					B3E1BB471D9E92420086FF9D = {
@@ -263,9 +402,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E1BB8E1D9E9B2D0086FF9D /* CartaoLandScapeViewController.swift in Sources */,
+				B3E1BB7C1D9E986B0086FF9D /* cell2TableViewCell.swift in Sources */,
+				B3E1BB6B1D9E97510086FF9D /* LembrarSenhaViewController.swift in Sources */,
+				B3E1BB821D9E9A030086FF9D /* Color.swift in Sources */,
+				B3E1BB681D9E972C0086FF9D /* LoginViewController.swift in Sources */,
+				B3E1BB801D9E99270086FF9D /* layout.swift in Sources */,
+				B3E1BB881D9E9AB70086FF9D /* HomeViewController.swift in Sources */,
+				B3E1BB8A1D9E9ADD0086FF9D /* HomeTableViewCell.swift in Sources */,
+				B3E1BB7A1D9E98610086FF9D /* cell1TableViewCell.swift in Sources */,
+				B3E1BB861D9E9A880086FF9D /* MapViewController.swift in Sources */,
+				B3E1BB961D9EA7030086FF9D /* MenuViewController.swift in Sources */,
+				B3E1BB781D9E98420086FF9D /* CriarContaViewController.swift in Sources */,
+				B3E1BB761D9E98050086FF9D /* SWRevealViewController.m in Sources */,
+				B3E1BB901D9E9B500086FF9D /* EditarPerfilViewController.swift in Sources */,
+				B3E1BB841D9E9A5D0086FF9D /* MenuTableViewController.swift in Sources */,
+				B3E1BB941D9E9BCE0086FF9D /* SobreViewController.swift in Sources */,
+				B3E1BB921D9E9BB30086FF9D /* PopUpViewController.swift in Sources */,
 				B3E1BB3D1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld in Sources */,
-				B3E1BB371D9E92420086FF9D /* ViewController.swift in Sources */,
 				B3E1BB351D9E92420086FF9D /* AppDelegate.swift in Sources */,
+				B3E1BB8C1D9E9B090086FF9D /* CartaoViewController.swift in Sources */,
+				B3E1BB7E1D9E98760086FF9D /* cell3TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,11 +574,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4BG8H329LG;
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tap4mobile.vanttage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vanttage-v2/Vanttage-v2-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -430,11 +590,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4BG8H329LG;
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tap4mobile.vanttage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vanttage-v2/Vanttage-v2-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
