@@ -81,3 +81,55 @@ class CartaoViewController: UIViewController {
      */
     
 }
+
+
+extension CartaoViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellCartao")
+        cell?.textLabel?.text = "blalbalbal"
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 0
+        } else {
+            return 20
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if section == 1 {
+//            return "% Ultimos Descontos"
+//        } else {
+//            return ""
+//        }
+//    }
+}
+
+extension CartaoViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 256
+        } else {
+            return 50
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var cell = UITableViewCell()
+        if section == 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: "cellHeader")!
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "cellCartao")!
+            cell.backgroundColor = UIColor.white
+            cell.textLabel?.text = "% Ultimos Descontos"
+        }
+       
+        return cell
+    }
+}

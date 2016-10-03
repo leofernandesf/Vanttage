@@ -577,6 +577,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4BG8H329LG;
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tap4mobile.vanttage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -593,6 +594,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4BG8H329LG;
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tap4mobile.vanttage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -674,6 +676,7 @@
 				B3E1BB5E1D9E92420086FF9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B3E1BB5F1D9E92420086FF9D /* Build configuration list for PBXNativeTarget "Vanttage-v2Tests" */ = {
 			isa = XCConfigurationList;
@@ -682,6 +685,7 @@
 				B3E1BB611D9E92420086FF9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B3E1BB621D9E92420086FF9D /* Build configuration list for PBXNativeTarget "Vanttage-v2UITests" */ = {
 			isa = XCConfigurationList;
@@ -690,6 +694,7 @@
 				B3E1BB641D9E92420086FF9D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
