@@ -17,6 +17,8 @@ class SobreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let titleLabel = layout.titleLabel(viewTela: self.view, title: "Sobre", subtrair: 90)
+        self.navigationItem.titleView = titleLabel
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }

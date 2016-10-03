@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B39ADC661DA292F2004DBF30 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADC631DA292F2004DBF30 /* FBSDKCoreKit.framework */; };
+		B39ADC671DA292F2004DBF30 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADC641DA292F2004DBF30 /* FBSDKLoginKit.framework */; };
+		B39ADC681DA292F2004DBF30 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADC651DA292F2004DBF30 /* FBSDKShareKit.framework */; };
+		B39ADCAF1DA298E2004DBF30 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADCAE1DA298E2004DBF30 /* Bolts.framework */; };
 		B3E1BB351D9E92420086FF9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB341D9E92420086FF9D /* AppDelegate.swift */; };
 		B3E1BB3A1D9E92420086FF9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E1BB381D9E92420086FF9D /* Main.storyboard */; };
 		B3E1BB3D1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB3B1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld */; };
@@ -53,6 +57,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B39ADC5F1DA292B4004DBF30 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		B39ADC601DA292B4004DBF30 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		B39ADC631DA292F2004DBF30 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		B39ADC641DA292F2004DBF30 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		B39ADC651DA292F2004DBF30 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		B39ADCAE1DA298E2004DBF30 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B3E1BB311D9E92420086FF9D /* Vanttage-v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vanttage-v2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E1BB341D9E92420086FF9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3E1BB391D9E92420086FF9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,6 +104,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39ADC671DA292F2004DBF30 /* FBSDKLoginKit.framework in Frameworks */,
+				B39ADC661DA292F2004DBF30 /* FBSDKCoreKit.framework in Frameworks */,
+				B39ADC681DA292F2004DBF30 /* FBSDKShareKit.framework in Frameworks */,
+				B39ADCAF1DA298E2004DBF30 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +128,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B39ADC5E1DA292B4004DBF30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B39ADC5F1DA292B4004DBF30 /* FBSDKCoreKit.framework */,
+				B39ADC601DA292B4004DBF30 /* FBSDKLoginKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B3E1BB281D9E92420086FF9D = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +144,7 @@
 				B3E1BB4B1D9E92420086FF9D /* Vanttage-v2Tests */,
 				B3E1BB561D9E92420086FF9D /* Vanttage-v2UITests */,
 				B3E1BB321D9E92420086FF9D /* Products */,
+				B39ADC5E1DA292B4004DBF30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -259,6 +283,10 @@
 		B3E1BB721D9E97BE0086FF9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B39ADCAE1DA298E2004DBF30 /* Bolts.framework */,
+				B39ADC631DA292F2004DBF30 /* FBSDKCoreKit.framework */,
+				B39ADC641DA292F2004DBF30 /* FBSDKLoginKit.framework */,
+				B39ADC651DA292F2004DBF30 /* FBSDKShareKit.framework */,
 				B3E1BB731D9E97E20086FF9D /* SWRevealViewController.h */,
 				B3E1BB751D9E98050086FF9D /* SWRevealViewController.m */,
 				B3E1BB741D9E98050086FF9D /* Vanttage-v2-Bridging-Header.h */,
@@ -576,6 +604,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4BG8H329LG;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vanttage-v2",
+				);
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -593,6 +626,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 4BG8H329LG;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vanttage-v2",
+				);
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

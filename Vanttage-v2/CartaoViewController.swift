@@ -16,7 +16,8 @@ class CartaoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let titleLabel = layout.titleLabel(viewTela: view, title: "Cartao Virtual", subtrair: 150)
+        self.navigationItem.titleView = titleLabel
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }

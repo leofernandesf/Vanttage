@@ -16,6 +16,7 @@ class layout {
             button.layer.cornerRadius = 27
             button.clipsToBounds = true
             button.layer.borderColor = color
+            button.setBackgroundImage(UIColor.imageWithColor(color: UIColor.darkGray), for: .highlighted)
         }
         
     }
@@ -53,9 +54,7 @@ class layout {
             tfield.layer.masksToBounds = true
         }
         
-        
-        
-        
+
 //        let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 24, height: 24))
 //        var envelopeView: UIImageView = UIImageView(frame: rect)
 //        envelopeView.isUserInteractionEnabled = true
@@ -69,5 +68,13 @@ class layout {
 //        tfEmail.leftView = viewLeft
 //        tfEmail.leftViewMode = .always
     
+    }
+    
+    static func titleLabel(viewTela: UIView, title: String, subtrair: CGFloat) -> UILabel{
+        let titleLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewTela.frame.width - subtrair, height: viewTela.frame.height)))
+        titleLabel.text = title
+        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.systemFont(ofSize: 25)
+        return titleLabel
     }
 }
