@@ -13,17 +13,17 @@ class cell1TableViewCell: UITableViewCell {
     @IBOutlet weak var ivImage: UIImageView!
     @IBOutlet weak var tfText: UITextField!
     @IBOutlet weak var lbFrase: UILabel!
-    var index: IndexPath!
+    var index: Int!
     var informacao: Cadastro? {
         didSet {
             switch index {
-            case [0,0]:
+            case 0:
                 if let nome = informacao?.nome {
                     tfText.text = nome
                 }
 
                 break
-            case [2,0]:
+            case 2:
                 if let email = informacao?.email {
                     tfText.text = email
                 }

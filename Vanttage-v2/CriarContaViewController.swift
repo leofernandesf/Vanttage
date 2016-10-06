@@ -23,7 +23,7 @@ class CriarContaViewController: UIViewController {
     var informacoes:Cadastro?
     let recognizer = UITapGestureRecognizer()
     let stringstf:[String] = ["Nome Completo","Senha","Email","Data de Nascimento","CPF","Cidade","UF","Profissao", "Numero do Cartao"]
-    let images = ["name_ic","password_ic","name_ic","calendar_ic","cpf_ic","map_ic","location_ic","job_ic","wallet_ic"]
+    let images = ["name_ic","password_ic","mail_ic","calendar_ic","cpf_ic","map_ic","location_ic","job_ic","wallet_ic"]
     let mylayout = layout()
     var verificador = false
     var cont = 0
@@ -149,6 +149,8 @@ extension CriarContaViewController: UITableViewDataSource {
             if indexPath.row == 1 {
                 customCell.tfText.isSecureTextEntry = true
             }
+            customCell.index = indexPath.row
+            customCell.informacao = self.informacoes
             if verificador {
                 customCell.tfText.text = ""
             }
