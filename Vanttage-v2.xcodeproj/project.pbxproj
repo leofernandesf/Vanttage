@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B359B0621DA3D6BD00BAD2F8 /* Cadastro.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359B0611DA3D6BD00BAD2F8 /* Cadastro.swift */; };
+		B359B0641DA3FB5A00BAD2F8 /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359B0631DA3FB5A00BAD2F8 /* MenuBarCollectionViewCell.swift */; };
+		B359B0671DA42AB100BAD2F8 /* EstabelecimentoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B359B0661DA42AB100BAD2F8 /* EstabelecimentoViewController.swift */; };
 		B39ADC661DA292F2004DBF30 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADC631DA292F2004DBF30 /* FBSDKCoreKit.framework */; };
 		B39ADC671DA292F2004DBF30 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADC641DA292F2004DBF30 /* FBSDKLoginKit.framework */; };
 		B39ADC681DA292F2004DBF30 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADC651DA292F2004DBF30 /* FBSDKShareKit.framework */; };
 		B39ADCAF1DA298E2004DBF30 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADCAE1DA298E2004DBF30 /* Bolts.framework */; };
+		B39B152D1DA54BF100933035 /* EstabelecimentoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39B152C1DA54BF100933035 /* EstabelecimentoTableViewCell.swift */; };
+		B39B15311DA555F100933035 /* opcoesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39B15301DA555F100933035 /* opcoesCollectionViewCell.swift */; };
 		B3E1BB351D9E92420086FF9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB341D9E92420086FF9D /* AppDelegate.swift */; };
 		B3E1BB3A1D9E92420086FF9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E1BB381D9E92420086FF9D /* Main.storyboard */; };
 		B3E1BB3D1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB3B1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld */; };
@@ -57,12 +62,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B359B0611DA3D6BD00BAD2F8 /* Cadastro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cadastro.swift; sourceTree = "<group>"; };
+		B359B0631DA3FB5A00BAD2F8 /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		B359B0661DA42AB100BAD2F8 /* EstabelecimentoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstabelecimentoViewController.swift; sourceTree = "<group>"; };
 		B39ADC5F1DA292B4004DBF30 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		B39ADC601DA292B4004DBF30 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		B39ADC631DA292F2004DBF30 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		B39ADC641DA292F2004DBF30 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		B39ADC651DA292F2004DBF30 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		B39ADCAE1DA298E2004DBF30 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		B39B152C1DA54BF100933035 /* EstabelecimentoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstabelecimentoTableViewCell.swift; sourceTree = "<group>"; };
+		B39B15301DA555F100933035 /* opcoesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = opcoesCollectionViewCell.swift; sourceTree = "<group>"; };
 		B3E1BB311D9E92420086FF9D /* Vanttage-v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vanttage-v2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E1BB341D9E92420086FF9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3E1BB391D9E92420086FF9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +138,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B359B0651DA42A8600BAD2F8 /* Estabelecimento */ = {
+			isa = PBXGroup;
+			children = (
+				B359B0661DA42AB100BAD2F8 /* EstabelecimentoViewController.swift */,
+				B39B152C1DA54BF100933035 /* EstabelecimentoTableViewCell.swift */,
+				B39B15301DA555F100933035 /* opcoesCollectionViewCell.swift */,
+			);
+			name = Estabelecimento;
+			sourceTree = "<group>";
+		};
 		B39ADC5E1DA292B4004DBF30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +224,7 @@
 		B3E1BB661D9E97010086FF9D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B359B0651DA42A8600BAD2F8 /* Estabelecimento */,
 				B3E1BB711D9E97A60086FF9D /* EditarPerfil */,
 				B3E1BB701D9E978D0086FF9D /* Cartao */,
 				B3E1BB6F1D9E97850086FF9D /* Home */,
@@ -223,6 +244,7 @@
 			children = (
 				B3E1BB671D9E972C0086FF9D /* LoginViewController.swift */,
 				B3E1BB6A1D9E97510086FF9D /* LembrarSenhaViewController.swift */,
+				B359B0611DA3D6BD00BAD2F8 /* Cadastro.swift */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -259,6 +281,7 @@
 			children = (
 				B3E1BB871D9E9AB70086FF9D /* HomeViewController.swift */,
 				B3E1BB891D9E9ADD0086FF9D /* HomeTableViewCell.swift */,
+				B359B0631DA3FB5A00BAD2F8 /* MenuBarCollectionViewCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -435,19 +458,24 @@
 				B3E1BB6B1D9E97510086FF9D /* LembrarSenhaViewController.swift in Sources */,
 				B3E1BB821D9E9A030086FF9D /* Color.swift in Sources */,
 				B3E1BB681D9E972C0086FF9D /* LoginViewController.swift in Sources */,
+				B39B152D1DA54BF100933035 /* EstabelecimentoTableViewCell.swift in Sources */,
 				B3E1BB801D9E99270086FF9D /* layout.swift in Sources */,
 				B3E1BB881D9E9AB70086FF9D /* HomeViewController.swift in Sources */,
 				B3E1BB8A1D9E9ADD0086FF9D /* HomeTableViewCell.swift in Sources */,
 				B3E1BB7A1D9E98610086FF9D /* cell1TableViewCell.swift in Sources */,
 				B3E1BB861D9E9A880086FF9D /* MapViewController.swift in Sources */,
 				B3E1BB961D9EA7030086FF9D /* MenuViewController.swift in Sources */,
+				B359B0641DA3FB5A00BAD2F8 /* MenuBarCollectionViewCell.swift in Sources */,
 				B3E1BB781D9E98420086FF9D /* CriarContaViewController.swift in Sources */,
 				B3E1BB761D9E98050086FF9D /* SWRevealViewController.m in Sources */,
 				B3E1BB901D9E9B500086FF9D /* EditarPerfilViewController.swift in Sources */,
 				B3E1BB841D9E9A5D0086FF9D /* MenuTableViewController.swift in Sources */,
 				B3E1BB941D9E9BCE0086FF9D /* SobreViewController.swift in Sources */,
+				B359B0671DA42AB100BAD2F8 /* EstabelecimentoViewController.swift in Sources */,
 				B3E1BB921D9E9BB30086FF9D /* PopUpViewController.swift in Sources */,
 				B3E1BB3D1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld in Sources */,
+				B39B15311DA555F100933035 /* opcoesCollectionViewCell.swift in Sources */,
+				B359B0621DA3D6BD00BAD2F8 /* Cadastro.swift in Sources */,
 				B3E1BB351D9E92420086FF9D /* AppDelegate.swift in Sources */,
 				B3E1BB8C1D9E9B090086FF9D /* CartaoViewController.swift in Sources */,
 				B3E1BB7E1D9E98760086FF9D /* cell3TableViewCell.swift in Sources */,

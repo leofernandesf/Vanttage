@@ -16,10 +16,14 @@ class LembrarSenhaViewController: UIViewController {
     @IBOutlet weak var enviar: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mylayout.buttonLayout(objeto: [enviar], color: UIColor.white.cgColor,borderWidth: 1.2)
         self.hideKeyboardWhenTappedAround()
         layout.tfLayout(tf: [tfEmail], image: nil)
         // Do any additional setup after loading the view.
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func didReceiveMemoryWarning() {

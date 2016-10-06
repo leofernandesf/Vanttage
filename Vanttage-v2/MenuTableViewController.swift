@@ -55,9 +55,12 @@ class MenuTableViewController: UITableViewController {
         cell?.backgroundColor = UIColor.white
         index = indexPath
         cell = tableView.cellForRow(at: index)
+        
         cell?.backgroundColor = UIColor.black.azul.withAlphaComponent(0.6)
         
         if indexPath.row == 4 {
+            let logOut = FBSDKLoginManager()
+            logOut.logOut()
             dismiss(animated: true, completion: nil)
         }
         

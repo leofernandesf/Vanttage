@@ -20,18 +20,24 @@ class CriarContaViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     
+    var informacoes:Cadastro?
     let recognizer = UITapGestureRecognizer()
-    let stringstf:[String] = ["Nome Completo","Senha","Data de Nascimento","CPF","Cidade","UF","Profissao", "Numero do Cartao"]
-    let images = ["name_ic","password_ic","calendar_ic","cpf_ic","map_ic","location_ic","job_ic","wallet_ic"]
+    let stringstf:[String] = ["Nome Completo","Senha","Email","Data de Nascimento","CPF","Cidade","UF","Profissao", "Numero do Cartao"]
+    let images = ["name_ic","password_ic","name_ic","calendar_ic","cpf_ic","map_ic","location_ic","job_ic","wallet_ic"]
     let mylayout = layout()
     var verificador = false
     var cont = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        recognizer.addTarget(self, action: #selector(CriarContaViewController.profileImage))
+        if let imagem = self.informacoes?.imagem {
+            ivPerfil.image = imagem
+
+        }
+                recognizer.addTarget(self, action: #selector(CriarContaViewController.profileImage))
         mylayout.imageLayout(image: ivPerfil, recognizer: recognizer)
         self.table.tableFooterView = UIView(frame: CGRect.zero)
         self.hideKeyboardWhenTappedAround()
+        print(self.informacoes?.email)
         // Do any additional setup after loading the view.
     }
     
@@ -128,13 +134,15 @@ extension CriarContaViewController: UIImagePickerControllerDelegate, UINavigatio
 
 extension CriarContaViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 10
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
-        if indexPath.row < 7 {
+        
+        
+        if indexPath.row < 8 {
             let customCell: cell1TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! cell1TableViewCell
             customCell.ivImage.image = UIImage(named: images[indexPath.row])
             customCell.tfText.placeholder = stringstf[indexPath.row]
@@ -145,7 +153,7 @@ extension CriarContaViewController: UITableViewDataSource {
                 customCell.tfText.text = ""
             }
             cell = customCell
-        } else if indexPath.row == 7 {
+        } else if indexPath.row == 8 {
             let customCell: cell2TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! cell2TableViewCell
             customCell.ivImage.image = UIImage(named: images[indexPath.row])
             customCell.tfCartao.placeholder = stringstf[indexPath.row]
@@ -160,7 +168,7 @@ extension CriarContaViewController: UITableViewDataSource {
             cell = customCell
         }
         cont += 1
-        if cont == 9 {
+        if cont == 10 {
             verificador = false
         }
         return cell
@@ -170,9 +178,9 @@ extension CriarContaViewController: UITableViewDataSource {
 
 extension CriarContaViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 7 {
+        if indexPath.row == 8 {
             return 	143
-        } else if indexPath.row == 8 {
+        } else if indexPath.row == 9 {
             return 175
         } else {
             return 84

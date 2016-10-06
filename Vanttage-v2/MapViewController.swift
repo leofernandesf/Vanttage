@@ -8,10 +8,12 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     
     @IBOutlet weak var myMap: MKMapView!
+    let locationManager = CLLocationManager()
     
     let regionRadius: CLLocationDistance = 1000
     
@@ -19,10 +21,15 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         // set initial location in Honolulu
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+
         
-        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-        centerMapOnLocation(location: initialLocation)
         myMap.showsUserLocation = true
+
+
         
     }
     
@@ -31,7 +38,20 @@ class MapViewController: UIViewController {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius * 2.0, regionRadius * 2.0)
         myMap.setRegion(coordinateRegion, animated: true)
+        print(myMap.userLocation.coordinate.latitude)
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance((location?.coordinate)!,
+                                                                  regionRadius * 2.0, regionRadius * 2.0)
+        //let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+        self.myMap.setRegion(coordinateRegion, animated: true)
+        self.locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
     
 }

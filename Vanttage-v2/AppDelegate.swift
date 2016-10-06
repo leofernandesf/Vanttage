@@ -8,19 +8,20 @@
 
 import UIKit
 import CoreData
-import CoreLocation
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var locationManager: CLLocationManager?
-    var shouldSupportAllOrientation = false
     
+    var shouldSupportAllOrientation = false
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        locationManager = CLLocationManager()
-        locationManager?.requestWhenInUseAuthorization()
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+//        let view = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.size.width, height: 20)))
+//        view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        //self.window?.rootViewController?.view.addSubview(view)
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         

@@ -14,6 +14,7 @@ class cell2TableViewCell: UITableViewCell {
     @IBOutlet weak var tfCartao: UITextField!
     
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

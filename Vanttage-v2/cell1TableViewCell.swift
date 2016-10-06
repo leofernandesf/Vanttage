@@ -13,11 +13,33 @@ class cell1TableViewCell: UITableViewCell {
     @IBOutlet weak var ivImage: UIImageView!
     @IBOutlet weak var tfText: UITextField!
     @IBOutlet weak var lbFrase: UILabel!
+    var index: IndexPath!
+    var informacao: Cadastro? {
+        didSet {
+            switch index {
+            case [0,0]:
+                if let nome = informacao?.nome {
+                    tfText.text = nome
+                }
+
+                break
+            case [2,0]:
+                if let email = informacao?.email {
+                    tfText.text = email
+                }
+                break
+            default:
+                return
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

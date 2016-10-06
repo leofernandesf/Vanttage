@@ -16,7 +16,7 @@ class layout {
             button.layer.cornerRadius = 27
             button.clipsToBounds = true
             button.layer.borderColor = color
-            button.setBackgroundImage(UIColor.imageWithColor(color: UIColor.darkGray), for: .highlighted)
+            button.setBackgroundImage(UIColor.imageWithColor(color: UIColor.white.withAlphaComponent(0.5)), for: .highlighted)
         }
         
     }
