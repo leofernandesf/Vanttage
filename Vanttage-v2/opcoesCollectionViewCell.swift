@@ -10,16 +10,19 @@ import UIKit
 
 class opcoesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lbSection: UILabel!
+    @IBOutlet weak var imageSelected: UIImageView!
     
     override var isSelected: Bool {
         didSet{
             lbSection.textColor = isSelected ? UIColor.white : UIColor.white.withAlphaComponent(0.6)
+            imageSelected.isHidden = isSelected ? false : true
         }
     }
     
     override var isHighlighted: Bool {
         didSet{
             lbSection.textColor = isHighlighted ? UIColor.white : UIColor.white.withAlphaComponent(0.6)
+            imageSelected.isHidden = isHighlighted ? false : true
         }
     }
     

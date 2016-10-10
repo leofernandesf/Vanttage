@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 class layout {
-    func buttonLayout(objeto:[UIButton], color: CGColor,borderWidth: CGFloat) {
+    func buttonLayout(objeto:[UIButton], color: UIColor,borderWidth: CGFloat, corner: CGFloat) {
         for button in objeto {
             button.layer.borderWidth = borderWidth
-            button.layer.cornerRadius = 27
+            button.layer.cornerRadius = corner
             button.clipsToBounds = true
-            button.layer.borderColor = color
-            button.setBackgroundImage(UIColor.imageWithColor(color: UIColor.white.withAlphaComponent(0.5)), for: .highlighted)
+            button.layer.borderColor = color.cgColor
+            button.setBackgroundImage(UIColor.imageWithColor(color: color.withAlphaComponent(0.5)), for: .highlighted)
         }
         
     }

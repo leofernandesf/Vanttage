@@ -20,6 +20,7 @@ class CriarContaViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     
+    var faceManager: FBSDKLoginManager?
     var informacoes:Cadastro?
     let recognizer = UITapGestureRecognizer()
     let stringstf:[String] = ["Nome Completo","Senha","Email","Data de Nascimento","CPF","Cidade","UF","Profissao", "Numero do Cartao"]
@@ -27,31 +28,52 @@ class CriarContaViewController: UIViewController {
     let mylayout = layout()
     var verificador = false
     var cont = 0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let imagem = self.informacoes?.imagem {
-            ivPerfil.image = imagem
-
-        }
-                recognizer.addTarget(self, action: #selector(CriarContaViewController.profileImage))
+        faceManager = FBSDKLoginManager()
+        recognizer.addTarget(self, action: #selector(CriarContaViewController.profileImage))
         mylayout.imageLayout(image: ivPerfil, recognizer: recognizer)
         self.table.tableFooterView = UIView(frame: CGRect.zero)
         self.hideKeyboardWhenTappedAround()
-        print(self.informacoes?.email)
         // Do any additional setup after loading the view.
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        if let _ = FBSDKAccessToken.current() {
+            self.graphRequest()
+        }
     }
     
     @IBAction func back(_ sender: AnyObject) {
         navigationController?.popViewController(animated: true)
     }
     
+    
+    @IBAction func cadastrarFace(_ sender: AnyObject) {
+        faceManager?.logIn(withReadPermissions: ["email","public_profile"], from: self) { (result, error) in
+            if (error != nil) {
+                print("Erro em logar",error)
+            } else if (result?.isCancelled)! {
+                print("CANCELADO")
+            } else {
+                print("logado")
+            }
+        }
+    }
+    
+    
     @IBAction func selecionarFoto(_ sender: AnyObject) {
         profileImage()
+    }
+    
+    func AtualizarInformacoesFace() {
+        if let imagem = self.informacoes?.imagem {
+            ivPerfil.image = imagem
+            
+        }
+        self.table.reloadData()
     }
     
     
@@ -100,6 +122,44 @@ class CriarContaViewController: UIViewController {
             galeria()
         }
         
+    }
+    
+    // MARK: - Request Facebook
+    func graphRequest() {
+        
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start { (connection, result, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            self.informacoes = Cadastro()
+            let data:[String:AnyObject] = result as! [String : AnyObject]
+            print(data)
+            if let email = data["email"] as? String {
+                self.informacoes?.email = email
+            }
+            
+            if data["picture"] != nil {
+                let pic = data["picture"] as! NSDictionary
+                let data = pic["data"] as! NSDictionary
+                let url = data["url"] as! String
+                
+                if let url = NSURL(string: url), let data = NSData(contentsOf: url as URL), let downloadedImage = UIImage(data: data as Data) {
+                    self.informacoes?.imagem = downloadedImage
+                }
+            }
+            
+            if let name = data["name"] as? String {
+                self.informacoes?.nome = name
+            }
+            
+            print(self.informacoes?.email)
+            print(self.informacoes?.imagem)
+            print(self.informacoes?.nome)
+            self.AtualizarInformacoesFace()
+            
+        }
     }
     
     
@@ -196,6 +256,7 @@ extension CriarContaViewController: Atualizar {
         verificador = true
         cont = 0
         self.table.reloadData()
+        self.ivPerfil.image = UIImage(named: "profile_photo")
     }
     func mostrar() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

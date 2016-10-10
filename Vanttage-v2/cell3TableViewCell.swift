@@ -18,7 +18,7 @@ class cell3TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        myLayout.buttonLayout(objeto: [limparCampos, confirmar], color: UIColor.white.laranja.cgColor, borderWidth: 1.2)
+        myLayout.buttonLayout(objeto: [limparCampos, confirmar], color: UIColor.white.laranja, borderWidth: 1.2,corner: 27)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

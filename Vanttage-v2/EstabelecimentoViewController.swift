@@ -11,13 +11,14 @@ import UIKit
 class EstabelecimentoViewController: UIViewController, UIDocumentInteractionControllerDelegate {
     
     @IBOutlet weak var myCollection: UICollectionView!
+    @IBOutlet weak var myTable: UITableView!
 
     let menuSection = ["Desconto","Regulamento","Local"]
     var documente: UIDocumentInteractionController!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        // Do any additional setup after loading the view.
+        
+        myTable.tableFooterView = UIView(frame: .zero)
         let index = IndexPath(item: 0, section: 0)
         myCollection.selectItem(at: index, animated: true, scrollPosition: .left)
     }
@@ -72,7 +73,7 @@ extension EstabelecimentoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: EstabelecimentoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellEs", for: indexPath) as! EstabelecimentoTableViewCell
         let customView = UIView()
-        customView.backgroundColor = UIColor.green
+        customView.backgroundColor = UIColor.green.verde
         cell.selectedBackgroundView = customView
         return cell
     }
@@ -96,7 +97,18 @@ extension EstabelecimentoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+//        if scrollView.contentOffset.y > 0 {
+//            print("teste 1 \(scrollView.contentOffset.y)")
+//            self.myTable.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+//        }
+    }
+    
+    
 }
+
 
 extension EstabelecimentoViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

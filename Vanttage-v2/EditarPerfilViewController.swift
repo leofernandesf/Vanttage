@@ -15,6 +15,8 @@ class EditarPerfilViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout.acaoMenu(botao: btBack, vc: self)
+        
+        
         // Do any additional setup after loading the view.
     }
     

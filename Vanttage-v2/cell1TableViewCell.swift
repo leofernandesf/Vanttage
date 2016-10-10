@@ -12,7 +12,6 @@ class cell1TableViewCell: UITableViewCell {
 
     @IBOutlet weak var ivImage: UIImageView!
     @IBOutlet weak var tfText: UITextField!
-    @IBOutlet weak var lbFrase: UILabel!
     var index: Int!
     var informacao: Cadastro? {
         didSet {
@@ -38,7 +37,6 @@ class cell1TableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {

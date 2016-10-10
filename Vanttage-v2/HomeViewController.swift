@@ -10,7 +10,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var viewBusca: UIView!
     @IBOutlet weak var secondView: UIView!
+    @IBOutlet weak var myTextField: UITextField!
     
     @IBOutlet weak var btBack: UIButton!
     
@@ -19,6 +21,10 @@ class HomeViewController: UIViewController {
     let menuSection = ["VANTAGENS", "MAPA"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dismissKeyboard()
+        viewBusca.layer.cornerRadius = 5
+        myTextField.delegate = self
+        viewBusca.clipsToBounds = true
 //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
         self.table.tableFooterView = UIView(frame: .zero)
         let index = IndexPath(item: 0, section: 0)
@@ -29,31 +35,36 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+}
+
+//MARK: - Extensions
+
+extension HomeViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:HomeTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellHome") as! HomeTableViewCell
+        //var cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome", for: indexPath) as? UITableViewCell
+        //if cell1 == nil {
+         let  cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome") as! HomeTableViewCell
+        
+        //}
+        
         //        cell.layer.cornerRadius = 10
         //        cell.clipsToBounds = true
-        return cell
+        print("cell: ",cell1)
+        return cell1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 20
     }
+    
+    
 }
 
 extension HomeViewController: UITableViewDelegate {

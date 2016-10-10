@@ -20,7 +20,7 @@ extension UIColor {
     }
     
     var laranja: UIColor {
-        return HexToColor(hexString: "#d44c26")
+        return HexToColor(hexString: "#C5361D")
     }
     
     

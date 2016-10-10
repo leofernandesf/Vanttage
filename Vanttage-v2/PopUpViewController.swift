@@ -19,7 +19,7 @@ class PopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("foi")
-        myLayout.buttonLayout(objeto: [btBack], color: UIColor.white.cgColor, borderWidth: 1)
+        myLayout.buttonLayout(objeto: [btBack], color: UIColor.white, borderWidth: 1,corner: 27)
         //
         // Do any additional setup after loading the view.
     }

@@ -12,6 +12,7 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageBackgorund: UIImageView!
     @IBOutlet weak var imageProfile: UIImageView!
+    @IBOutlet weak var btLayout: UIButton!
     
     let myLayout = layout()
     override func awakeFromNib() {
@@ -28,7 +29,12 @@ class HomeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func click(_ sender: AnyObject) {
-        print("clicou no botao")
+        self.btLayout.backgroundColor = isHighlighted ? UIColor.gray : UIColor.blue
     }
+    
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        self.btLayout.backgroundColor = UIColor.clear
+//    }
     
 }
