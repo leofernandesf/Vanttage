@@ -41,9 +41,9 @@ class LoginViewController: UIViewController {
 //    }
     override func viewWillAppear(_ animated: Bool) {
         print("will")
-        if let _ = FBSDKAccessToken.current() {
-            self.performSegue(withIdentifier: "cadastrar", sender: self)
-        }
+//        if let _ = FBSDKAccessToken.current() {
+//            self.performSegue(withIdentifier: "cadastrar", sender: self)
+//        }
     }
     
     @IBAction func esqueciSenha(_ sender: AnyObject) {
@@ -69,6 +69,7 @@ class LoginViewController: UIViewController {
                 print("CANCELADO")
             } else {
                 print("logado")
+                self.performSegue(withIdentifier: "cadastrar", sender: self)
             }
         }
     }

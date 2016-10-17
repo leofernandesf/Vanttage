@@ -70,11 +70,44 @@ class layout {
     
     }
     
+    static func sizeImage(width: CGFloat, height: CGFloat, image: UIImage) -> UIImage{
+        let pinImage = image
+        let size = CGSize(width: width , height: height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        pinImage.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resizedImage!
+    }
+    
     static func titleLabel(viewTela: UIView, title: String, subtrair: CGFloat) -> UILabel{
         let titleLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: viewTela.frame.width - subtrair, height: viewTela.frame.height)))
         titleLabel.text = title
         titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont.systemFont(ofSize: 25)
         return titleLabel
+    }
+}
+
+
+extension UIView {
+    func showAnimation(view:UIView) {
+        view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        view.alpha = 0.0
+        UIView.animate(withDuration: 0.25) { 
+            view.alpha = 1.0
+            view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+    }
+    
+    func removeAnimate(view: UIView) {
+        UIView.animate(withDuration: 0.25, animations: {
+            view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            view.alpha = 0.0
+            }, completion: { (finished: Bool) in
+                if finished {
+                    view.removeFromSuperview()
+                }
+        })
     }
 }

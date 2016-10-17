@@ -9,7 +9,7 @@
 import UIKit
 
 class FiltroTableViewCell: UITableViewCell {
-    let imagem = [#imageLiteral(resourceName: "star_ic"), #imageLiteral(resourceName: "discount_ic"), #imageLiteral(resourceName: "time_ic")]
+    let imagem = [#imageLiteral(resourceName: "star_ic"), #imageLiteral(resourceName: "discount_filtro_ic"), #imageLiteral(resourceName: "time_ic")]
     let imageSelected = [#imageLiteral(resourceName: "star_agora_ic"), #imageLiteral(resourceName: "discount_selected_ic"), #imageLiteral(resourceName: "time_selected_ic")]
     @IBOutlet weak var selectImage: UIImageView!
     

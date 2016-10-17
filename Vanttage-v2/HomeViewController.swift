@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol MostrarMapa {
+    func mostrar(lat: Double, long: Double)
+    
+}
+
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var viewBusca: UIView!
@@ -51,7 +56,7 @@ extension HomeViewController: UITableViewDataSource {
         //var cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome", for: indexPath) as? UITableViewCell
         //if cell1 == nil {
          let  cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome") as! HomeTableViewCell
-        
+        cell1.mostrar = self
         //}
         
         //        cell.layer.cornerRadius = 10
@@ -109,4 +114,13 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return 1
     }
     
+}
+
+extension HomeViewController: MostrarMapa {
+    func mostrar(lat: Double, long: Double) {
+        print(lat)
+        print(long)
+        self.secondView.isHidden = false
+        self.muCollection.selectItem(at: IndexPath(item: 1, section: 0), animated: true, scrollPosition: .left)
+    }
 }

@@ -15,8 +15,17 @@ class Cadastro: NSObject {
     var dataNascimento: String?
     var cpf: Int?
     var cidade: String?
-    var UF: String?
+    var cep: String?
+    var numero: String?
+    var endereco: String?
     var profissao: String?
     var numeroCartao: String?
     var imagem: UIImage?
+    
+    
+    
+    
 }
+
+
+

@@ -16,49 +16,81 @@ protocol Atualizar {
 
 class CriarContaViewController: UIViewController {
     
+    @IBOutlet weak var btBack: UIButton!
     @IBOutlet weak var ivPerfil: UIImageView!
+    @IBOutlet weak var tfNome: UITextField!
+    @IBOutlet weak var tfEmail: UITextField!
+    @IBOutlet weak var tfSenha: UITextField!
+    @IBOutlet weak var tfConfirmarSenha: UITextField!
+    @IBOutlet weak var tfData: UITextField!
+    @IBOutlet weak var tfCPF: UITextField!
+    @IBOutlet weak var tfCidade: UITextField!
+    @IBOutlet weak var tfCEP: UITextField!
+    @IBOutlet weak var tfNumero: UITextField!
+    @IBOutlet weak var tfEndereco: UITextField!
+    @IBOutlet weak var tfProfissao: UITextField!
+    @IBOutlet weak var tfCartao: UITextField!
+    @IBOutlet weak var btLimparCampos: UIButton!
+    @IBOutlet weak var btConfirmar: UIButton!
+    @IBOutlet weak var load: UIActivityIndicatorView!
+    @IBOutlet weak var visulaEfect: UIVisualEffectView!
+    @IBOutlet weak var myScroll: UIScrollView!
     
-    @IBOutlet weak var table: UITableView!
-    
+    var mytfs = [UITextField]()
     var faceManager: FBSDKLoginManager?
     var informacoes:Cadastro?
     let recognizer = UITapGestureRecognizer()
-    let stringstf:[String] = ["Nome Completo","Senha","Email","Data de Nascimento","CPF","Cidade","UF","Profissao", "Numero do Cartao"]
-    let images = ["name_ic","password_ic","mail_ic","calendar_ic","cpf_ic","map_ic","location_ic","job_ic","wallet_ic"]
     let mylayout = layout()
-    var verificador = false
-    var cont = 0
-    
-    
+    var pickOption = ["Manaus - AM", "Belem - PA"]
+    let pickerView = UIPickerView()
     override func viewDidLoad() {
         super.viewDidLoad()
         faceManager = FBSDKLoginManager()
         recognizer.addTarget(self, action: #selector(CriarContaViewController.profileImage))
         mylayout.imageLayout(image: ivPerfil, recognizer: recognizer)
-        self.table.tableFooterView = UIView(frame: CGRect.zero)
+        mylayout.buttonLayout(objeto: [btLimparCampos, btConfirmar], color: UIColor.white.laranja, borderWidth: 1.2,corner: 27)
         self.hideKeyboardWhenTappedAround()
+        let image = layout.sizeImage(width: 24, height: 24, image: #imageLiteral(resourceName: "back_ic"))
+        btBack.setImage(image, for: .normal)
+        pickerView.delegate = self
+        self.tfCidade.text = pickOption[0]
+        pickerView.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
+        tfCidade.inputView = pickerView
+        self.myScroll.delegate = self
+        
+        mytfs = [tfNome,tfEmail,tfSenha,tfConfirmarSenha,tfData,tfCPF,tfCidade,tfCEP,tfNumero,tfEndereco,tfProfissao,tfCartao]
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("entrou no will")
         if let _ = FBSDKAccessToken.current() {
+            self.visulaEfect.isHidden = false
+            self.load.startAnimating()
             self.graphRequest()
         }
     }
     
     @IBAction func back(_ sender: AnyObject) {
+        faceManager?.logOut()
         navigationController?.popViewController(animated: true)
     }
     
     
     @IBAction func cadastrarFace(_ sender: AnyObject) {
+        
+        self.visulaEfect.isHidden = false
+        self.load.startAnimating()
         faceManager?.logIn(withReadPermissions: ["email","public_profile"], from: self) { (result, error) in
             if (error != nil) {
                 print("Erro em logar",error)
+                self.visulaEfect.isHidden = true
             } else if (result?.isCancelled)! {
                 print("CANCELADO")
+                self.visulaEfect.isHidden = true
             } else {
                 print("logado")
+                self.graphRequest()
             }
         }
     }
@@ -73,12 +105,88 @@ class CriarContaViewController: UIViewController {
             ivPerfil.image = imagem
             
         }
-        self.table.reloadData()
+        if let nome = self.informacoes?.nome {
+            self.tfNome.text = nome
+        }
+        
+        if let email = self.informacoes?.email {
+            self.tfEmail.text = email
+        }
+    }
+    
+    @IBAction func limparCampos(_ sender: AnyObject) {
+        
+        self.limparDados()
+    }
+    
+    @IBAction func confirmar(_ sender: AnyObject) {
+        if self.tfSenha.text != self.tfConfirmarSenha.text {
+            showPopUp(identifier: "popUpCadastroErro", tipo: 3)
+        } else if textFieldVazias() {
+            showPopUp(identifier: "popUpCadastroErro", tipo: 2)
+        } else {
+            for tf in mytfs {
+                print(tf.text)
+            }
+            showPopUp(identifier: "popUpCadastroCerto", tipo: 2)
+        }
+        
+        
+        
+    }
+    
+    func showPopUp(identifier: String, tipo : Int) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var controller = UIViewController()
+        if identifier == "popUpCadastroErro" {
+            let controller2 = storyboard.instantiateViewController(withIdentifier: identifier) as! PopUpCadastroErro
+            controller2.tipoErro = tipo
+            controller = controller2
+        } else {
+            let controller2 = storyboard.instantiateViewController(withIdentifier: identifier) as! PopUpOKViewController
+            controller = controller2
+        }
+        
+        self.addChildViewController(controller)
+        controller.view.frame = self.view.frame
+        self.view.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
     }
     
     
     
-    //Mark: - CAMERA
+    
+    func textFieldVazias() -> Bool  {
+        var verificador = false
+        for tf in mytfs {
+            if (tf.text?.isEmpty)! {
+                tf.attributedPlaceholder = NSAttributedString(string: tf.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.black.laranja])
+                verificador = true
+            }
+        }
+        return verificador
+    }
+    
+    
+    
+    func limparDados() {
+        self.ivPerfil.image = UIImage(named: "profile_photo")
+        self.tfNumero.text = ""
+        self.tfCartao.text = ""
+        self.tfCEP.text = ""
+        self.tfCPF.text = ""
+        self.tfData.text = ""
+        self.tfNome.text = ""
+        self.tfEmail.text = ""
+        self.tfSenha.text = ""
+        self.tfCidade.text = ""
+        self.tfEndereco.text = ""
+        self.tfProfissao.text = ""
+        self.tfConfirmarSenha.text = ""
+    }
+    
+    
+    //MARK: - CAMERA
     func profileImage() {
         let alert: UIAlertController = UIAlertController(title: "Escolha um foto", message: nil, preferredStyle: .actionSheet)
         
@@ -154,33 +262,104 @@ class CriarContaViewController: UIViewController {
                 self.informacoes?.nome = name
             }
             
-            print(self.informacoes?.email)
-            print(self.informacoes?.imagem)
-            print(self.informacoes?.nome)
+            self.visulaEfect.isHidden = true
             self.AtualizarInformacoesFace()
             
         }
     }
     
+}
+
+
+
+
+
+
+
+
+//MARK: - Extensions
+
+extension CriarContaViewController: UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField.tag {
+        case 1...2:
+            print("do nothing")
+        default:
+            myScroll.setContentOffset(CGPoint(x: 0, y: self.myScroll.contentOffset.y + 100), animated: true)
+        }
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField.tag {
+        case 1:
+            tfEmail.becomeFirstResponder()
+        case 2:
+            tfSenha.becomeFirstResponder()
+        case 3:
+            tfConfirmarSenha.becomeFirstResponder()
+        case 4:
+            tfData.becomeFirstResponder()
+        case 5:
+            tfCPF.becomeFirstResponder()
+        case 6:
+            tfCidade.becomeFirstResponder()
+        case 8:
+            tfNumero.becomeFirstResponder()
+        case 9:
+            tfEndereco.becomeFirstResponder()
+        case 10:
+            tfProfissao.becomeFirstResponder()
+        case 11:
+            tfCartao.becomeFirstResponder()
+        case 12:
+            textField.resignFirstResponder()
+        default:
+            print("nada")
+        }
+        return true
+    }
     
 }
+
+extension CriarContaViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= -20 {
+            self.myScroll.isScrollEnabled = true
+        } else {
+            self.myScroll.isScrollEnabled = false
+        }
+    }
+    
+    
+}
+
+extension CriarContaViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.tfCidade.text = pickOption[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickOption[row]
+    }
+}
+
+extension CriarContaViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.pickOption.count
+    }
+}
+
 
 extension CriarContaViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var  chosenImage = UIImage()
-        chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
         print("foto antes ",ivPerfil.image)
         ivPerfil.image = chosenImage
         print("foto depois ",ivPerfil.image)
@@ -192,81 +371,6 @@ extension CriarContaViewController: UIImagePickerControllerDelegate, UINavigatio
     }
 }
 
-extension CriarContaViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
-        
-        
-        if indexPath.row < 8 {
-            let customCell: cell1TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! cell1TableViewCell
-            customCell.ivImage.image = UIImage(named: images[indexPath.row])
-            customCell.tfText.placeholder = stringstf[indexPath.row]
-            if indexPath.row == 1 {
-                customCell.tfText.isSecureTextEntry = true
-            }
-            customCell.index = indexPath.row
-            customCell.informacao = self.informacoes
-            if verificador {
-                customCell.tfText.text = ""
-            }
-            cell = customCell
-        } else if indexPath.row == 8 {
-            let customCell: cell2TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! cell2TableViewCell
-            customCell.ivImage.image = UIImage(named: images[indexPath.row])
-            customCell.tfCartao.placeholder = stringstf[indexPath.row]
-            if verificador {
-                customCell.tfCartao.text = ""
-            }
-            
-            cell = customCell
-        } else {
-            let customCell: cell3TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! cell3TableViewCell
-            customCell.atualizar = self
-            cell = customCell
-        }
-        cont += 1
-        if cont == 10 {
-            verificador = false
-        }
-        return cell
-    }
-    
-}
-
-extension CriarContaViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 8 {
-            return 	143
-        } else if indexPath.row == 9 {
-            return 175
-        } else {
-            return 84
-        }
-    }
-}
-
-
-extension CriarContaViewController: Atualizar {
-    func limparTable() {
-        verificador = true
-        cont = 0
-        self.table.reloadData()
-        self.ivPerfil.image = UIImage(named: "profile_photo")
-    }
-    func mostrar() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "pop1")
-        controller.willMove(toParentViewController: self)
-        self.view.addSubview(controller.view)
-        self.addChildViewController(controller)
-        controller.didMove(toParentViewController: self)
-    }
-}
 
 
 

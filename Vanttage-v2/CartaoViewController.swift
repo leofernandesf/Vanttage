@@ -92,15 +92,11 @@ extension CartaoViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 0
-        } else {
-            return 20
-        }
+        return 20
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -114,22 +110,17 @@ extension CartaoViewController: UITableViewDataSource {
 
 extension CartaoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 256
-        } else {
-            return 50
-        }
+        
+        return 50
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var cell = UITableViewCell()
-        if section == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "cellHeader")!
-        } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "cellCartao")!
-            cell.backgroundColor = UIColor.white
-            cell.textLabel?.text = "% Ultimos Descontos"
-        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellCartao")!
+        cell.backgroundColor = UIColor.white
+        cell.textLabel?.text = "% Ultimos Descontos"
+        
        
         return cell
     }
