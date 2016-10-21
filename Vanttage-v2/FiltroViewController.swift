@@ -32,7 +32,7 @@ class FiltroViewController: UIViewController {
     
     
     @IBAction func back(_ sender: AnyObject) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
 
     /*

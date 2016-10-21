@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var viewBusca: UIView!
     @IBOutlet weak var secondView: UIView!
     @IBOutlet weak var myTextField: UITextField!
-    
+    var companies : [Companies]?
     @IBOutlet weak var btBack: UIButton!
     
     @IBOutlet weak var muCollection: UICollectionView!
@@ -38,6 +38,66 @@ class HomeViewController: UIViewController {
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }
+        GET()
+    }
+    
+    
+    func GET() {
+        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies")!)
+        request.httpMethod = "GET"
+        //let postString = "id=12&name=teste"
+        //request.httpBody = postString.data(using: .utf8)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                self.companies = [Companies]()
+                for dic in json as! [[String: AnyObject]]{
+                    
+                    let companie = Companies()
+                    companie.nome = dic["name"] as? String
+                    companie.phone = dic["phones"] as? String
+                    companie.addres = dic["address"] as? String
+//                    if let poin = dic["latlng"] as? String {
+//                        var latlog = poin.components(separatedBy: ",")
+//                        companie.lat = latlog[0]
+//                        companie.long = latlog[1]
+//                    }
+                    companie.thumbnail = dic["banner1"] as? String
+
+                    self.companies?.append(companie)
+                    
+                    
+                }
+                
+                DispatchQueue.main.async {
+                    self.table.reloadData()
+                }
+                
+                print(json)
+            } catch let jsonError {
+                print(jsonError)
+            }
+            
+//            let responseString = String(data: data, encoding: .utf8)
+//            print("responseString = \(responseString)")
+        
+            
+        
+        }
+        task.resume()
     }
     
 }
@@ -56,7 +116,8 @@ extension HomeViewController: UITableViewDataSource {
         //var cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome", for: indexPath) as? UITableViewCell
         //if cell1 == nil {
          let  cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome") as! HomeTableViewCell
-        cell1.mostrar = self
+        //cell1.mostrar = self
+        cell1.companie = self.companies?[indexPath.row]
         //}
         
         //        cell.layer.cornerRadius = 10
@@ -66,7 +127,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return companies?.count ?? 0
     }
     
     

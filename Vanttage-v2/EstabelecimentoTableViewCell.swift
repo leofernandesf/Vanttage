@@ -24,5 +24,12 @@ class EstabelecimentoTableViewCell: UITableViewCell {
         self.lbDescricao.textColor = isSelected ? UIColor.white : UIColor.black
     }
     
+//    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+//        super.setHighlighted(highlighted, animated: animated)
+//        
+//        self.lbPorcentagem.textColor = highlighted ? UIColor.white : UIColor.black
+//        self.lbDescricao.textColor = highlighted ? UIColor.white : UIColor.black
+//    }
+    
 
 }

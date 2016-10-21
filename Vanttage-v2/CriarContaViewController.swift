@@ -35,6 +35,7 @@ class CriarContaViewController: UIViewController {
     @IBOutlet weak var load: UIActivityIndicatorView!
     @IBOutlet weak var visulaEfect: UIVisualEffectView!
     @IBOutlet weak var myScroll: UIScrollView!
+    @IBOutlet weak var cadastroFace: UIButton!
     
     var mytfs = [UITextField]()
     var faceManager: FBSDKLoginManager?
@@ -43,8 +44,37 @@ class CriarContaViewController: UIViewController {
     let mylayout = layout()
     var pickOption = ["Manaus - AM", "Belem - PA"]
     let pickerView = UIPickerView()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setarValores()
+        
+        mytfs = [tfNome,tfEmail,tfSenha,tfConfirmarSenha,tfData,tfCPF,tfCidade,tfCEP,tfNumero,tfEndereco,tfProfissao,tfCartao]
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("entrou no will")
+        
+        if (navigationController?.viewControllers[0].isKind(of: LoginViewController.self))! {
+            print("login")
+            self.cadastroFace.isHidden = false
+            btBack.addTarget(self, action: #selector(CriarContaViewController.back), for: .touchUpInside)
+            if let _ = FBSDKAccessToken.current() {
+                self.visulaEfect.isHidden = false
+                self.load.startAnimating()
+                self.graphRequest()
+            }
+        } else {
+            layout.acaoMenu(botao: btBack, vc: self)
+            print("de outro lugar")
+            self.cadastroFace.isHidden = true
+        }
+        
+    }
+    
+    func setarValores() {
         faceManager = FBSDKLoginManager()
         recognizer.addTarget(self, action: #selector(CriarContaViewController.profileImage))
         mylayout.imageLayout(image: ivPerfil, recognizer: recognizer)
@@ -57,23 +87,12 @@ class CriarContaViewController: UIViewController {
         pickerView.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
         tfCidade.inputView = pickerView
         self.myScroll.delegate = self
-        
-        mytfs = [tfNome,tfEmail,tfSenha,tfConfirmarSenha,tfData,tfCPF,tfCidade,tfCEP,tfNumero,tfEndereco,tfProfissao,tfCartao]
-        // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("entrou no will")
-        if let _ = FBSDKAccessToken.current() {
-            self.visulaEfect.isHidden = false
-            self.load.startAnimating()
-            self.graphRequest()
-        }
-    }
-    
-    @IBAction func back(_ sender: AnyObject) {
+     func back() {
+        print("apertou")
         faceManager?.logOut()
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     
@@ -94,6 +113,64 @@ class CriarContaViewController: UIViewController {
             }
         }
     }
+    
+    func post() {
+        //let params = ["name":"leonardo","id": 0 ,"password":"password", "cardNumber":"password", "cpf":"cvbb", "email":"asdfgg", "birth":"2016-09-08T00:00:00.000Z", "profession":"password", "status":1, "createdAt":"2016-10-20T14:52:11.000Z", "codeZip":"password", "pathPhoto":"password", "citiesId":1, "profilesId":1] as Dictionary<String, Any>
+        let params = Cadastro.cadastroObjeto(tfs: mytfs)
+        //let params = ["name":tfNome.text,"id": 0 ,"password":tfSenha.text, "cardNumber":tfCartao.text, "cpf":tfCPF.text, "email":tfEmail.text, "birth":"2016-09-08T00:00:00.000Z", "profession":tfProfissao.text, "status":1, "createdAt":"2016-10-20T14:52:11.000Z", "codeZip":tfCEP.text, "pathPhoto":"password", "citiesId":1, "profilesId":1] as Dictionary<String, Any>
+        print(params)
+        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/UserCards")!)
+        request.httpMethod = "POST"
+        do {
+            let json = try JSONSerialization.data(withJSONObject: params, options: [])
+            request.httpBody = json
+        } catch let jsonError {
+            print(jsonError)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(responseString)")
+
+        }
+        task.resume()
+    }
+    
+    
+    
+    
+    
+//    func postDataAsynchronous(url: String, bodyData: String, completionHandler: @escaping (_ responseString: String?, _ error: NSError?) -> ()) {
+//        var URL: NSURL = NSURL(string: url)!
+//        var request:NSMutableURLRequest = NSMutableURLRequest(url:URL as URL)
+//        request.httpMethod = "POST";
+//        request.httpBody = bodyData.data(using: String.Encoding.utf8);
+//        
+//        NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue: OperationQueue.main){
+//            
+//            response, data, error in
+//            
+//            var output: String!
+//            
+//            if data != nil {
+//                output = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String
+//            }
+//            
+//            completionHandler(output, error as NSError?)
+//        }
+//    }
     
     
     @IBAction func selecionarFoto(_ sender: AnyObject) {
@@ -120,17 +197,17 @@ class CriarContaViewController: UIViewController {
     }
     
     @IBAction func confirmar(_ sender: AnyObject) {
-        if self.tfSenha.text != self.tfConfirmarSenha.text {
-            showPopUp(identifier: "popUpCadastroErro", tipo: 3)
-        } else if textFieldVazias() {
-            showPopUp(identifier: "popUpCadastroErro", tipo: 2)
-        } else {
-            for tf in mytfs {
-                print(tf.text)
-            }
-            showPopUp(identifier: "popUpCadastroCerto", tipo: 2)
-        }
-        
+//        if self.tfSenha.text != self.tfConfirmarSenha.text {
+//            showPopUp(identifier: "popUpCadastroErro", tipo: 3)
+//        } else if textFieldVazias() {
+//            showPopUp(identifier: "popUpCadastroErro", tipo: 2)
+//        } else {
+//            for tf in mytfs {
+//                print(tf.text)
+//            }
+//            showPopUp(identifier: "popUpCadastroCerto", tipo: 2)
+//        }
+        post()
         
         
     }
@@ -323,13 +400,13 @@ extension CriarContaViewController: UITextFieldDelegate {
 }
 
 extension CriarContaViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y >= -20 {
-            self.myScroll.isScrollEnabled = true
-        } else {
-            self.myScroll.isScrollEnabled = false
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.contentOffset.y >= -20 {
+//            self.myScroll.isScrollEnabled = true
+//        } else {
+//            self.myScroll.isScrollEnabled = false
+//        }
+//    }
     
     
 }

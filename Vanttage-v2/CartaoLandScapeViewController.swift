@@ -10,9 +10,13 @@ import UIKit
 
 class CartaoLandScapeViewController: UIViewController {
     
+    @IBOutlet weak var btVoltar: UIButton!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let image = layout.sizeImage(width: 32, height: 26, image: #imageLiteral(resourceName: "Change_view_ic"))
+        btVoltar.setImage(image, for: .normal)
         // Do any additional setup after loading the view.
     }
     
