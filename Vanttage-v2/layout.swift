@@ -48,12 +48,12 @@ class layout {
             let width = CGFloat(1.0)
             border.borderColor = UIColor.white.withAlphaComponent(0.6).cgColor
             border.frame = CGRect(x: 0, y: tfield.frame.size.height - width, width:  tfield.frame.size.width, height: tfield.frame.size.height)
-            
+            print(tfield.frame.size.height - width)
             border.borderWidth = width
             tfield.layer.addSublayer(border)
             tfield.layer.masksToBounds = true
         }
-        
+        //border.frame = CGRect(x: 0, y: 29, width:  216, height: 30)
 
 //        let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 24, height: 24))
 //        var envelopeView: UIImageView = UIImageView(frame: rect)

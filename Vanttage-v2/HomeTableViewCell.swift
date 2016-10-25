@@ -30,6 +30,8 @@ class HomeTableViewCell: UITableViewCell {
             self.nome.text = companie?.nome
             self.lbFone.text = companie?.phone
             self.lbEndereco.text = companie?.addres
+            setUpImageThumbNail()
+            setUpImageProfile()
             print(companie?.thumbnail)
             print(companie?.long)
             print(companie?.lat)
@@ -38,6 +40,18 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     
+    func setUpImageProfile()  {
+        if let image = companie?.thumbnail {
+            imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
+            
+        }
+    }
+    
+    func setUpImageThumbNail() {
+        if let image = companie?.banner1 {
+            thumbImage.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
+        }
+    }
     
     let myLayout = layout()
     override func awakeFromNib() {
@@ -69,4 +83,23 @@ class HomeTableViewCell: UITableViewCell {
 //        self.btLayout.backgroundColor = UIColor.clear
 //    }
     
+}
+
+
+
+extension UIImageView {
+    func loadImageUsingURL(urlString: String)  {
+        let url = URL(string: urlString)
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            
+            if error != nil {
+                print(error)
+                return
+            }
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data!)
+                print(self.image)
+            }
+        }).resume()
+    }
 }

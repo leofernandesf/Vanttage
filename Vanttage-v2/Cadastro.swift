@@ -68,7 +68,7 @@ class Cadastro: NSObject {
         }
         
         
-       params = ["name":nome,"id": 0 ,"password":senha, "cardNumber":numeroCartao, "cpf":cpf, "email":email, "birth":"2016-09-08T00:00:00.000Z", "profession":profissao, "status":1, "createdAt":"2016-10-20T14:52:11.000Z", "codeZip":cep, "pathPhoto":"password", "citiesId":1, "profilesId":1]
+       params = ["name":nome,"id": 0 ,"password":senha, "cardNumber":numeroCartao, "cpf":cpf, "email":email, "birth":"2016-09-08", "profession":profissao, "status":1, "codeZip":cep, "pathPhoto":"password", "citiesId":1, "profilesId":1]
         
         return params
     }

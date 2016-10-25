@@ -59,37 +59,42 @@ class HomeViewController: UIViewController {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             
+            }else {
+                
+                print(data)
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                    self.companies = [Companies]()
+                    for dic in json as! [[String: AnyObject]]{
+                        
+                        let companie = Companies()
+                        companie.nome = dic["name"] as? String
+                        companie.phone = dic["phones"] as? String
+                        companie.addres = dic["address"] as? String
+                        //                    if let poin = dic["latlng"] as? String {
+                        //                        var latlog = poin.components(separatedBy: ",")
+                        //                        companie.lat = latlog[0]
+                        //                        companie.long = latlog[1]
+                        //                    }
+                        companie.thumbnail = dic["thumbnail"] as? String
+                        companie.banner1 = dic["bannerFeatured"] as? String
+                        
+                        self.companies?.append(companie)
+                        
+                        
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.table.reloadData()
+                    }
+                    
+                    print(json)
+                } catch let jsonError {
+                    print(jsonError)
+                }
             }
             
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                self.companies = [Companies]()
-                for dic in json as! [[String: AnyObject]]{
-                    
-                    let companie = Companies()
-                    companie.nome = dic["name"] as? String
-                    companie.phone = dic["phones"] as? String
-                    companie.addres = dic["address"] as? String
-//                    if let poin = dic["latlng"] as? String {
-//                        var latlog = poin.components(separatedBy: ",")
-//                        companie.lat = latlog[0]
-//                        companie.long = latlog[1]
-//                    }
-                    companie.thumbnail = dic["banner1"] as? String
-
-                    self.companies?.append(companie)
-                    
-                    
-                }
-                
-                DispatchQueue.main.async {
-                    self.table.reloadData()
-                }
-                
-                print(json)
-            } catch let jsonError {
-                print(jsonError)
-            }
+            
             
 //            let responseString = String(data: data, encoding: .utf8)
 //            print("responseString = \(responseString)")
