@@ -13,7 +13,7 @@ class layout {
     func buttonLayout(objeto:[UIButton], color: UIColor,borderWidth: CGFloat, corner: CGFloat) {
         for button in objeto {
             button.layer.borderWidth = borderWidth
-            button.layer.cornerRadius = corner
+            button.layer.cornerRadius = button.frame.width*corner
             button.clipsToBounds = true
             button.layer.borderColor = color.cgColor
             button.setBackgroundImage(UIColor.imageWithColor(color: color.withAlphaComponent(0.5)), for: .highlighted)

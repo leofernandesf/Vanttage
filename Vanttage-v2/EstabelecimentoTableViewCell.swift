@@ -11,7 +11,15 @@ import UIKit
 class EstabelecimentoTableViewCell: UITableViewCell {
     @IBOutlet weak var lbPorcentagem: UILabel!
     @IBOutlet weak var lbDescricao: UILabel!
-
+    var promocao: Promocoes? {
+        didSet {
+            if let x = promocao?.value {
+                self.lbPorcentagem.text = "\(x)%"
+            }
+            
+            self.lbDescricao.text = promocao?.descricao
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,7 +28,7 @@ class EstabelecimentoTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        self.lbPorcentagem.textColor = isSelected ? UIColor.white : UIColor.black
+        self.lbPorcentagem.textColor = isSelected ? UIColor.white : UIColor.green.verde
         self.lbDescricao.textColor = isSelected ? UIColor.white : UIColor.black
     }
     

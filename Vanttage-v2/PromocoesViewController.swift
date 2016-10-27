@@ -13,7 +13,7 @@ class PromocoesViewController: UIViewController {
     
     @IBOutlet weak var myTable: UITableView!
     var verificador = false
-    
+    var promocoes: [Promocoes]?
     override func viewDidLoad() {
         super.viewDidLoad()
         print(verificador)
@@ -25,6 +25,8 @@ class PromocoesViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 
     /*
@@ -45,11 +47,13 @@ extension PromocoesViewController: UITableViewDataSource {
         let customView = UIView()
         customView.backgroundColor = UIColor.green.verde
         cell.selectedBackgroundView = customView
+        
+        cell.promocao = self.promocoes?[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return promocoes?.count ?? 0
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

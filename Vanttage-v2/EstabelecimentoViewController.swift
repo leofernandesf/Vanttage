@@ -16,21 +16,26 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         case thirdChildTab = 2
     }
     
+    @IBOutlet weak var lnTopNome: UILabel!
+    @IBOutlet weak var lbNome: UILabel!
     @IBOutlet weak var myCollection: UICollectionView!
     @IBOutlet weak var scroll: UIScrollView!
     
+    @IBOutlet weak var tvDescrecao: UITextView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var imageScrollView: UIScrollView!
     
     @IBOutlet weak var pageControll: UIPageControl!
-    var local: Locais?
-    
-    
-    let images = [#imageLiteral(resourceName: "pin_ic"),#imageLiteral(resourceName: "cartao_gold"), #imageLiteral(resourceName: "map_ic"), #imageLiteral(resourceName: "header_scroll_bg")]
+    //var local: Locais?
+    var estabelecimento: Companies!
+    var images: [UIImage]?
     var currentViewController: UIViewController?
+    var promocoes : [Promocoes]?
+    
+    
+    
     lazy var firstChildTabVC: UIViewController? = {
-        let firstChildTabVC: PromocoesViewController = self.storyboard?.instantiateViewController(withIdentifier: "descontoViewController") as! PromocoesViewController
-        firstChildTabVC.verificador = true
+        let firstChildTabVC = self.storyboard?.instantiateViewController(withIdentifier: "descontoViewController")
         return firstChildTabVC
     }()
     
@@ -49,8 +54,12 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     
     let screenHeight = UIScreen.main.bounds.height
     let scrollViewContentHeight = 1000 as CGFloat
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setView()
         let index = IndexPath(item: 0, section: 0)
         myCollection.selectItem(at: index, animated: true, scrollPosition: .left)
         
@@ -60,11 +69,23 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         scroll.delegate = self
         scroll.bounces = false
         print(scroll.contentSize)
-        
-        displayCurrentTab(TabIndex.firstChildTab.rawValue)
+        setUpPromocoes()
+        //displayCurrentTab(TabIndex.firstChildTab.rawValue)
         imagem()
         // Do any additional setup after loading the view.
     }
+    
+    func setView() {
+        if let nome = estabelecimento.nome {
+            self.lbNome.text = nome
+            self.lnTopNome.text = nome
+        }
+        
+        if let descricao = estabelecimento.descricao {
+            self.tvDescrecao.text = descricao
+        }
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -73,10 +94,64 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         }
     }
     
+    
+    func setUpPromocoes() {
+        if let ID = self.estabelecimento.id {
+            print(ID)
+            var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies/\(ID)/promotions")!)
+            request.httpMethod = "GET"
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(response)")
+                    
+                }else {
+                    
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                        self.promocoes = [Promocoes]()
+                        for dic in json as! [[String: AnyObject]]{
+                            
+                            let promocao = Promocoes()
+                            promocao.id = dic["id"] as! Int?
+                            promocao.isFeatured = dic["isFeatured"] as! Int?
+                            promocao.descricao = dic["description"] as! String?
+                            promocao.value = dic["value"] as! Int?
+                            promocao.discount = dic["discount"] as! Int?
+                            promocao.howToUse = dic["howToUse"] as! String?
+                            promocao.rules = dic["rules"] as! String?
+                            promocao.status = dic["status"] as! Int?
+                            promocao.dayStart = dic["dayStart"] as! Int?
+                            promocao.dayEnd = dic["dayEnd"] as! Int?
+                            promocao.startHour = dic["startHour"] as! String?
+                            promocao.endHour = dic["endHour"] as! String?
+                            promocao.citiesId = dic["citiesId"] as! Int?
+                            promocao.companiesId = dic["companiesId"] as! Int?
+                            self.promocoes?.append(promocao)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
+                        }
+                    } catch let jsonError {
+                        print(jsonError)
+                    }
+                }
+            }
+            task.resume()
+        }
+        
+    }
+    
     @IBAction func compartilhar(_ sender: AnyObject) {
         
         print("share")
-        let imageDta = UIImagePNGRepresentation(UIImage(named: "pin_ic")!)
+        let imageDta = UIImagePNGRepresentation((images?[0])!)
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("test.jpg")
         do {
             try imageDta?.write(to: fileURL, options: .atomic)
@@ -90,9 +165,14 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
             self.documente.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
         }
     }
+    
+    
+    
     @IBAction func back(_ sender: AnyObject) {
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
+    
     
     func displayCurrentTab(_ tabIndex: Int){
         if let vc = viewControllerForSelectedSegmentIndex(tabIndex) {
@@ -106,15 +186,23 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         }
     }
     
+    
+    
+    
     func viewControllerForSelectedSegmentIndex(_ index: Int) -> UIViewController? {
         var vc: UIViewController?
         switch index {
         case TabIndex.firstChildTab.rawValue :
+            let vc1: PromocoesViewController = firstChildTabVC as! PromocoesViewController
+            vc1.promocoes = self.promocoes
             vc = firstChildTabVC
         case TabIndex.secondChildTab.rawValue :
             vc = secondChildTabVC
         case TabIndex.thirdChildTab.rawValue :
-            vc = thirdChildTabVC
+            let vc3: LocalViewController = thirdChildTabVC as! LocalViewController
+            vc3.lat = Double(self.estabelecimento.lat!)!
+            vc3.long = Double(self.estabelecimento.long!)!
+            vc = vc3
         default:
             return nil
         }
@@ -122,33 +210,23 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         return vc
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     
     func imagem() {
-        self.pageControll.numberOfPages = images.count
+        self.pageControll.numberOfPages = (images?.count)!
         let scrollViewWidth:CGFloat = self.imageScrollView.frame.width
         let scrollViewHeight:CGFloat = self.imageScrollView.frame.height
         
-        
-        for i in 0..<images.count {
+        let x = images?.count
+        for i in 0..<x! {
             let novaImagem = UIImageView(frame: CGRect(x: scrollViewWidth*CGFloat(i), y: 0, width: scrollViewWidth, height: scrollViewHeight))
-            novaImagem.image = images[i]
+            novaImagem.image = images?[i]
             //novaImagem.contentMode = .scaleAspectFit
             //novaImagem.contentMode = .scaleAspectFill
             novaImagem.contentMode = .scaleToFill
             self.imageScrollView.addSubview(novaImagem)
         }
         
-        self.imageScrollView.contentSize = CGSize(width: scrollViewWidth * CGFloat(images.count), height: scrollViewHeight)
+        self.imageScrollView.contentSize = CGSize(width: scrollViewWidth * CGFloat((images?.count)!), height: scrollViewHeight)
         self.imageScrollView.delegate = self
         self.pageControll.currentPage = 0
     }
@@ -157,56 +235,37 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
 }
 
 
+
 extension EstabelecimentoViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yOffset = scrollView.contentOffset.y
         print(yOffset)
-        //        if scrollView == self.scroll {
-        //            if yOffset >= 194.0 {
-        //                self.scroll.isScrollEnabled = false
-        //                myTable.isScrollEnabled = true
-        //            }
-        //            //            if yOffset >= scrollViewContentHeight - screenHeight {
-        //            //                scrollView.isScrollEnabled = false
-        //            //                mttable.isScrollEnabled = true
-        //            //            }
-        //        }
-        //
-        //        if scrollView == self.myTable {
-        //            if yOffset <= 0 {
-        //                self.scroll.isScrollEnabled = true
-        //                self.myTable.isScrollEnabled = false
-        //            }
-        //        }
-        //
-        //        if yOffset >= scrollViewContentHeight - screenHeight {
-        //            scrollView.isScrollEnabled = false
-        //            myTable.isScrollEnabled = true
-        //        }
+                //if scrollView == self.scroll {
+        if yOffset >= 160.0 {
+            self.lbNome.isHidden = true
+            self.tvDescrecao.isHidden = true
+            self.lnTopNome.isHidden = false
+                //    }
+                    //            if yOffset >= scrollViewContentHeight - screenHeight {
+                    //                scrollView.isScrollEnabled = false
+                    //                mttable.isScrollEnabled = true
+                    //            }
+        } else {
+            self.lbNome.isHidden = false
+            self.tvDescrecao.isHidden = false
+            self.lnTopNome.isHidden = true
+        }
+        
+//                if yOffset >= scrollViewContentHeight - screenHeight {
+//                    scrollView.isScrollEnabled = false
+//                    myTable.isScrollEnabled = true
+//                }
     }
     
-    //    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    //        print("vai 1")
-    //    }
-    //
-    //    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    //        print("vai 2")
-    //    }
-    //
-    //    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-    //        print("vai 3")
-    //    }
-    //    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-    //        print("vai 4")
-    //    }
-    //
-    //    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-    //        print("vai 5")
-    //    }
-    //
-    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    //        print("vai 6")
-    //    }
+//        func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//            print("vai 1")
+//        }
+    
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageWidth:CGFloat = scrollView.frame.width
@@ -253,3 +312,4 @@ extension EstabelecimentoViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+

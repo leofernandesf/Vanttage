@@ -19,11 +19,22 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var secondView: UIView!
     @IBOutlet weak var myTextField: UITextField!
     var companies : [Companies]?
+    var companei: Companies?
+    var image: UIImage?
     @IBOutlet weak var btBack: UIButton!
     
     @IBOutlet weak var muCollection: UICollectionView!
     @IBOutlet weak var table: UITableView!
     let menuSection = ["VANTAGENS", "MAPA"]
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "informacao" {
+            let vc: EstabelecimentoViewController = segue.destination as! EstabelecimentoViewController
+            vc.estabelecimento = self.companei
+            vc.images = [self.image!]
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dismissKeyboard()
@@ -61,7 +72,6 @@ class HomeViewController: UIViewController {
             
             }else {
                 
-                print(data)
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
                     self.companies = [Companies]()
@@ -71,11 +81,17 @@ class HomeViewController: UIViewController {
                         companie.nome = dic["name"] as? String
                         companie.phone = dic["phones"] as? String
                         companie.addres = dic["address"] as? String
-                        //                    if let poin = dic["latlng"] as? String {
-                        //                        var latlog = poin.components(separatedBy: ",")
-                        //                        companie.lat = latlog[0]
-                        //                        companie.long = latlog[1]
-                        //                    }
+                        if let poin = dic["latlng"] as? String {
+                            if poin != "" {
+                                print(poin)
+                                var latlog = poin.components(separatedBy: ",")
+                                companie.lat = latlog[0]
+                                companie.long = latlog[1]
+                            }
+
+                        }
+                        companie.descricao = dic["description"] as? String
+                        companie.id = dic["id"] as? Int
                         companie.thumbnail = dic["thumbnail"] as? String
                         companie.banner1 = dic["bannerFeatured"] as? String
                         
@@ -140,6 +156,9 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.companei = companies?[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath) as!HomeTableViewCell
+        self.image = cell.thumbImage.image
         performSegue(withIdentifier: "informacao", sender: self)
     }
 }
@@ -184,8 +203,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController: MostrarMapa {
     func mostrar(lat: Double, long: Double) {
-        print(lat)
-        print(long)
+//        print(lat)
+//        print(long)
         self.secondView.isHidden = false
         self.muCollection.selectItem(at: IndexPath(item: 1, section: 0), animated: true, scrollPosition: .left)
     }

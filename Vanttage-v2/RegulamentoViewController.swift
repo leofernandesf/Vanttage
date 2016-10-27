@@ -10,6 +10,7 @@ import UIKit
 
 class RegulamentoViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,3 +34,5 @@ class RegulamentoViewController: UIViewController {
     */
 
 }
+
+

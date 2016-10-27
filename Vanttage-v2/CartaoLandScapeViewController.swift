@@ -22,6 +22,8 @@ class CartaoLandScapeViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        print(btVoltar.frame.size.width)
+        print(btVoltar.frame.width)
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         appdelegate.shouldSupportAllOrientation = true
         UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")

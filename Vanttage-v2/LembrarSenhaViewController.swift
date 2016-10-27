@@ -16,8 +16,8 @@ class LembrarSenhaViewController: UIViewController {
     @IBOutlet weak var enviar: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        mylayout.buttonLayout(objeto: [enviar], color: UIColor.white,borderWidth: 1.2,corner: 27)
+        print(enviar.frame.width)
+        mylayout.buttonLayout(objeto: [enviar], color: UIColor.white,borderWidth: 1.2,corner: 0.1)
         self.hideKeyboardWhenTappedAround()
         layout.tfLayout(tf: [tfEmail], image: nil)
         // Do any additional setup after loading the view.

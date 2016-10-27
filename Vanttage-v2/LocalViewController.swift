@@ -14,11 +14,12 @@ class LocalViewController: UIViewController,MKMapViewDelegate,CLLocationManagerD
 
     @IBOutlet weak var myMap: MKMapView!
     let regionRadius: CLLocationDistance = 1000
-    
+    var lat : Double?
+    var long: Double?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let location = CLLocationCoordinate2D(latitude: -3.096201, longitude: -60.022970)
+        let location = CLLocationCoordinate2D(latitude: lat!,longitude: long!)
+        //let location = CLLocationCoordinate2D(latitude: -3.096201, longitude: -60.022970)
         //var location = CLLocationCoordinate2DMake(-37.81411, 144.96328)
         
         let span = MKCoordinateSpanMake(0.1, 0.1)

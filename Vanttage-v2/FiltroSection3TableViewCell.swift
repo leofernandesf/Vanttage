@@ -26,7 +26,7 @@ class FiltroSection3TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        myLayout.buttonLayout(objeto: [btGastronomia,btEntreterimento,btBeleza,btservico], color: UIColor.lightGray, borderWidth: 2,corner: 22)
+        myLayout.buttonLayout(objeto: [btGastronomia,btEntreterimento,btBeleza,btservico], color: UIColor.lightGray, borderWidth: 2,corner: 0.12)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
