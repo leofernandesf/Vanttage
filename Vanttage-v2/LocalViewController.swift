@@ -14,13 +14,21 @@ class LocalViewController: UIViewController,MKMapViewDelegate,CLLocationManagerD
 
     @IBOutlet weak var myMap: MKMapView!
     let regionRadius: CLLocationDistance = 1000
+    var local: Companies?
     var lat : Double?
     var long: Double?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUpAnnotation()
+    }
+    
+    
+    
+    func setUpAnnotation() {
+        self.lat = Double((local?.lat!)!)!
+        self.long = Double((local?.long!)!)!
         let location = CLLocationCoordinate2D(latitude: lat!,longitude: long!)
-        //let location = CLLocationCoordinate2D(latitude: -3.096201, longitude: -60.022970)
-        //var location = CLLocationCoordinate2DMake(-37.81411, 144.96328)
         
         let span = MKCoordinateSpanMake(0.1, 0.1)
         
@@ -32,31 +40,15 @@ class LocalViewController: UIViewController,MKMapViewDelegate,CLLocationManagerD
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = "Pizza Pistorante"
-        annotation.subtitle = "Luna Rossa"
         
-        // Add annotation to the scene
+        if let titulo = local?.nome {
+            annotation.title = titulo
+        }
+        
         
         myMap.addAnnotation(annotation)
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

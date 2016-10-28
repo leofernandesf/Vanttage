@@ -60,19 +60,78 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        print(images?.count)
         let index = IndexPath(item: 0, section: 0)
         myCollection.selectItem(at: index, animated: true, scrollPosition: .left)
         
-        scroll.contentSize.height = screenHeight + 220
+        getImages()
         // myView.frame.height = screenHeight + 215
         
         scroll.delegate = self
         scroll.bounces = false
-        print(scroll.contentSize)
+        
         setUpPromocoes()
         //displayCurrentTab(TabIndex.firstChildTab.rawValue)
         imagem()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        scroll.contentSize.height = screenHeight + 220
+        print(scroll.contentSize)
+    }
+    
+    func getImages() {
+        let image = UIImageView()
+        
+        if let url1 = estabelecimento.banner1 {
+            print(url1)
+            if url1 != "banner1" {
+                image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url1)", completion: { (imagem) in
+                    self.images = [imagem]
+                    self.imagem()
+                    
+                    if let url2 = self.estabelecimento.banner2 {
+                        if url2 != "banner2" {
+                            image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url2)", completion: { (imagem) in
+                                self.images?.append(image.image!)
+                                self.imagem()
+                                
+                                if let url3 = self.estabelecimento.banner3 {
+                                    if url3 != "banner3" {
+                                        image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url3)", completion: { (imagem) in
+                                            self.images?.append(image.image!)
+                                            self.imagem()
+                                            
+                                            if let url4 = self.estabelecimento.banerFeatured {
+                                                if url4 != "undifined" {
+                                                    image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url4)", completion: { (imagem) in
+                                                        self.images?.append(image.image!)
+                                                        self.imagem()
+                                                    })
+                                                }
+                                            }
+                                        })
+                                    }
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        //image.lo
+    }
+    
+    func x() {
+        
     }
     
     func setView() {
@@ -169,6 +228,7 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     
     
     @IBAction func back(_ sender: AnyObject) {
+        self.images = []
         _ = self.navigationController?.popViewController(animated: true)
     }
     
@@ -195,13 +255,14 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         case TabIndex.firstChildTab.rawValue :
             let vc1: PromocoesViewController = firstChildTabVC as! PromocoesViewController
             vc1.promocoes = self.promocoes
-            vc = firstChildTabVC
+            vc = vc1
         case TabIndex.secondChildTab.rawValue :
-            vc = secondChildTabVC
+            let vc2: RegulamentoViewController = secondChildTabVC as! RegulamentoViewController
+            vc2.promocao = self.promocoes
+            vc = vc2
         case TabIndex.thirdChildTab.rawValue :
             let vc3: LocalViewController = thirdChildTabVC as! LocalViewController
-            vc3.lat = Double(self.estabelecimento.lat!)!
-            vc3.long = Double(self.estabelecimento.long!)!
+            vc3.local = self.estabelecimento
             vc = vc3
         default:
             return nil
@@ -212,23 +273,28 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     
     
     func imagem() {
-        self.pageControll.numberOfPages = (images?.count)!
-        let scrollViewWidth:CGFloat = self.imageScrollView.frame.width
-        let scrollViewHeight:CGFloat = self.imageScrollView.frame.height
-        
-        let x = images?.count
-        for i in 0..<x! {
-            let novaImagem = UIImageView(frame: CGRect(x: scrollViewWidth*CGFloat(i), y: 0, width: scrollViewWidth, height: scrollViewHeight))
-            novaImagem.image = images?[i]
-            //novaImagem.contentMode = .scaleAspectFit
-            //novaImagem.contentMode = .scaleAspectFill
-            novaImagem.contentMode = .scaleToFill
-            self.imageScrollView.addSubview(novaImagem)
+        print(images)
+        if images != nil {
+            print("entrou")
+            self.pageControll.numberOfPages = (images?.count)!
+            let scrollViewWidth:CGFloat = self.imageScrollView.frame.width
+            let scrollViewHeight:CGFloat = self.imageScrollView.frame.height
+            
+            let x = images?.count
+            for i in 0..<x! {
+                let novaImagem = UIImageView(frame: CGRect(x: scrollViewWidth*CGFloat(i), y: 0, width: scrollViewWidth, height: scrollViewHeight))
+                novaImagem.image = images?[i]
+                //novaImagem.contentMode = .scaleAspectFit
+                //novaImagem.contentMode = .scaleAspectFill
+                novaImagem.contentMode = .scaleToFill
+                self.imageScrollView.addSubview(novaImagem)
+            }
+            
+            self.imageScrollView.contentSize = CGSize(width: scrollViewWidth * CGFloat((images?.count)!), height: scrollViewHeight)
+            self.imageScrollView.delegate = self
+            self.pageControll.currentPage = 0
         }
         
-        self.imageScrollView.contentSize = CGSize(width: scrollViewWidth * CGFloat((images?.count)!), height: scrollViewHeight)
-        self.imageScrollView.delegate = self
-        self.pageControll.currentPage = 0
     }
     
     

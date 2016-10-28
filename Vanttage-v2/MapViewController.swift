@@ -21,53 +21,25 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     @IBOutlet weak var lugarNome: UILabel!
     let regionRadius: CLLocationDistance = 1000
     
+    var companies: [Companies]?
     
-    
-    var anotations: [Locais] {
-        var anotations2 = [Locais]()
-        let latitude = -3.096201 as Double
-        let longitude = -60.022970 as Double
-        let anotation = Locais(latitude: latitude, longitude: longitude)
-        anotation.title = "vai"
-        anotation.teste = false
-        anotation.fone = "55555555"
-        anotation.endereco = "djalma batista, vai rapaz"
-        anotations2.append(anotation)
-        
-        let latitude2 = -3.100762 as Double
-        let longitude2 = -60.023790 as Double
-        let anotation2 = Locais(latitude: latitude2, longitude: longitude2)
-        anotation2.fone = "44444444"
-        anotation2.endereco = "djalma batista, vai"
-        anotation2.title = "vai2"
-        anotation2.teste = true
-        anotations2.append(anotation2)
-        
-        let latitude3 = -3.135774 as Double
-        let longitude3 = -60.021162 as Double
-        let anotation3 = Locais(latitude: latitude3, longitude: longitude3)
-        anotation3.fone = "66666666"
-        anotation3.endereco = "djalma batista, longe"
-        anotation3.title = "vai3"
-        anotation3.teste = true
-        anotations2.append(anotation3)
-        return anotations2
-    }
+    var anotations: [Locais]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("entrou")
         // set initial location in Honolulu
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-
-        
         myMap.showsUserLocation = true
         myMap.delegate = self
         
-        self.myMap.addAnnotations(anotations)
+        let local = Locais()
+        
+        anotations = local.retornaLocais(companies: companies!)
+        self.myMap.addAnnotations(anotations!)
 
         
     }

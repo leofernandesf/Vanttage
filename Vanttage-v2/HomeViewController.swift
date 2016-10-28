@@ -8,32 +8,34 @@
 
 import UIKit
 
-protocol MostrarMapa {
-    func mostrar(lat: Double, long: Double)
-    
-}
 
 class HomeViewController: UIViewController {
+    enum TabIndex : Int {
+        case firstChildTab = 0
+        case secondChildTab = 1
+    }
     
     @IBOutlet weak var viewBusca: UIView!
-    @IBOutlet weak var secondView: UIView!
     @IBOutlet weak var myTextField: UITextField!
     var companies : [Companies]?
     var companei: Companies?
     var image: UIImage?
     @IBOutlet weak var btBack: UIButton!
-    
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var muCollection: UICollectionView!
-    @IBOutlet weak var table: UITableView!
+    var currentViewController: UIViewController?
     let menuSection = ["VANTAGENS", "MAPA"]
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "informacao" {
-            let vc: EstabelecimentoViewController = segue.destination as! EstabelecimentoViewController
-            vc.estabelecimento = self.companei
-            vc.images = [self.image!]
-        }
-    }
+    lazy var firstChildTabVC: UIViewController? = {
+        let firstChildTabVC = self.storyboard?.instantiateViewController(withIdentifier: "vc1")
+        return firstChildTabVC
+    }()
+    
+    lazy var secondChildTabVC : UIViewController? = {
+        let secondChildTabVC = self.storyboard?.instantiateViewController(withIdentifier: "map")
+        return secondChildTabVC
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +44,9 @@ class HomeViewController: UIViewController {
         myTextField.delegate = self
         viewBusca.clipsToBounds = true
 //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
-        self.table.tableFooterView = UIView(frame: .zero)
+        
         let index = IndexPath(item: 0, section: 0)
         muCollection.selectItem(at: index, animated: true, scrollPosition: .left)
-        
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }
@@ -53,13 +54,18 @@ class HomeViewController: UIViewController {
     }
     
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let currentViewController = currentViewController {
+            currentViewController.viewWillDisappear(animated)
+        }
+    }
+    
     func GET() {
-        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies")!)
+        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies/allCompanie?citiId=256")!)
         request.httpMethod = "GET"
-        //let postString = "id=12&name=teste"
-        //request.httpBody = postString.data(using: .utf8)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(error)")
@@ -94,14 +100,16 @@ class HomeViewController: UIViewController {
                         companie.id = dic["id"] as? Int
                         companie.thumbnail = dic["thumbnail"] as? String
                         companie.banner1 = dic["bannerFeatured"] as? String
-                        
+                        companie.banner2 = dic["banner1"] as? String
+                        companie.banner3 = dic["banner2"] as? String
+                        companie.banerFeatured = dic["banner3"] as? String
                         self.companies?.append(companie)
                         
                         
                     }
                     
                     DispatchQueue.main.async {
-                        self.table.reloadData()
+                        self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
                     }
                     
                     print(json)
@@ -109,16 +117,43 @@ class HomeViewController: UIViewController {
                     print(jsonError)
                 }
             }
-            
-            
-            
-//            let responseString = String(data: data, encoding: .utf8)
-//            print("responseString = \(responseString)")
-        
-            
-        
+
         }
         task.resume()
+    }
+    
+    
+    func displayCurrentTab(_ tabIndex: Int){
+        if let vc = viewControllerForSelectedSegmentIndex(tabIndex) {
+            
+            self.addChildViewController(vc)
+            vc.didMove(toParentViewController: self)
+            
+            vc.view.frame = self.contentView.bounds
+            self.contentView.addSubview(vc.view)
+            self.currentViewController = vc
+        }
+    }
+    
+    
+    
+    
+    func viewControllerForSelectedSegmentIndex(_ index: Int) -> UIViewController? {
+        var vc: UIViewController?
+        switch index {
+        case TabIndex.firstChildTab.rawValue :
+            let vc1: HomeTableViewController = firstChildTabVC as! HomeTableViewController
+            vc1.companies = self.companies
+            vc = vc1
+        case TabIndex.secondChildTab.rawValue :
+            let vc2: MapViewController = secondChildTabVC as! MapViewController
+            vc2.companies = self.companies
+            vc = vc2
+        default:
+            return nil
+        }
+        
+        return vc
     }
     
 }
@@ -132,36 +167,6 @@ extension HomeViewController : UITextFieldDelegate {
     }
 }
 
-extension HomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //var cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome", for: indexPath) as? UITableViewCell
-        //if cell1 == nil {
-         let  cell1 = tableView.dequeueReusableCell(withIdentifier: "cellHome") as! HomeTableViewCell
-        //cell1.mostrar = self
-        cell1.companie = self.companies?[indexPath.row]
-        //}
-        
-        //        cell.layer.cornerRadius = 10
-        //        cell.clipsToBounds = true
-        print("cell: ",cell1)
-        return cell1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companies?.count ?? 0
-    }
-    
-    
-}
-
-extension HomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.companei = companies?[indexPath.row]
-        let cell = tableView.cellForRow(at: indexPath) as!HomeTableViewCell
-        self.image = cell.thumbImage.image
-        performSegue(withIdentifier: "informacao", sender: self)
-    }
-}
 
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -179,18 +184,15 @@ extension HomeViewController : UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            self.secondView.isHidden = true
-        } else {
-            self.secondView.isHidden = false
-            
-        }
+        self.currentViewController?.view.removeFromSuperview()
+        self.currentViewController?.removeFromParentViewController()
+        displayCurrentTab(indexPath.item)
     }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width/2, height: collectionView.bounds.height)
+        return CGSize(width: 343/2, height: 62)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
@@ -201,11 +203,3 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension HomeViewController: MostrarMapa {
-    func mostrar(lat: Double, long: Double) {
-//        print(lat)
-//        print(long)
-        self.secondView.isHidden = false
-        self.muCollection.selectItem(at: IndexPath(item: 1, section: 0), animated: true, scrollPosition: .left)
-    }
-}

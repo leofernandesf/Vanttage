@@ -20,13 +20,18 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myLayout.buttonLayout(objeto: [entrar, inscrever],color: UIColor.white,borderWidth: 1.2,corner: 0.1)
+        
         self.hideKeyboardWhenTappedAround()
-        layout.tfLayout(tf: [tfNome,tfPassword], image: nil)
+        
         logInFace = FBSDKLoginManager()
         logInFace?.logOut()
         
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        myLayout.buttonLayout(objeto: [entrar, inscrever],color: UIColor.white,borderWidth: 1.2,corner: 0.1)
+        layout.tfLayout(tf: [tfNome,tfPassword], image: nil)
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Foundation
 
 protocol Atualizar {
     func limparTable()
     func mostrar()
     
+}
+
+struct Cidades {
+    var nome : String?
+    var codigo: Int?
 }
 
 class CriarContaViewController: UIViewController {
@@ -42,7 +48,7 @@ class CriarContaViewController: UIViewController {
     var informacoes:Cadastro?
     let recognizer = UITapGestureRecognizer()
     let mylayout = layout()
-    var pickOption = ["Manaus - AM", "Belem - PA"]
+    var pickOption: [String] = []
     let pickerView = UIPickerView()
     
     
@@ -52,6 +58,10 @@ class CriarContaViewController: UIViewController {
         
         mytfs = [tfNome,tfEmail,tfSenha,tfConfirmarSenha,tfData,tfCPF,tfCidade,tfCEP,tfNumero,tfEndereco,tfProfissao,tfCartao]
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,14 +88,19 @@ class CriarContaViewController: UIViewController {
         faceManager = FBSDKLoginManager()
         recognizer.addTarget(self, action: #selector(CriarContaViewController.profileImage))
         mylayout.imageLayout(image: ivPerfil, recognizer: recognizer)
-        mylayout.buttonLayout(objeto: [btLimparCampos, btConfirmar], color: UIColor.white.laranja, borderWidth: 1.2,corner: 27)
+        mylayout.buttonLayout(objeto: [btLimparCampos, btConfirmar], color: UIColor.white.laranja, borderWidth: 1.2,corner: 0.1)
         self.hideKeyboardWhenTappedAround()
         let image = layout.sizeImage(width: 24, height: 24, image: #imageLiteral(resourceName: "back_ic"))
         btBack.setImage(image, for: .normal)
         pickerView.delegate = self
-        self.tfCidade.text = pickOption[0]
+        
         pickerView.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
         tfCidade.inputView = pickerView
+        let date: UIDatePicker = UIDatePicker()
+        date.datePickerMode = .date
+        date.addTarget(self, action: #selector(CriarContaViewController.onDidChangeDate(sender:)), for: .valueChanged)
+        tfData.inputView = date
+        get()
         self.myScroll.delegate = self
     }
     
@@ -93,6 +108,17 @@ class CriarContaViewController: UIViewController {
         print("apertou")
         faceManager?.logOut()
         _ = navigationController?.popViewController(animated: true)
+        
+    }
+    
+    
+    func onDidChangeDate(sender: UIDatePicker) {
+        print("entrou")
+        let myDateFormater: DateFormatter = DateFormatter()
+        myDateFormater.dateFormat = "yyyy-MM-dd"
+        
+        let myString: String = myDateFormater.string(from: sender.date)
+        tfData.text = myString as String
     }
     
     
@@ -114,10 +140,14 @@ class CriarContaViewController: UIViewController {
         }
     }
     
+    func vai(completion: (_ error: String)-> Void) {
+        
+    }
+    
     func post() {
-        //let params = ["name":"leonardo","id": 0 ,"password":"password", "cardNumber":"password", "cpf":"cvbb", "email":"asdfgg", "birth":"2016-09-08T00:00:00.000Z", "profession":"password", "status":1, "createdAt":"2016-10-20T14:52:11.000Z", "codeZip":"password", "pathPhoto":"password", "citiesId":1, "profilesId":1] as Dictionary<String, Any>
+        
         let params = Cadastro.cadastroObjeto(tfs: mytfs)
-        //let params = ["name":tfNome.text,"id": 0 ,"password":tfSenha.text, "cardNumber":tfCartao.text, "cpf":tfCPF.text, "email":tfEmail.text, "birth":"2016-09-08T00:00:00.000Z", "profession":tfProfissao.text, "status":1, "createdAt":"2016-10-20T14:52:11.000Z", "codeZip":tfCEP.text, "pathPhoto":"password", "citiesId":1, "profilesId":1] as Dictionary<String, Any>
+
         print(params)
         var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/UserCards")!)
         request.httpMethod = "POST"
@@ -149,7 +179,42 @@ class CriarContaViewController: UIViewController {
     }
     
     
-    
+    func get() {
+        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Cities")!)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                
+            }else {
+                
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                    for dic in json as! [[String: AnyObject]]{
+                        //let cidades = Cidades()
+                        let existe = dic["isVisibled"] as! Int
+                        if existe == 1 {
+                            print(dic)
+                            
+                        }
+                    }
+                    
+                    //self.tfCidade.text = self.pickOption[0]
+
+                } catch let jsonError {
+                    print(jsonError)
+                }
+            }
+            
+        }
+        task.resume()
+    }
     
     
 //    func postDataAsynchronous(url: String, bodyData: String, completionHandler: @escaping (_ responseString: String?, _ error: NSError?) -> ()) {
@@ -197,17 +262,18 @@ class CriarContaViewController: UIViewController {
     }
     
     @IBAction func confirmar(_ sender: AnyObject) {
-//        if self.tfSenha.text != self.tfConfirmarSenha.text {
-//            showPopUp(identifier: "popUpCadastroErro", tipo: 3)
-//        } else if textFieldVazias() {
-//            showPopUp(identifier: "popUpCadastroErro", tipo: 2)
-//        } else {
-//            for tf in mytfs {
-//                print(tf.text)
-//            }
-//            showPopUp(identifier: "popUpCadastroCerto", tipo: 2)
-//        }
-        post()
+        if self.tfSenha.text != self.tfConfirmarSenha.text {
+            showPopUp(identifier: "popUpCadastroErro", tipo: 3)
+        } else if textFieldVazias() {
+            showPopUp(identifier: "popUpCadastroErro", tipo: 2)
+        } else {
+            for tf in mytfs {
+                print(tf.text)
+            }
+            post()
+            //showPopUp(identifier: "popUpCadastroCerto", tipo: 2)
+        }
+        
         
         
     }
@@ -236,7 +302,7 @@ class CriarContaViewController: UIViewController {
     func textFieldVazias() -> Bool  {
         var verificador = false
         for tf in mytfs {
-            if (tf.text?.isEmpty)! {
+            if (tf.text?.isEmpty)! && (tf != tfProfissao) && (tf != tfCartao) {
                 tf.attributedPlaceholder = NSAttributedString(string: tf.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.black.laranja])
                 verificador = true
             }

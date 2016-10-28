@@ -23,7 +23,7 @@ class PopUpCadastroErro: UIViewController {
         super.viewDidLoad()
         print("foi")
         self.popUpview.layer.cornerRadius = 5
-        myLayout.buttonLayout(objeto: [btBack], color: UIColor.white, borderWidth: 1,corner: 27)
+        myLayout.buttonLayout(objeto: [btBack], color: UIColor.white, borderWidth: 1,corner: 0.1)
         showMensage()
         
         self.view.showAnimation(view: self.view)

@@ -26,7 +26,7 @@ class Cadastro: NSObject {
     
     static func cadastroObjeto(tfs: [UITextField]) -> Dictionary<String, Any> {
         var params = Dictionary<String, Any>()
-        var nome: String!
+        var nome: String?
         var email: String!
         var senha: String!
         var dataNascimento: String!
@@ -51,6 +51,10 @@ class Cadastro: NSObject {
             senha = senha1
         }
         
+        if let data1 = tfs[4].text {
+            dataNascimento = data1
+        }
+        
         if let cpf1 = tfs[5].text {
             cpf = cpf1
         }
@@ -68,7 +72,9 @@ class Cadastro: NSObject {
         }
         
         
-       params = ["name":nome,"id": 0 ,"password":senha, "cardNumber":numeroCartao, "cpf":cpf, "email":email, "birth":"2016-09-08", "profession":profissao, "status":1, "codeZip":cep, "pathPhoto":"password", "citiesId":1, "profilesId":1]
+        
+        
+       params = ["name":nome!,"id": 0 ,"password":senha, "cardNumber":numeroCartao, "cpf":cpf, "email":email, "birth":dataNascimento, "profession":profissao, "status":1, "codeZip":cep, "pathPhoto":"password", "citiesId":1, "profilesId":1]
         
         return params
     }

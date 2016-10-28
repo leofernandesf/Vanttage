@@ -10,7 +10,7 @@ import UIKit
 
 class RegulamentoViewController: UIViewController {
 
-    
+    var promocao: [Promocoes]?
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -74,7 +74,9 @@ class HomeTableViewCell: UITableViewCell {
     func setUpImageProfile()  {
         if let image = companie?.thumbnail {
             //imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
-            imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/1477411846246.png")
+            imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)", completion: { (resposta) in
+                print(resposta)
+            })
             
         }
     }
@@ -82,9 +84,26 @@ class HomeTableViewCell: UITableViewCell {
     func setUpImageThumbNail() {
         if let image = companie?.banner1 {
             //thumbImage.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
-            thumbImage.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/1477411846246.png")
+            DispatchQueue.main.async {
+                
+                self.thumbImage.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(image)", completion: { (resposta) in
+                    print(resposta)
+                })
+                print("olha aqui")
+            }
         }
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let rectShape = CAShapeLayer()
+        rectShape.frame = self.thumbImage.bounds
+        rectShape.path = UIBezierPath(roundedRect: self.thumbImage.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+        //self.thumbImage.layer.backgroundColor = UIColor.greenColor().CGColor
+        self.thumbImage.layer.mask = rectShape
+    }
+    
     
     let myLayout = layout()
     override func awakeFromNib() {
@@ -121,13 +140,14 @@ class HomeTableViewCell: UITableViewCell {
 let imageCache = NSCache<NSString, UIImage>()
 
 extension UIImageView {
-    func loadImageUsingURL(urlString: String)  {
+    func loadImageUsingURL(urlString: String, completion: @escaping (_ result: UIImage) -> Void)  {
         let url = URL(string: urlString)
         
         image = nil
         
         if let imageFromCache = imageCache.object(forKey: urlString as NSString){
             self.image = imageFromCache
+            completion(self.image!)
             return
         }
         
@@ -142,8 +162,10 @@ extension UIImageView {
                 let imageToCache = UIImage(data: data!)
                 imageCache.setObject(imageToCache!, forKey: urlString as NSString)
                 self.image = imageToCache
-                print(self.image)
+                //print(self.image)
+                completion(self.image!)
             }
         }).resume()
+        
     }
 }
