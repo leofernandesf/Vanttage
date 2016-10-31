@@ -180,8 +180,8 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
                             promocao.id = dic["id"] as! Int?
                             promocao.isFeatured = dic["isFeatured"] as! Int?
                             promocao.descricao = dic["description"] as! String?
-                            promocao.value = dic["value"] as! Int?
-                            promocao.discount = dic["discount"] as! Int?
+                            promocao.value = dic["value"] as! String?
+                            promocao.discount = dic["discount"] as! String?
                             promocao.howToUse = dic["howToUse"] as! String?
                             promocao.rules = dic["rules"] as! String?
                             promocao.status = dic["status"] as! Int?

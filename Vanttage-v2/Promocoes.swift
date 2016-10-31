@@ -12,8 +12,8 @@ class Promocoes: NSObject {
     var id: Int?
     var isFeatured: Int?
     var descricao: String?
-    var value: Int?
-    var discount: Int?
+    var value: String?
+    var discount: String?
     var howToUse: String?
     var rules: String?
     var status: Int?

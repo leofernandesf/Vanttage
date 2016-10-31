@@ -35,7 +35,13 @@ class PopUpCadastroErro: UIViewController {
             primeiraMensagem = "Codigo do cartao esta incorreto ou esta invalido"
             segundaMensagem = "Verifique os numeros ou tenta mais tarde"
         } else if tipoErro == 2 {
-            primeiraMensagem = "Preencha todos os campos para finalizar o cadastro"
+            primeiraMensagem = "Preencha todos os campos em laranja para finalizar o cadastro"
+            segundaMensagem = "Por favor verifique se todos os campos foram preenchidos corretamente"
+        } else if tipoErro == 3{
+            primeiraMensagem = "CPF ja cadastrado"
+            segundaMensagem = "Por favor verifique se todos os campos foram preenchidos corretamente"
+        } else if tipoErro == 4 {
+            primeiraMensagem = "Email ja cadastrado"
             segundaMensagem = "Por favor verifique se todos os campos foram preenchidos corretamente"
         } else {
             primeiraMensagem = "Senhas diferentes"

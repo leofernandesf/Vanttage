@@ -40,20 +40,25 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dismissKeyboard()
-        viewBusca.layer.cornerRadius = 5
-        myTextField.delegate = self
-        viewBusca.clipsToBounds = true
-//        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
         
-        let index = IndexPath(item: 0, section: 0)
-        muCollection.selectItem(at: index, animated: true, scrollPosition: .left)
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }
         GET()
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        muCollection.delegate = self
+        muCollection.dataSource = self
+        
+        viewBusca.layer.cornerRadius = 5
+        myTextField.delegate = self
+        viewBusca.clipsToBounds = true
+        //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
+        
+        let index = IndexPath(item: 0, section: 0)
+        muCollection.selectItem(at: index, animated: true, scrollPosition: .left)
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -192,7 +197,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 343/2, height: 62)
+        return CGSize(width: collectionView.frame.size.width/2, height: collectionView.frame.size.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0

@@ -16,8 +16,9 @@ protocol Atualizar {
 }
 
 struct Cidades {
-    var nome : String?
-    var codigo: Int?
+    var nome : String!
+    var stateID: Int!
+    var id: Int!
 }
 
 class CriarContaViewController: UIViewController {
@@ -50,10 +51,12 @@ class CriarContaViewController: UIViewController {
     let mylayout = layout()
     var pickOption: [String] = []
     let pickerView = UIPickerView()
-    
-    
+    var cidades: [Cidades] = []
+    var row: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.visulaEfect.isHidden = false
+        self.load.startAnimating()
         setarValores()
         
         mytfs = [tfNome,tfEmail,tfSenha,tfConfirmarSenha,tfData,tfCPF,tfCidade,tfCEP,tfNumero,tfEndereco,tfProfissao,tfCartao]
@@ -61,7 +64,7 @@ class CriarContaViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        pickerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +95,7 @@ class CriarContaViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         let image = layout.sizeImage(width: 24, height: 24, image: #imageLiteral(resourceName: "back_ic"))
         btBack.setImage(image, for: .normal)
-        pickerView.delegate = self
+        
         
         pickerView.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
         tfCidade.inputView = pickerView
@@ -146,7 +149,7 @@ class CriarContaViewController: UIViewController {
     
     func post() {
         
-        let params = Cadastro.cadastroObjeto(tfs: mytfs)
+        let params = Cadastro.cadastroObjeto(tfs: mytfs, cidadeID: cidades[row])
 
         print(params)
         var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/UserCards")!)
@@ -170,9 +173,25 @@ class CriarContaViewController: UIViewController {
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
+                var tipoError = Int()
+                let responseString = String(data: data, encoding: .utf8)
+                if (responseString?.contains("cpf_UNIQUE"))! {
+                    tipoError = 3
+                } else if (responseString?.contains("email_UNIQUE"))! {
+                    tipoError = 4
+                }
+                
+                DispatchQueue.main.async {
+                    self.showPopUp(identifier: "popUpCadastroErro", tipo: tipoError)
+                }
+                print("responseString = \(responseString)")
+            } else {
+                DispatchQueue.main.async {
+                    self.showPopUp(identifier: "popUpCadastroCerto", tipo: 0)
+                }
+                
             }
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
+            
 
         }
         task.resume()
@@ -197,15 +216,21 @@ class CriarContaViewController: UIViewController {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
                     for dic in json as! [[String: AnyObject]]{
-                        //let cidades = Cidades()
                         let existe = dic["isVisibled"] as! Int
                         if existe == 1 {
-                            print(dic)
+                            let cidade = Cidades(nome: dic["name"] as! String?, stateID: dic["statesId"] as! Int, id: dic["id"] as! Int)
                             
+                            self.cidades.append(cidade)
                         }
                     }
                     
-                    //self.tfCidade.text = self.pickOption[0]
+                    print(self.cidades)
+                    DispatchQueue.main.async {
+                        self.tfCidade.text = self.cidades[0].nome
+                        self.visulaEfect.isHidden = true
+                        self.load.stopAnimating()
+                    }
+                    
 
                 } catch let jsonError {
                     print(jsonError)
@@ -216,26 +241,6 @@ class CriarContaViewController: UIViewController {
         task.resume()
     }
     
-    
-//    func postDataAsynchronous(url: String, bodyData: String, completionHandler: @escaping (_ responseString: String?, _ error: NSError?) -> ()) {
-//        var URL: NSURL = NSURL(string: url)!
-//        var request:NSMutableURLRequest = NSMutableURLRequest(url:URL as URL)
-//        request.httpMethod = "POST";
-//        request.httpBody = bodyData.data(using: String.Encoding.utf8);
-//        
-//        NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue: OperationQueue.main){
-//            
-//            response, data, error in
-//            
-//            var output: String!
-//            
-//            if data != nil {
-//                output = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) as! String
-//            }
-//            
-//            completionHandler(output, error as NSError?)
-//        }
-//    }
     
     
     @IBAction func selecionarFoto(_ sender: AnyObject) {
@@ -262,14 +267,12 @@ class CriarContaViewController: UIViewController {
     }
     
     @IBAction func confirmar(_ sender: AnyObject) {
+        print(row)
         if self.tfSenha.text != self.tfConfirmarSenha.text {
             showPopUp(identifier: "popUpCadastroErro", tipo: 3)
         } else if textFieldVazias() {
             showPopUp(identifier: "popUpCadastroErro", tipo: 2)
         } else {
-            for tf in mytfs {
-                print(tf.text)
-            }
             post()
             //showPopUp(identifier: "popUpCadastroCerto", tipo: 2)
         }
@@ -302,7 +305,7 @@ class CriarContaViewController: UIViewController {
     func textFieldVazias() -> Bool  {
         var verificador = false
         for tf in mytfs {
-            if (tf.text?.isEmpty)! && (tf != tfProfissao) && (tf != tfCartao) {
+            if (tf.text?.isEmpty)! && (tf != tfCEP) && (tf != tfNumero)  && (tf != tfEndereco) && (tf != tfCartao){
                 tf.attributedPlaceholder = NSAttributedString(string: tf.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.black.laranja])
                 verificador = true
             }
@@ -314,18 +317,9 @@ class CriarContaViewController: UIViewController {
     
     func limparDados() {
         self.ivPerfil.image = UIImage(named: "profile_photo")
-        self.tfNumero.text = ""
-        self.tfCartao.text = ""
-        self.tfCEP.text = ""
-        self.tfCPF.text = ""
-        self.tfData.text = ""
-        self.tfNome.text = ""
-        self.tfEmail.text = ""
-        self.tfSenha.text = ""
-        self.tfCidade.text = ""
-        self.tfEndereco.text = ""
-        self.tfProfissao.text = ""
-        self.tfConfirmarSenha.text = ""
+        for tfs in mytfs {
+            tfs.text = ""
+        }
     }
     
     
@@ -479,11 +473,12 @@ extension CriarContaViewController: UIScrollViewDelegate {
 
 extension CriarContaViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.tfCidade.text = pickOption[row]
+        self.tfCidade.text = cidades[row].nome
+        self.row = row
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickOption[row]
+        return cidades[row].nome
     }
 }
 
@@ -493,7 +488,7 @@ extension CriarContaViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.pickOption.count
+        return self.cidades.count
     }
 }
 
