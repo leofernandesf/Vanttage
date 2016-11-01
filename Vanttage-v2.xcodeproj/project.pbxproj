@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3145A041DC7B63C009EE11F /* HistoricoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3145A031DC7B63C009EE11F /* HistoricoViewController.swift */; };
 		B315679C1DB668E600E8F72A /* PromocoesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B315679B1DB668E600E8F72A /* PromocoesViewController.swift */; };
 		B315679E1DB670FB00E8F72A /* RegulamentoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B315679D1DB670FB00E8F72A /* RegulamentoViewController.swift */; };
 		B31567A01DB6710500E8F72A /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B315679F1DB6710500E8F72A /* LocalViewController.swift */; };
@@ -74,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B3145A031DC7B63C009EE11F /* HistoricoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricoViewController.swift; sourceTree = "<group>"; };
 		B315679B1DB668E600E8F72A /* PromocoesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromocoesViewController.swift; sourceTree = "<group>"; };
 		B315679D1DB670FB00E8F72A /* RegulamentoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegulamentoViewController.swift; sourceTree = "<group>"; };
 		B315679F1DB6710500E8F72A /* LocalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3145A021DC7B621009EE11F /* Historico */ = {
+			isa = PBXGroup;
+			children = (
+				B3145A031DC7B63C009EE11F /* HistoricoViewController.swift */,
+			);
+			name = Historico;
+			sourceTree = "<group>";
+		};
 		B359B0651DA42A8600BAD2F8 /* Estabelecimento */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +284,7 @@
 		B3E1BB661D9E97010086FF9D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B3145A021DC7B621009EE11F /* Historico */,
 				B36F41121DAD294B0053A078 /* PopUp */,
 				B35E6ED11DABC58800854767 /* Filtro */,
 				B3E1BB701D9E978D0086FF9D /* Cartao */,
@@ -508,6 +519,7 @@
 				B3E1BB8E1D9E9B2D0086FF9D /* CartaoLandScapeViewController.swift in Sources */,
 				B3C223DB1DB4FEB1008890C4 /* PopUpOKViewController.swift in Sources */,
 				B3E1BB6B1D9E97510086FF9D /* LembrarSenhaViewController.swift in Sources */,
+				B3145A041DC7B63C009EE11F /* HistoricoViewController.swift in Sources */,
 				B3E1BB821D9E9A030086FF9D /* Color.swift in Sources */,
 				B315679E1DB670FB00E8F72A /* RegulamentoViewController.swift in Sources */,
 				B35A3F2D1DB8F21100004596 /* Companies.swift in Sources */,

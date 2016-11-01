@@ -11,7 +11,7 @@ import UIKit
 class MenuTableViewController: UITableViewController {
     
     var index = IndexPath(row: 0, section: 0)
-    var cells = ["cell1","cell2","cell3","cell4","cell5",]
+    var cells = ["cell1","cell2","cell3","cell4","cell5","cell6"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +33,7 @@ class MenuTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 6
     }
     
     
@@ -58,7 +58,7 @@ class MenuTableViewController: UITableViewController {
         
         cell?.backgroundColor = UIColor.black.azul.withAlphaComponent(0.6)
         
-        if indexPath.row == 4 {
+        if indexPath.row == 5 {
             let logOut = FBSDKLoginManager()
             logOut.logOut()
             dismiss(animated: true, completion: nil)

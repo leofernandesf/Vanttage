@@ -25,8 +25,8 @@ class layout {
         
         image.layer.cornerRadius = image.frame.width/2
         image.clipsToBounds = true
-        image.layer.borderColor = UIColor.white.cgColor
-        image.layer.borderWidth = 1
+//        image.layer.borderColor = UIColor.white.cgColor
+//        image.layer.borderWidth = 1
         
         if recognizer != nil {
             image.isUserInteractionEnabled = true

@@ -57,13 +57,14 @@ class CriarContaViewController: UIViewController {
         super.viewDidLoad()
         self.visulaEfect.isHidden = false
         self.load.startAnimating()
-        setarValores()
         
-        mytfs = [tfNome,tfEmail,tfSenha,tfConfirmarSenha,tfData,tfCPF,tfCidade,tfCEP,tfNumero,tfEndereco,tfProfissao,tfCartao]
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        setarValores()
+        
+        mytfs = [tfNome,tfEmail,tfSenha,tfConfirmarSenha,tfData,tfCPF,tfCidade,tfCEP,tfNumero,tfEndereco,tfProfissao,tfCartao]
         pickerView.delegate = self
     }
     
