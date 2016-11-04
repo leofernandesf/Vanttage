@@ -1,25 +1,28 @@
 //
-//  PopUpOKViewController.swift
+//  ExclusiveViewController.swift
 //  Vanttage-v2
 //
-//  Created by leo on 17/10/16.
+//  Created by leo on 03/11/16.
 //  Copyright © 2016 tap4. All rights reserved.
 //
 
 import UIKit
 
-class PopUpOKViewController: UIViewController {
-
-    @IBOutlet weak var popUpview: UIView!
-    @IBOutlet weak var btOK: UIButton!
+class ExclusiveViewController: UIViewController {
     let myLayout = layout()
-    let defaults = UserDefaults.standard
+    @IBOutlet weak var btVoltar: UIButton!
+    
+    @IBOutlet weak var nextView: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let image = layout.sizeImage(width: 18, height: 18, image: #imageLiteral(resourceName: "back_ic"))
+//        btVoltar.setImage(image, for: .normal)
         
-        self.popUpview.layer.cornerRadius = 5
-        myLayout.buttonLayout(objeto: [btOK], color: UIColor.white, borderWidth: 1,corner: 0.1)
-        self.view.showAnimation(view: self.view)
+        self.navigationController?.navigationBar.isHidden = true
+        layout.acaoMenu(botao: btVoltar, vc: self)
+        myLayout.buttonLayout(objeto: [nextView], color: UIColor.red.laranja, borderWidth: 1.2, corner: 0.1)
         // Do any additional setup after loading the view.
     }
 
@@ -27,12 +30,10 @@ class PopUpOKViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
-    @IBAction func entrar(_ sender: AnyObject) {
-        
-        self.view.removeAnimate(view: self.view)
-        self.defaults.set(1, forKey: "entrar")
-        _ = self.navigationController?.popViewController(animated: true)
+    @IBAction func voltaer(_ sender: AnyObject) {
+        print("vai")
     }
 
     /*

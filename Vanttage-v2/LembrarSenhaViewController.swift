@@ -17,13 +17,18 @@ class LembrarSenhaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(enviar.frame.width)
-        mylayout.buttonLayout(objeto: [enviar], color: UIColor.white,borderWidth: 1.2,corner: 0.1)
+        
         self.hideKeyboardWhenTappedAround()
-        layout.tfLayout(tf: [tfEmail], image: nil)
+        
         // Do any additional setup after loading the view.
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        mylayout.buttonLayout(objeto: [enviar], color: UIColor.white,borderWidth: 1.2,corner: 0.1)
+        layout.tfLayout(tf: [tfEmail], image: nil)
     }
     
     override func didReceiveMemoryWarning() {

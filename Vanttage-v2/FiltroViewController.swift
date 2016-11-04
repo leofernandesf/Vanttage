@@ -10,12 +10,15 @@ import UIKit
 
 class FiltroViewController: UIViewController {
 
+    @IBOutlet weak var btVoltar: UIButton!
     @IBOutlet weak var myTable: UITableView!
     let headers: [String] = ["Ordenar por", "Dias da Semana", "Categorias"]
     let cellTitlles = ["Destaque", "Maior Desconto", "recente"]
     override func viewDidLoad() {
         super.viewDidLoad()
         myTable.tableFooterView = UIView(frame: .zero)
+        let imagem = layout.sizeImage(width: 24, height: 24, image: #imageLiteral(resourceName: "back_ic"))
+        btVoltar.setImage(imagem, for: .normal)
 //        let pinImage = UIImage(named: "back_ic")
 //        let size = CGSize(width: 24, height: 24)
 //        UIGraphicsBeginImageContext(size)

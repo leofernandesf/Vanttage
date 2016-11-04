@@ -144,13 +144,9 @@ class CriarContaViewController: UIViewController {
         }
     }
     
-    func vai(completion: (_ error: String)-> Void) {
-        
-    }
-    
     func post() {
         
-        let params = Cadastro.cadastroObjeto(tfs: mytfs, cidadeID: cidades[row])
+        let params = Cadastro.cadastroObjeto(tfs: mytfs, cidadeID: cidades[row], imagemRecebe: self.ivPerfil.image!)
 
         print(params)
         var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/UserCards")!)

@@ -15,6 +15,9 @@ class HomeViewController: UIViewController {
         case secondChildTab = 1
     }
     
+    
+    @IBOutlet weak var btFiltro: UIButton!
+    
     @IBOutlet weak var viewBusca: UIView!
     @IBOutlet weak var myTextField: UITextField!
     var companies : [Companies]?
@@ -40,7 +43,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dismissKeyboard()
-        
+        let imagem = layout.sizeImage(width: 24, height: 24, image: #imageLiteral(resourceName: "menu_ic"))
+        self.btBack.setImage(imagem, for: .normal)
+        let imagem2 = layout.sizeImage(width: 24, height: 24, image: #imageLiteral(resourceName: "filter_ic"))
+        self.btFiltro.setImage(imagem2, for: .normal)
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }
@@ -55,7 +61,8 @@ class HomeViewController: UIViewController {
         myTextField.delegate = self
         viewBusca.clipsToBounds = true
         //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
-        
+        let user = UserDefaults.standard
+        print(user.object(forKey: "entrar"))
         let index = IndexPath(item: 0, section: 0)
         muCollection.selectItem(at: index, animated: true, scrollPosition: .left)
     }

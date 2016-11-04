@@ -23,6 +23,10 @@ extension UIColor {
         return HexToColor(hexString: "#C5361D")
     }
     
+    var azulEscuro: UIColor {
+        return HexToColor(hexString: "#0A1620")
+    }
+    
     
     func HexToColor(hexString: String, alpha:CGFloat? = 1.0) -> UIColor {
         // Convert hex string to an integer
