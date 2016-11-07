@@ -91,6 +91,7 @@ class HomeTableViewCell: UITableViewCell {
         if let image = companie?.thumbnail {
             //imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
             imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)", completion: { (resposta) in
+                self.myLayout.imageLayout(image: self.imageProfile, recognizer: nil)
                 print(resposta)
             })
             
@@ -118,13 +119,15 @@ class HomeTableViewCell: UITableViewCell {
         rectShape.path = UIBezierPath(roundedRect: self.thumbImage.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 5, height: 5)).cgPath
         //self.thumbImage.layer.backgroundColor = UIColor.greenColor().CGColor
         self.thumbImage.layer.mask = rectShape
+        print(thumbImage.frame.width)
+        
     }
     
     
     let myLayout = layout()
     override func awakeFromNib() {
         super.awakeFromNib()
-        myLayout.imageLayout(image: imageProfile, recognizer: nil)
+        
         backGround.layer.masksToBounds = true
         backGround.clipsToBounds = true
         backGround.layer.cornerRadius = 5

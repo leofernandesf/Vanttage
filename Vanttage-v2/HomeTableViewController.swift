@@ -12,10 +12,9 @@ class HomeTableViewController: UIViewController {
     @IBOutlet weak var table: UITableView!
     var companies: [Companies]?
     var companie: Companies?
-    var image: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.table.tableFooterView = UIView(frame: .zero)
+        
 
         // Do any additional setup after loading the view.
     }
@@ -24,15 +23,23 @@ class HomeTableViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("entrou")
+        DispatchQueue.main.async {
+            self.table.delegate = self
+            self.table.dataSource = self
+            self.table.tableFooterView = UIView(frame: .zero)
+        }
+        
+        
+    }
+    
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "informacao" {
             let vc: EstabelecimentoViewController = segue.destination as! EstabelecimentoViewController
             vc.estabelecimento = self.companie
-//            if self.image != nil {
-//                vc.images = [self.image!]
-//            }
             
         }
     }
@@ -66,8 +73,7 @@ extension HomeTableViewController: UITableViewDataSource {
 extension HomeTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.companie = companies?[indexPath.row]
-//        let cell = tableView.cellForRow(at: indexPath) as!HomeTableViewCell
-//        self.image = cell.thumbImage.image
+
         performSegue(withIdentifier: "informacao", sender: self)
         self.table.deselectRow(at: indexPath, animated: true)
     }

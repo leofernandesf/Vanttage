@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }
-        GET()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,8 +63,10 @@ class HomeViewController: UIViewController {
         //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
         let user = UserDefaults.standard
         print(user.object(forKey: "entrar"))
+        GET()
         let index = IndexPath(item: 0, section: 0)
         muCollection.selectItem(at: index, animated: true, scrollPosition: .left)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -200,7 +202,10 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.currentViewController?.view.removeFromSuperview()
         self.currentViewController?.removeFromParentViewController()
-        displayCurrentTab(indexPath.item)
+        DispatchQueue.main.async {
+            self.displayCurrentTab(indexPath.item)
+        }
+        
     }
 }
 

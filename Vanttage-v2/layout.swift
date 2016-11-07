@@ -27,7 +27,7 @@ class layout {
         image.clipsToBounds = true
 //        image.layer.borderColor = UIColor.white.cgColor
 //        image.layer.borderWidth = 1
-        
+        print(image.frame.width)
         if recognizer != nil {
             image.isUserInteractionEnabled = true
             image.addGestureRecognizer(recognizer!)

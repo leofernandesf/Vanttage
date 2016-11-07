@@ -16,6 +16,7 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet{
             menuSection.textColor = isSelected ? UIColor.white : UIColor.white.withAlphaComponent(0.6)
+            print(imageSelected.image?.size.width)
             imageSelected.isHidden = isSelected ? false : true
         }
     }
