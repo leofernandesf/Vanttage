@@ -28,4 +28,7 @@ class Companies: NSObject {
     var phone: String?
     var status: Bool?
     var citiesId: Int?
+    var multiplyGold: Int?
+    var multiplyExclusive: Int?
+    
 }

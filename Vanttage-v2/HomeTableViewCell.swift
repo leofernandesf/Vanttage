@@ -12,6 +12,7 @@ class HomeTableViewCell: UITableViewCell {
     
     
     
+    @IBOutlet weak var starimage: UIImageView!
     @IBOutlet weak var backGround: UIView!
     @IBOutlet weak var nome: UILabel!
     @IBOutlet weak var lbFone: UILabel!
@@ -22,9 +23,11 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var btLayout: UIButton!
     let latitude3 = -3.135774 as Double
     let longitude3 = -60.021162 as Double
-
+    let defaults = UserDefaults.standard
     @IBOutlet weak var lbDescontMaximo: UILabel!
     @IBOutlet weak var lbDescontMinimo: UILabel!
+    @IBOutlet weak var lbPoint: UILabel!
+    @IBOutlet weak var pointImage: UIImageView!
     
     
     var companie: Companies? {
@@ -32,6 +35,19 @@ class HomeTableViewCell: UITableViewCell {
             self.nome.text = companie?.nome
             self.lbFone.text = companie?.phone
             self.lbEndereco.text = companie?.addres
+            
+            let x = defaults.object(forKey: "tipoCartao") as! Int
+            if x == 1 {
+                if let valor = companie?.multiplyGold {
+                    self.lbPoint.text = "x\(valor)"
+                }
+            } else {
+                if let valor = companie?.multiplyExclusive {
+                    self.lbPoint.text = "x\(valor)"
+                }
+            }
+            let tipoCartao = defaults.object(forKey: "tipoCartao")
+            print(tipoCartao)
             setUpImageThumbNail()
             setUpImageProfile()
             setUpPromocoes()

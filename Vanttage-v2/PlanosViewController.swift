@@ -13,6 +13,7 @@ class PlanosViewController: UIViewController {
     @IBOutlet weak var myCollection: UICollectionView!
     @IBOutlet weak var btAvancar: UIButton!
     let myLayout = layout()
+    var selectedcell = IndexPath(item: 0, section: 0)
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,17 +65,10 @@ extension PlanosViewController: UICollectionViewDataSource {
 
 extension PlanosViewController: UICollectionViewDelegate {
     
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        let layout = self.myCollection.collectionViewLayout as! UICollectionViewFlowLayout
-//        let cellWidth = layout.itemSize.width + layout.minimumLineSpacing
-//        
-//        var offset = targetContentOffset.pointee
-//        let index = (offset.x + scrollView.contentInset.left)/cellWidth
-//        
-//        let roundedInex = round(index)
-//        
-//        offset = CGPoint(x: roundedInex * cellWidth - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-//        targetContentOffset.pointee = offset
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedcell = indexPath
+        self.btAvancar.isHidden = false
+        
+    }
     
 }

@@ -56,7 +56,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         muCollection.delegate = self
         muCollection.dataSource = self
-        
+        print("entrou no didApear")
         viewBusca.layer.cornerRadius = 5
         myTextField.delegate = self
         viewBusca.clipsToBounds = true
@@ -108,6 +108,8 @@ class HomeViewController: UIViewController {
                             }
 
                         }
+                        companie.multiplyGold = dic["multiplyGold"] as? Int
+                        companie.multiplyExclusive = dic["multiplyExclusive"] as? Int
                         companie.descricao = dic["description"] as? String
                         companie.id = dic["id"] as? Int
                         companie.thumbnail = dic["thumbnail"] as? String

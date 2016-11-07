@@ -111,7 +111,7 @@ class Cadastro: NSObject {
     }
     
     
-    static func verErro(nometf: String?, passwordtf: String?,completion: @escaping (_ error: Int)-> Void) {
+    static func verErro(nometf: String?, passwordtf: String?,completion: @escaping (_ error: Int, _ prifileID: Int)-> Void) {
         var nome: String!
         var password: String!
         
@@ -154,7 +154,13 @@ class Cadastro: NSObject {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, AnyObject>
                     print(json)
                     let authorized = json["authorized"] as! Int
-                    completion(authorized)
+                    var tipoCartao = 1
+                    if authorized == 1 {
+                        let user = json["user"] as! Dictionary<String, AnyObject>
+                        tipoCartao = user["profilesId"] as! Int
+                    }
+                    
+                    completion(authorized, tipoCartao)
                     
                 } catch let jsonError {
                     print(jsonError)

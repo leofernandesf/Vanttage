@@ -101,12 +101,13 @@ class LoginViewController: UIViewController {
     
     func post() {
         print("entrou")
-        Cadastro.verErro(nometf: tfNome.text, passwordtf: tfPassword.text) { (result) in
+        Cadastro.verErro(nometf: tfNome.text, passwordtf: tfPassword.text) { (result, id) in
             DispatchQueue.main.async {
                 self.load.stopAnimating()
                 self.visulaeffect.isHidden = true
                 if result == 1 {
                     self.defaults.set(1, forKey: "entrar")
+                    self.defaults.set(id, forKey: "tipoCartao")
                     self.performSegue(withIdentifier: "entrar", sender: self)
                 } else {
                     print("nao pode entrar")

@@ -10,9 +10,12 @@ import UIKit
 
 class DadoCartaoExclusiveViewController: UIViewController {
 
+    @IBOutlet weak var btConfirmar: UIButton!
+    let myLayout = layout()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        myLayout.buttonLayout(objeto: [btConfirmar], color: UIColor.blue.azulEscuro, borderWidth: 1.2, corner: 0.1)
+        self.dismissKeyboard()
         // Do any additional setup after loading the view.
     }
 

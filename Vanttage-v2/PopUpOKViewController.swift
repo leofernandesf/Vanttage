@@ -32,6 +32,7 @@ class PopUpOKViewController: UIViewController {
         
         self.view.removeAnimate(view: self.view)
         self.defaults.set(1, forKey: "entrar")
+        self.defaults.set(1, forKey: "tipoCartao")
         _ = self.navigationController?.popViewController(animated: true)
     }
 
