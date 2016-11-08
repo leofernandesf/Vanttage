@@ -16,6 +16,7 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         case thirdChildTab = 2
     }
     
+    @IBOutlet weak var buttonShare: UIButton!
     @IBOutlet weak var lnTopNome: UILabel!
     @IBOutlet weak var lbNome: UILabel!
     @IBOutlet weak var myCollection: UICollectionView!
@@ -59,11 +60,18 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let imagem = layout.sizeImage(width: 18, height: 18, image: #imageLiteral(resourceName: "share_ic"))
+        buttonShare.setImage(imagem, for: .normal)
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        scroll.contentSize.height = screenHeight + 220
         setView()
-        print(images?.count)
         let index = IndexPath(item: 0, section: 0)
         myCollection.selectItem(at: index, animated: true, scrollPosition: .left)
-        
+        myCollection.delegate = self
+        myCollection.dataSource = self
         getImages()
         // myView.frame.height = screenHeight + 215
         
@@ -73,12 +81,6 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         setUpPromocoes()
         //displayCurrentTab(TabIndex.firstChildTab.rawValue)
         imagem()
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        scroll.contentSize.height = screenHeight + 220
-        print(scroll.contentSize)
     }
     
     func getImages() {
@@ -130,9 +132,6 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         //image.lo
     }
     
-    func x() {
-        
-    }
     
     func setView() {
         if let nome = estabelecimento.nome {
