@@ -17,7 +17,7 @@ class PlanosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        myLayout.buttonLayout(objeto: [btAvancar], color: UIColor.blue.azulEscuro, borderWidth: 1.2, corner: 0.1)
+        
         // Do any additional setup after loading the view.
     }
 
@@ -29,6 +29,7 @@ class PlanosViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.myCollection.delegate = self
         self.myCollection.dataSource = self
+        myLayout.buttonLayout(objeto: [btAvancar], color: UIColor.blue.azulEscuro, borderWidth: 1.2, corner: 0.1)
     }
     
     @IBAction func voltar(_ sender: AnyObject) {

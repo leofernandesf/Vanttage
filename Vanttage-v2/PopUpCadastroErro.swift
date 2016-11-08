@@ -22,12 +22,17 @@ class PopUpCadastroErro: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("foi")
-        self.popUpview.layer.cornerRadius = 5
-        myLayout.buttonLayout(objeto: [btBack], color: UIColor.white, borderWidth: 1,corner: 0.1)
+        
         showMensage()
         
         self.view.showAnimation(view: self.view)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.popUpview.layer.cornerRadius = 5
+        myLayout.buttonLayout(objeto: [btBack], color: UIColor.white, borderWidth: 1,corner: 0.1)
     }
     
     func showMensage() {

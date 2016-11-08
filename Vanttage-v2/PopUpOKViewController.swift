@@ -17,10 +17,14 @@ class PopUpOKViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.popUpview.layer.cornerRadius = 5
-        myLayout.buttonLayout(objeto: [btOK], color: UIColor.white, borderWidth: 1,corner: 0.1)
         self.view.showAnimation(view: self.view)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.popUpview.layer.cornerRadius = 5
+        myLayout.buttonLayout(objeto: [btOK], color: UIColor.white, borderWidth: 1,corner: 0.1)
     }
 
     override func didReceiveMemoryWarning() {

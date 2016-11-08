@@ -89,9 +89,13 @@ class HomeTableViewCell: UITableViewCell {
     }
     func setUpImageProfile()  {
         if let image = companie?.thumbnail {
+            
             //imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
             imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)", completion: { (resposta) in
-                self.myLayout.imageLayout(image: self.imageProfile, recognizer: nil)
+                DispatchQueue.main.async {
+                    self.myLayout.imageLayout(image: self.imageProfile, recognizer: nil)
+                }
+                
                 print(resposta)
             })
             
@@ -166,6 +170,7 @@ extension UIImageView {
         
         if let imageFromCache = imageCache.object(forKey: urlString as NSString){
             self.image = imageFromCache
+            let myLayout = layout()
             completion(self.image!)
             return
         }

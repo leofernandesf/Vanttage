@@ -20,12 +20,15 @@ class ExclusiveViewController: UIViewController {
 //        let image = layout.sizeImage(width: 18, height: 18, image: #imageLiteral(resourceName: "back_ic"))
 //        btVoltar.setImage(image, for: .normal)
         
-        self.navigationController?.navigationBar.isHidden = true
         layout.acaoMenu(botao: btVoltar, vc: self)
-        myLayout.buttonLayout(objeto: [nextView], color: UIColor.red.laranja, borderWidth: 1.2, corner: 0.1)
+        
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        myLayout.buttonLayout(objeto: [nextView], color: UIColor.red.laranja, borderWidth: 1.2, corner: 0.1)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,6 +37,7 @@ class ExclusiveViewController: UIViewController {
     
     @IBAction func voltaer(_ sender: AnyObject) {
         print("vai")
+        //self.view.target(forAction: #selector(SWRevealViewController.revealToggle(_:)), withSender: self)
     }
 
     /*
