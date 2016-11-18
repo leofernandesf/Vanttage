@@ -77,7 +77,7 @@ class HomeViewController: UIViewController {
     }
     
     func GET() {
-        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies/allCompanie?citiId=256")!)
+        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Companies/allCompanie?citiId=256")!)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -94,31 +94,27 @@ class HomeViewController: UIViewController {
                 
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                    
                     self.companies = [Companies]()
                     for dic in json as! [[String: AnyObject]]{
+                        let company = dic["company"] as! [String : Any]
                         
                         let companie = Companies()
-                        companie.nome = dic["name"] as? String
-                        companie.phone = dic["phones"] as? String
-                        companie.addres = dic["address"] as? String
-                        if let poin = dic["latlng"] as? String {
-                            if poin != "" {
-                                print(poin)
-                                var latlog = poin.components(separatedBy: ",")
-                                companie.lat = latlog[0]
-                                companie.long = latlog[1]
-                            }
-
-                        }
-                        companie.multiplyGold = dic["multiplyGold"] as? Int
-                        companie.multiplyExclusive = dic["multiplyExclusive"] as? Int
-                        companie.descricao = dic["description"] as? String
-                        companie.id = dic["id"] as? Int
-                        companie.thumbnail = dic["thumbnail"] as? String
-                        companie.banner1 = dic["bannerFeatured"] as? String
-                        companie.banner2 = dic["banner1"] as? String
-                        companie.banner3 = dic["banner2"] as? String
-                        companie.banerFeatured = dic["banner3"] as? String
+                        companie.nome = company["socialName"] as? String
+                        companie.phone = company["phoneFix"] as? String
+                        companie.addres = company["address"] as? String
+                        companie.lat = company["lat"] as? String
+                        companie.long = company["lon"] as? String
+                        
+                        companie.multiplyGold = company["multiply"] as? Int
+                        companie.multiplyExclusive = company["multiply"] as? Int
+                        companie.descricao = company["description"] as? String
+                        companie.id = company["id"] as? Int
+                        
+                        
+                        let companieImage = dic["companyImg"] as! [[String : Any]]
+                        companie.comapniesImages = companieImage
+                        
                         self.companies?.append(companie)
                         
                         
@@ -128,7 +124,7 @@ class HomeViewController: UIViewController {
                         self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
                     }
                     
-                    print(json)
+                    
                 } catch let jsonError {
                     print(jsonError)
                 }

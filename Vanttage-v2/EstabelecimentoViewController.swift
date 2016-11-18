@@ -105,7 +105,7 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
                                             self.images?.append(image.image!)
                                             self.imagem()
                                             
-                                            if let url4 = self.estabelecimento.banerFeatured {
+                                            if let url4 = self.estabelecimento.banner4 {
                                                 if url4 != "undifined" {
                                                     image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url4)", completion: { (imagem) in
                                                         self.images?.append(image.image!)

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -28,12 +28,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="WLd-sT-VPF" firstAttribute="centerY" secondItem="HZ0-9C-KRc" secondAttribute="centerY" id="90w-1W-M3D"/>
-                            <constraint firstAttribute="trailing" secondItem="HZ0-9C-KRc" secondAttribute="trailing" id="GZa-7E-Hsi"/>
-                            <constraint firstItem="WLd-sT-VPF" firstAttribute="centerX" secondItem="HZ0-9C-KRc" secondAttribute="centerX" id="JSh-4n-Vgc"/>
-                            <constraint firstItem="HZ0-9C-KRc" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Ne6-R0-Gg6"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="HZ0-9C-KRc" secondAttribute="bottom" id="SYk-Wl-QQJ"/>
-                            <constraint firstItem="HZ0-9C-KRc" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="mqd-2g-8G2"/>
+                            <constraint firstItem="HZ0-9C-KRc" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6qE-HH-p91"/>
+                            <constraint firstItem="HZ0-9C-KRc" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="9Y2-zE-6bZ"/>
+                            <constraint firstItem="WLd-sT-VPF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="GyX-zI-6Np"/>
+                            <constraint firstItem="HZ0-9C-KRc" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="HOa-h1-LHl"/>
+                            <constraint firstItem="WLd-sT-VPF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cHU-rF-u2D"/>
+                            <constraint firstItem="HZ0-9C-KRc" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="yVw-P7-3Sf"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>

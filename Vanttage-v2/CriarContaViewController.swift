@@ -371,7 +371,7 @@ class CriarContaViewController: UIViewController {
         
         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start { (connection, result, error) in
             if error != nil {
-                print(error)
+                print(error!)
                 return
             }
             

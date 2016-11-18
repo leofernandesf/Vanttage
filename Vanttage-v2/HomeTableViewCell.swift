@@ -32,6 +32,7 @@ class HomeTableViewCell: UITableViewCell {
     
     var companie: Companies? {
         didSet {
+            print(companie?.nome)
             self.nome.text = companie?.nome
             self.lbFone.text = companie?.phone
             self.lbEndereco.text = companie?.addres
@@ -47,11 +48,24 @@ class HomeTableViewCell: UITableViewCell {
                 }
             }
             let tipoCartao = defaults.object(forKey: "tipoCartao")
+            
             print(tipoCartao)
-            setUpImageThumbNail()
+            if let imagens = companie?.comapniesImages {
+                setUpImages(imagens: imagens)
+            }
+            
+//            setUpImageThumbNail()
             setUpImageProfile()
-            setUpPromocoes()
+//            setUpPromocoes()
 
+        }
+    }
+    
+    func setUpImages(imagens: [[String:Any]]) {
+        for im in imagens {
+            if let imageFile = im["img"] as? String {
+                companie?.perfil = imageFile
+            }
         }
     }
     
@@ -88,10 +102,10 @@ class HomeTableViewCell: UITableViewCell {
 //        }
     }
     func setUpImageProfile()  {
-        if let image = companie?.thumbnail {
+        if let image = companie?.perfil {
             
             //imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
-            imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)", completion: { (resposta) in
+            imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(image)", completion: { (resposta) in
                 DispatchQueue.main.async {
                     self.myLayout.imageLayout(image: self.imageProfile, recognizer: nil)
                 }

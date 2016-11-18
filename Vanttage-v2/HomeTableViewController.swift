@@ -15,7 +15,9 @@ class HomeTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        self.table.delegate = self
+        self.table.dataSource = self
+        self.table.tableFooterView = UIView(frame: .zero)
         // Do any additional setup after loading the view.
     }
     override func didReceiveMemoryWarning() {
@@ -26,9 +28,7 @@ class HomeTableViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("entrou")
         DispatchQueue.main.async {
-            self.table.delegate = self
-            self.table.dataSource = self
-            self.table.tableFooterView = UIView(frame: .zero)
+            
         }
         
         
