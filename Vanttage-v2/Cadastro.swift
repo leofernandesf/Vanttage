@@ -111,7 +111,7 @@ class Cadastro: NSObject {
     }
     
     
-    static func verErro(nometf: String?, passwordtf: String?,completion: @escaping (_ error: Int, _ prifileID: Int)-> Void) {
+    static func verErro(nometf: String?, passwordtf: String?,completion: @escaping (_ error: Bool, _ prifileID: Int)-> Void) {
         var nome: String!
         var password: String!
         
@@ -123,7 +123,7 @@ class Cadastro: NSObject {
             password = senha
         }
         let params: Dictionary<String, Any> = ["email": nome, "password": password]
-        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/appLogin")!)
+        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/appLogin")!)
         request.httpMethod = "POST"
         
         do {
@@ -153,14 +153,16 @@ class Cadastro: NSObject {
                     
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, AnyObject>
                     print(json)
-                    let authorized = json["authorized"] as! Int
+                    let teste = json["authorized"] as! Bool
+                    print(teste)
+                    let authorized = json["authorized"] as! Bool
                     var tipoCartao = 1
-                    if authorized == 1 {
-                        let user = json["user"] as! Dictionary<String, AnyObject>
-                        tipoCartao = user["profilesId"] as! Int
+                    if authorized == true {
+//                        let user = json["user"] as! Dictionary<String, AnyObject>
+//                        tipoCartao = user["profilesId"] as! Int
                     }
                     
-                    completion(authorized, tipoCartao)
+                    completion(authorized, 1)
                     
                 } catch let jsonError {
                     print(jsonError)

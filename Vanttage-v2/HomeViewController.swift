@@ -77,7 +77,7 @@ class HomeViewController: UIViewController {
     }
     
     func GET() {
-        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Companies/allCompanie?citiId=256")!)
+        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Companies/allCompanies?citiId=256")!)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -94,7 +94,7 @@ class HomeViewController: UIViewController {
                 
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                    
+                    print(json)
                     self.companies = [Companies]()
                     for dic in json as! [[String: AnyObject]]{
                         let company = dic["company"] as! [String : Any]

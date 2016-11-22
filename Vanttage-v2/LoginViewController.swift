@@ -105,9 +105,9 @@ class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 self.load.stopAnimating()
                 self.visulaeffect.isHidden = true
-                if result == 1 {
+                if result == true {
                     self.defaults.set(1, forKey: "entrar")
-                    self.defaults.set(id, forKey: "tipoCartao")
+                    //self.defaults.set(id, forKey: "tipoCartao")
                     self.performSegue(withIdentifier: "entrar", sender: self)
                 } else {
                     print("nao pode entrar")

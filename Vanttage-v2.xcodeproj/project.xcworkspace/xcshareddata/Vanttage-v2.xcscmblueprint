@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6240610D6392DE741FA0A301DF854C0C3238753B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "42FF50CD6E8CBCECA2E3FF0DCA465F4A97B3CF2B" : 9223372036854775807,
+    "6240610D6392DE741FA0A301DF854C0C3238753B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "84C404DA-583B-426D-A27F-8D9E922F2140",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "42FF50CD6E8CBCECA2E3FF0DCA465F4A97B3CF2B" : "",
+    "6240610D6392DE741FA0A301DF854C0C3238753B" : "Vanttage-v2\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Vanttage-v2",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Vanttage-v2.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/leofernandesf\/Vanttage.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "42FF50CD6E8CBCECA2E3FF0DCA465F4A97B3CF2B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/gitlab.tap4.com.br\/iOS\/vanttage-v2.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6240610D6392DE741FA0A301DF854C0C3238753B"
+    }
+  ]
+}

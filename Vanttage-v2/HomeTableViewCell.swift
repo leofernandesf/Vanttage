@@ -54,7 +54,7 @@ class HomeTableViewCell: UITableViewCell {
                 setUpImages(imagens: imagens)
             }
             
-//            setUpImageThumbNail()
+            setUpImageThumbNail()
             setUpImageProfile()
 //            setUpPromocoes()
 
@@ -62,9 +62,23 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func setUpImages(imagens: [[String:Any]]) {
+        var cont = 0
         for im in imagens {
             if let imageFile = im["img"] as? String {
-                companie?.perfil = imageFile
+                if cont == 0 {
+                    companie?.perfil = imageFile
+                } else if cont == 1 {
+                    companie?.logo = imageFile
+                } else if cont == 2 {
+                    companie?.banner1 = imageFile
+                } else if cont == 3 {
+                    companie?.banner2 = imageFile
+                } else if cont == 4 {
+                    companie?.banner3 = imageFile
+                } else if cont == 5 {
+                    companie?.banner4 = imageFile
+                }
+                cont += 1
             }
         }
     }
@@ -103,9 +117,9 @@ class HomeTableViewCell: UITableViewCell {
     }
     func setUpImageProfile()  {
         if let image = companie?.perfil {
-            
+            print(image)
             //imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
-            imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(image)", completion: { (resposta) in
+            imageProfile.loadImageUsingURL(urlString: "http://testbed.tap4.com.br:3000/\(image)", completion: { (resposta) in
                 DispatchQueue.main.async {
                     self.myLayout.imageLayout(image: self.imageProfile, recognizer: nil)
                 }
@@ -121,7 +135,7 @@ class HomeTableViewCell: UITableViewCell {
             //thumbImage.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
             DispatchQueue.main.async {
                 
-                self.thumbImage.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(image)", completion: { (resposta) in
+                self.thumbImage.loadImageUsingURL(urlString: "http://testbed.tap4.com.br:3000/\(image)", completion: { (resposta) in
                     print(resposta)
                 })
                 print("olha aqui")

@@ -60,6 +60,7 @@
 		B3E1BB921D9E9BB30086FF9D /* PopUpCadastroErro.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB911D9E9BB30086FF9D /* PopUpCadastroErro.swift */; };
 		B3E1BB941D9E9BCE0086FF9D /* SobreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB931D9E9BCE0086FF9D /* SobreViewController.swift */; };
 		B3E1BB961D9EA7030086FF9D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB951D9EA7030086FF9D /* MenuViewController.swift */; };
+		B3FCC1D51DE47C850048A06C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCC1D41DE47C850048A06C /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		B3E1BB911D9E9BB30086FF9D /* PopUpCadastroErro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpCadastroErro.swift; sourceTree = "<group>"; };
 		B3E1BB931D9E9BCE0086FF9D /* SobreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SobreViewController.swift; sourceTree = "<group>"; };
 		B3E1BB951D9EA7030086FF9D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		B3FCC1D41DE47C850048A06C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 				B3E1BB3B1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld */,
 				B3E1BB7F1D9E99270086FF9D /* layout.swift */,
 				B3E1BB811D9E9A030086FF9D /* Color.swift */,
+				B3FCC1D41DE47C850048A06C /* Helper.swift */,
 			);
 			path = "Vanttage-v2";
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				B35E6ED91DABD28600854767 /* FiltroSection3TableViewCell.swift in Sources */,
 				B35E6ED31DABC5B300854767 /* FiltroTableViewCell.swift in Sources */,
 				B384ACC61DCBA6DD00A9CA2C /* PlanoCollectionViewCell.swift in Sources */,
+				B3FCC1D51DE47C850048A06C /* Helper.swift in Sources */,
 				B31567A01DB6710500E8F72A /* LocalViewController.swift in Sources */,
 				B315679C1DB668E600E8F72A /* PromocoesViewController.swift in Sources */,
 				B3E1BB921D9E9BB30086FF9D /* PopUpCadastroErro.swift in Sources */,
