@@ -35,6 +35,7 @@
 		B39ADCAF1DA298E2004DBF30 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39ADCAE1DA298E2004DBF30 /* Bolts.framework */; };
 		B39B152D1DA54BF100933035 /* EstabelecimentoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39B152C1DA54BF100933035 /* EstabelecimentoTableViewCell.swift */; };
 		B39B15311DA555F100933035 /* opcoesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39B15301DA555F100933035 /* opcoesCollectionViewCell.swift */; };
+		B39CDC4C1DE6116A005D71F0 /* BotaoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39CDC4B1DE6116A005D71F0 /* BotaoTableViewCell.swift */; };
 		B39FA4FD1DCCB90D00ACD8DD /* CenterCellCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39FA4FC1DCCB90D00ACD8DD /* CenterCellCollectionViewFlowLayout.swift */; };
 		B3C223DB1DB4FEB1008890C4 /* PopUpOKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C223DA1DB4FEB1008890C4 /* PopUpOKViewController.swift */; };
 		B3E1BB351D9E92420086FF9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB341D9E92420086FF9D /* AppDelegate.swift */; };
@@ -112,6 +113,7 @@
 		B39ADCAE1DA298E2004DBF30 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B39B152C1DA54BF100933035 /* EstabelecimentoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstabelecimentoTableViewCell.swift; sourceTree = "<group>"; };
 		B39B15301DA555F100933035 /* opcoesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = opcoesCollectionViewCell.swift; sourceTree = "<group>"; };
+		B39CDC4B1DE6116A005D71F0 /* BotaoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotaoTableViewCell.swift; sourceTree = "<group>"; };
 		B39FA4FC1DCCB90D00ACD8DD /* CenterCellCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterCellCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		B3C223DA1DB4FEB1008890C4 /* PopUpOKViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpOKViewController.swift; sourceTree = "<group>"; };
 		B3E1BB311D9E92420086FF9D /* Vanttage-v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vanttage-v2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,7 @@
 				B315679F1DB6710500E8F72A /* LocalViewController.swift */,
 				B38361741DB7E7EE0002DADA /* EstabelecimentoViewController.swift */,
 				B36996791DC121760038ABB8 /* Promocoes.swift */,
+				B39CDC4B1DE6116A005D71F0 /* BotaoTableViewCell.swift */,
 			);
 			name = Estabelecimento;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				B3E1BB801D9E99270086FF9D /* layout.swift in Sources */,
 				B39FA4FD1DCCB90D00ACD8DD /* CenterCellCollectionViewFlowLayout.swift in Sources */,
 				B3E1BB881D9E9AB70086FF9D /* HomeViewController.swift in Sources */,
+				B39CDC4C1DE6116A005D71F0 /* BotaoTableViewCell.swift in Sources */,
 				B3E1BB8A1D9E9ADD0086FF9D /* HomeTableViewCell.swift in Sources */,
 				B3E1BB861D9E9A880086FF9D /* MapViewController.swift in Sources */,
 				B3E1BB961D9EA7030086FF9D /* MenuViewController.swift in Sources */,

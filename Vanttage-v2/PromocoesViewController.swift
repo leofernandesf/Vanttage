@@ -11,6 +11,7 @@ import UIKit
 class PromocoesViewController: UIViewController {
 
     
+    @IBOutlet weak var btSolicitar: UIButton!
     @IBOutlet weak var myTable: UITableView!
     var verificador = false
     var promocoes: [Promocoes]?
@@ -18,6 +19,8 @@ class PromocoesViewController: UIViewController {
         super.viewDidLoad()
         print(verificador)
         myTable.tableFooterView = UIView(frame: .zero)
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -26,7 +29,9 @@ class PromocoesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     
 
     /*
@@ -43,17 +48,29 @@ class PromocoesViewController: UIViewController {
 
 extension PromocoesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: EstabelecimentoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellEs", for: indexPath) as! EstabelecimentoTableViewCell
-        let customView = UIView()
-        customView.backgroundColor = UIColor.green.verde
-        cell.selectedBackgroundView = customView
+        var cell = UITableViewCell()
+        if indexPath.row == (promocoes?.count)! {
+            let Customcell: BotaoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellbt", for: indexPath) as! BotaoTableViewCell
+            
+            cell = Customcell
+        } else {
+            let Customcell: EstabelecimentoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellEs", for: indexPath) as! EstabelecimentoTableViewCell
+            let customView = UIView()
+            customView.backgroundColor = UIColor.green.verde
+            Customcell.selectedBackgroundView = customView
+            Customcell.promocao = self.promocoes?[indexPath.row]
+            cell = Customcell
+            
+        }
         
-        cell.promocao = self.promocoes?[indexPath.row]
+        
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return promocoes?.count ?? 0
+        print(promocoes?.count)
+        return (promocoes?.count)! + 1
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

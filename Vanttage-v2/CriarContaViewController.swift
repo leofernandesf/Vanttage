@@ -23,6 +23,7 @@ struct Cidades {
 
 class CriarContaViewController: UIViewController {
     
+    @IBOutlet weak var lbTitulo: UILabel!
     @IBOutlet weak var btBack: UIButton!
     @IBOutlet weak var ivPerfil: UIImageView!
     @IBOutlet weak var tfNome: UITextField!
@@ -81,6 +82,7 @@ class CriarContaViewController: UIViewController {
                 self.graphRequest()
             }
         } else {
+            lbTitulo.text = "Editar Perfil"
             layout.acaoMenu(botao: btBack, vc: self)
             print("de outro lugar")
             self.cadastroFace.isHidden = true
@@ -90,6 +92,14 @@ class CriarContaViewController: UIViewController {
     }
     
     func imprimirInformacoes() {
+        
+        tfNome.text = DAO.userSalvos(str: "name", entityName: "User")
+        tfCEP.text = DAO.userSalvos(str: "codeZip", entityName: "User")
+        tfCPF.text = DAO.userSalvos(str: "cpf", entityName: "User")
+        tfEmail.text = DAO.userSalvos(str: "email", entityName: "User")
+        tfProfissao.text = DAO.userSalvos(str: "profession", entityName: "User")
+        tfData.text = DAO.userSalvos(str: "birth", entityName: "User")
+        tfCartao.text = DAO.userSalvos(str: "numberCard", entityName: "UserCard")
         
     }
     
@@ -137,7 +147,7 @@ class CriarContaViewController: UIViewController {
         self.load.startAnimating()
         faceManager?.logIn(withReadPermissions: ["email","public_profile"], from: self) { (result, error) in
             if (error != nil) {
-                print("Erro em logar",error)
+                print("Erro em logar",error as Any)
                 self.visulaEfect.isHidden = true
             } else if (result?.isCancelled)! {
                 print("CANCELADO")

@@ -16,11 +16,13 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         case thirdChildTab = 2
     }
     
+    @IBOutlet weak var heightLayout: NSLayoutConstraint!
     @IBOutlet weak var buttonShare: UIButton!
     @IBOutlet weak var lnTopNome: UILabel!
     @IBOutlet weak var lbNome: UILabel!
     @IBOutlet weak var myCollection: UICollectionView!
     @IBOutlet weak var scroll: UIScrollView!
+    @IBOutlet weak var btSolicitar: UIButton!
     
     @IBOutlet weak var tvDescrecao: UITextView!
     @IBOutlet weak var contentView: UIView!
@@ -61,13 +63,13 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         super.viewDidLoad()
         let imagem = layout.sizeImage(width: 18, height: 18, image: #imageLiteral(resourceName: "share_ic"))
         buttonShare.setImage(imagem, for: .normal)
-        print(estabelecimento.promotions?.count)
-        print(estabelecimento.operatingDays)
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        scroll.contentSize.height = screenHeight + 220
+        scroll.contentSize.height = screenHeight + 230
+        self.heightLayout.constant = screenHeight - 160
         setView()
         let index = IndexPath(item: 0, section: 0)
         myCollection.selectItem(at: index, animated: true, scrollPosition: .left)
