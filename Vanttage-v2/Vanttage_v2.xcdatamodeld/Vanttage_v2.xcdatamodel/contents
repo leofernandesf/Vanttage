@@ -2,7 +2,6 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="User" syncable="YES">
         <attribute name="birth" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cardNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="citiesId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="codeZip" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cpf" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,17 +10,17 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pathPhoto" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profession" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="profilesId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="UserCard" representedClassName="UserCard" syncable="YES" codeGenerationType="class">
-        <attribute name="createdAt" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateValidation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="numberCard" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profilesId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="userCardsId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="210"/>
-        <element name="UserCard" positionX="-54" positionY="72" width="128" height="120"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="30"/>
+        <element name="UserCard" positionX="-54" positionY="72" width="128" height="30"/>
     </elements>
 </model>

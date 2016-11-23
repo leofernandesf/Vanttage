@@ -72,65 +72,66 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         myCollection.selectItem(at: index, animated: true, scrollPosition: .left)
         myCollection.delegate = self
         myCollection.dataSource = self
-        getImages()
+        //getImages()
         // myView.frame.height = screenHeight + 215
         
         scroll.delegate = self
         scroll.bounces = false
         
-        setUpPromocoes()
+        //setUpPromocoes()
         //displayCurrentTab(TabIndex.firstChildTab.rawValue)
-        imagem()
+        //imagem()
     }
     
-    func getImages() {
-        let image = UIImageView()
-        
-        if let url1 = estabelecimento.banner1 {
-            print(url1)
-            if url1 != "banner1" {
-                image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url1)", completion: { (imagem) in
-                    self.images = [imagem]
-                    self.imagem()
-                    
-                    if let url2 = self.estabelecimento.banner2 {
-                        if url2 != "banner2" {
-                            image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url2)", completion: { (imagem) in
-                                self.images?.append(image.image!)
-                                self.imagem()
-                                
-                                if let url3 = self.estabelecimento.banner3 {
-                                    if url3 != "banner3" {
-                                        image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url3)", completion: { (imagem) in
-                                            self.images?.append(image.image!)
-                                            self.imagem()
-                                            
-                                            if let url4 = self.estabelecimento.banner4 {
-                                                if url4 != "undifined" {
-                                                    image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url4)", completion: { (imagem) in
-                                                        self.images?.append(image.image!)
-                                                        self.imagem()
-                                                    })
-                                                }
-                                            }
-                                        })
-                                    }
-                                }
-                            })
-                        }
-                    }
-                })
-            }
-        }
-        
-        
-        
-        
-        
-        
-        
-        //image.lo
-    }
+//    func getImages() {
+//        let image = UIImageView()
+//        
+//        
+//        if let url1 = estabelecimento.banner1 {
+//            print(url1)
+//            if url1 != "banner1" {
+//                image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url1)", completion: { (imagem) in
+//                    self.images = [imagem]
+//                    self.imagem()
+//                    
+//                    if let url2 = self.estabelecimento.banner2 {
+//                        if url2 != "banner2" {
+//                            image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url2)", completion: { (imagem) in
+//                                self.images?.append(image.image!)
+//                                self.imagem()
+//                                
+//                                if let url3 = self.estabelecimento.banner3 {
+//                                    if url3 != "banner3" {
+//                                        image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url3)", completion: { (imagem) in
+//                                            self.images?.append(image.image!)
+//                                            self.imagem()
+//                                            
+//                                            if let url4 = self.estabelecimento.banner4 {
+//                                                if url4 != "undifined" {
+//                                                    image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url4)", completion: { (imagem) in
+//                                                        self.images?.append(image.image!)
+//                                                        self.imagem()
+//                                                    })
+//                                                }
+//                                            }
+//                                        })
+//                                    }
+//                                }
+//                            })
+//                        }
+//                    }
+//                })
+//            }
+//        }
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        //image.lo
+//    }
     
     
     func setView() {

@@ -63,6 +63,8 @@ class MenuTableViewController: UITableViewController {
             logOut.logOut()
             let user = UserDefaults.standard
             user.set(0, forKey: "entrar")
+            DAO.excluir(entityName: "User")
+            DAO.excluir(entityName: "UserCard")
             dismiss(animated: true, completion: nil)
         }
         

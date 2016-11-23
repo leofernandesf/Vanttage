@@ -147,9 +147,13 @@ class CriarContaViewController: UIViewController {
     func post() {
         
         let params = Cadastro.cadastroObjeto(tfs: mytfs, cidadeID: cidades[row], imagemRecebe: self.ivPerfil.image!)
-
-        print(params)
-        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/UserCards")!)
+//        let url = "http://testbed.tap4.com.br:3000/api/UserCards"
+//        print(params)
+//        
+//        Helper.POST(urlString: url, postString: params) { (result) in
+//            print(result)
+//        }
+        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/UserCards/save")!)
         request.httpMethod = "POST"
         do {
             let json = try JSONSerialization.data(withJSONObject: params, options: [])
@@ -196,7 +200,8 @@ class CriarContaViewController: UIViewController {
     
     
     func get() {
-        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Cities")!)
+        
+        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Cities")!)
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error

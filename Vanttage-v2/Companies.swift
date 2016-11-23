@@ -31,5 +31,6 @@ class Companies: NSObject {
     var multiplyGold: Int?
     var multiplyExclusive: Int?
     var comapniesImages: [[String : Any]]?
+    var promotions: [[String : Any]]?
     
 }

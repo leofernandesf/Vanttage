@@ -11,7 +11,10 @@ import UIKit
 class HomeTableViewCell: UITableViewCell {
     
     
+    @IBOutlet weak var lbUmaPromocao: UILabel!
     
+    @IBOutlet weak var maisPromocoes: UIImageView!
+    @IBOutlet weak var umaPromocao: UIImageView!
     @IBOutlet weak var starimage: UIImageView!
     @IBOutlet weak var backGround: UIView!
     @IBOutlet weak var nome: UILabel!
@@ -37,21 +40,18 @@ class HomeTableViewCell: UITableViewCell {
             self.lbFone.text = companie?.phone
             self.lbEndereco.text = companie?.addres
             
-            let x = defaults.object(forKey: "tipoCartao") as! Int
-            if x == 1 {
-                if let valor = companie?.multiplyGold {
-                    self.lbPoint.text = "x\(valor)"
-                }
-            } else {
-                if let valor = companie?.multiplyExclusive {
-                    self.lbPoint.text = "x\(valor)"
-                }
-            }
-            let tipoCartao = defaults.object(forKey: "tipoCartao")
             
-            print(tipoCartao)
+            if let valor = companie?.multiplyGold {
+                self.lbPoint.text = "x\(valor)"
+            }
+            
+            
             if let imagens = companie?.comapniesImages {
                 setUpImages(imagens: imagens)
+            }
+            
+            if let promocoes = companie?.promotions {
+                setUpPromocoes(promocoes: promocoes)
             }
             
             setUpImageThumbNail()
@@ -63,6 +63,7 @@ class HomeTableViewCell: UITableViewCell {
     
     func setUpImages(imagens: [[String:Any]]) {
         var cont = 0
+        print(imagens.count)
         for im in imagens {
             if let imageFile = im["img"] as? String {
                 if cont == 0 {
@@ -83,37 +84,49 @@ class HomeTableViewCell: UITableViewCell {
         }
     }
     
-    func setUpPromocoes() {
-//        if let id = companie?.id {
-//            var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies/\(id)/promotions")!)
-//            request.httpMethod = "GET"
-////            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-////            request.addValue("application/json", forHTTPHeaderField: "Accept")
-//            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//                guard let data = data, error == nil else {                                                 // check for fundamental networking error
-//                    print("error=\(error)")
-//                    return
-//                }
-//                
-//                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-//                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//                    print("response = \(response)")
-//                    
-//                }else {
-//                    
-//                    do {
-//                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-//                        let dic:[[String:AnyObject]] = json as! [[String : AnyObject]]
-//                        
-//                        if let
-//                        
-//                    } catch let jsonError {
-//                        print(jsonError)
-//                    }
-//                }
-//            }
-//            task.resume()
-//        }
+    func setUpPromocoes(promocoes: [[String : Any]]) {
+        print(promocoes.count)
+        if promocoes.count == 1 {
+            self.maisPromocoes.isHidden = true
+            self.lbDescontMaximo.isHidden = true
+            self.lbDescontMinimo.isHidden = true
+            self.lbUmaPromocao.isHidden = false
+            self.umaPromocao.isHidden = false
+            
+            
+            if let valor = promocoes[0]["value"] {
+                self.lbUmaPromocao.text = "\(valor)%"
+            }
+        } else {
+            var maior = 0
+            var menor = 0
+            self.maisPromocoes.isHidden = false
+            self.lbDescontMaximo.isHidden = false
+            self.lbDescontMinimo.isHidden = false
+            self.lbUmaPromocao.isHidden = true
+            self.umaPromocao.isHidden = true
+            
+            if let valor = promocoes[0]["value"] as? String {
+                maior = Int(valor)!
+                menor = Int(valor)!
+            }
+            
+            for promocao in promocoes {
+                if let valor = promocao["value"] as? String {
+                    let value = Int(valor)!
+                    if value > maior {
+                        maior = value
+                    } else if value < menor {
+                        menor = value
+                    }
+                }
+            }
+            
+            self.lbDescontMinimo.text = "\(menor)%"
+            self.lbDescontMaximo.text = "\(maior)%"
+            print("mais de uma promocao")
+        }
+        
     }
     func setUpImageProfile()  {
         if let image = companie?.perfil {

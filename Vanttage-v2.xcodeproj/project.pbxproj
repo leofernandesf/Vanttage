@@ -61,6 +61,7 @@
 		B3E1BB941D9E9BCE0086FF9D /* SobreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB931D9E9BCE0086FF9D /* SobreViewController.swift */; };
 		B3E1BB961D9EA7030086FF9D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1BB951D9EA7030086FF9D /* MenuViewController.swift */; };
 		B3FCC1D51DE47C850048A06C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCC1D41DE47C850048A06C /* Helper.swift */; };
+		B3FCC1FB1DE489050048A06C /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCC1FA1DE489050048A06C /* DAO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		B3E1BB931D9E9BCE0086FF9D /* SobreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SobreViewController.swift; sourceTree = "<group>"; };
 		B3E1BB951D9EA7030086FF9D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B3FCC1D41DE47C850048A06C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		B3FCC1FA1DE489050048A06C /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,13 +267,13 @@
 		B3E1BB331D9E92420086FF9D /* Vanttage-v2 */ = {
 			isa = PBXGroup;
 			children = (
+				B3FCC1F71DE488DC0048A06C /* DAO */,
 				B3E1BB721D9E97BE0086FF9D /* Frameworks */,
 				B3E1BB661D9E97010086FF9D /* Controller */,
 				B3E1BB651D9E94D80086FF9D /* View */,
 				B3E1BB341D9E92420086FF9D /* AppDelegate.swift */,
 				B3E1BB3E1D9E92420086FF9D /* Assets.xcassets */,
 				B3E1BB431D9E92420086FF9D /* Info.plist */,
-				B3E1BB3B1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld */,
 				B3E1BB7F1D9E99270086FF9D /* layout.swift */,
 				B3E1BB811D9E9A030086FF9D /* Color.swift */,
 				B3FCC1D41DE47C850048A06C /* Helper.swift */,
@@ -404,6 +406,15 @@
 				B3E1BB741D9E98050086FF9D /* Vanttage-v2-Bridging-Header.h */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B3FCC1F71DE488DC0048A06C /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1BB3B1D9E92420086FF9D /* Vanttage_v2.xcdatamodeld */,
+				B3FCC1FA1DE489050048A06C /* DAO.swift */,
+			);
+			name = DAO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,6 +555,7 @@
 			files = (
 				B3E1BB8E1D9E9B2D0086FF9D /* CartaoLandScapeViewController.swift in Sources */,
 				B3C223DB1DB4FEB1008890C4 /* PopUpOKViewController.swift in Sources */,
+				B3FCC1FB1DE489050048A06C /* DAO.swift in Sources */,
 				B3E1BB6B1D9E97510086FF9D /* LembrarSenhaViewController.swift in Sources */,
 				B3145A041DC7B63C009EE11F /* HistoricoViewController.swift in Sources */,
 				B3E1BB821D9E9A030086FF9D /* Color.swift in Sources */,
@@ -748,7 +760,7 @@
 					"$(PROJECT_DIR)/Vanttage-v2",
 				);
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tap4mobile.vanttage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -770,7 +782,7 @@
 					"$(PROJECT_DIR)/Vanttage-v2",
 				);
 				INFOPLIST_FILE = "Vanttage-v2/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.tap4mobile.vanttage;
 				PRODUCT_NAME = "$(TARGET_NAME)";

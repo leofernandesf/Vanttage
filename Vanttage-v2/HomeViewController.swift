@@ -115,6 +115,8 @@ class HomeViewController: UIViewController {
                         let companieImage = dic["companyImg"] as! [[String : Any]]
                         companie.comapniesImages = companieImage
                         
+                        let promotions = dic["promotions"] as! [[String : Any]]
+                        companie.promotions = promotions
                         self.companies?.append(companie)
                         
                         

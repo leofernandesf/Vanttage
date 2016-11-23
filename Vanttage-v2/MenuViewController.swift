@@ -10,9 +10,12 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
+    @IBOutlet weak var lbPontos: UILabel!
+    @IBOutlet weak var lbNome: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.lbNome.text = DAO.userSalvos(str: "name", entityName: "User")
         // Do any additional setup after loading the view.
     }
 

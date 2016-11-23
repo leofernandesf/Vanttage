@@ -28,6 +28,10 @@ class LoginViewController: UIViewController {
         load.stopAnimating()
         logInFace = FBSDKLoginManager()
         logInFace?.logOut()
+        //DAO.excluir()
+        print(DAO.userSalvos(str: "name", entityName: "User"))
+        print(DAO.userSalvos(str: "numberCard", entityName: "UserCard"))
+        
         
     }
     
@@ -40,6 +44,7 @@ class LoginViewController: UIViewController {
                 performSegue(withIdentifier: "entrar", sender: self)
             }
         }
+        
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -96,69 +101,34 @@ class LoginViewController: UIViewController {
     }
     
     
-    
-    
-    
     func post() {
+        
         print("entrou")
-        Cadastro.verErro(nometf: tfNome.text, passwordtf: tfPassword.text) { (result, id) in
-            DispatchQueue.main.async {
-                self.load.stopAnimating()
-                self.visulaeffect.isHidden = true
-                if result == true {
+        let url = "http://testbed.tap4.com.br:3000/appLogin"
+        let parameter: [String : Any] = ["email" : tfNome.text! , "password" : tfPassword.text!]
+        
+        Helper.POST(urlString: url, postString: parameter ) { (result) in
+            self.verificarResult(result: result)
+        }
+
+    }
+    
+    func verificarResult(result: [String: Any]) {
+        //print(result)
+        let authorized = result["authorized"] as! Bool
+        if authorized {
+            if let user = result["user"] as? [String : Any] {
+                print(user)
+                DAO.separarPalavras(user: user)
+                DispatchQueue.main.async {
+                    self.load.stopAnimating()
+                    self.visulaeffect.isHidden = true
                     self.defaults.set(1, forKey: "entrar")
-                    //self.defaults.set(id, forKey: "tipoCartao")
                     self.performSegue(withIdentifier: "entrar", sender: self)
-                } else {
-                    print("nao pode entrar")
                 }
                 
             }
-            
         }
-//        var nome: String!
-//        var password: String!
-//        
-//        if let email = tfNome.text {
-//            nome = email
-//        }
-//        
-//        if let senha = tfPassword.text {
-//            password = senha
-//        }
-//        let params: Dictionary<String, Any> = ["email": nome, "password": password]
-//        var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/appLogin")!)
-//        request.httpMethod = "POST"
-//        do {
-//            let json = try JSONSerialization.data(withJSONObject: params, options: [])
-//            request.httpBody = json
-//        } catch let jsonError {
-//            print(jsonError)
-//        }
-//        
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue("application/json", forHTTPHeaderField: "Accept")
-//        
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-//                print("error=\(error)")
-//                return
-//            }
-//            
-//            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//                print("response = \(response)")
-//                
-//            } else {
-//                let responseString = String(data: data, encoding: .utf8)
-//                print("responseString = \(responseString)")
-//                DispatchQueue.main.async {
-//                    self.performSegue(withIdentifier: "entrar", sender: self)
-//                }
-//                
-//            }
-//        }
-//        task.resume()
     }
     
     
