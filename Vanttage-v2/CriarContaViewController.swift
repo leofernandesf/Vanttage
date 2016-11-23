@@ -84,7 +84,12 @@ class CriarContaViewController: UIViewController {
             layout.acaoMenu(botao: btBack, vc: self)
             print("de outro lugar")
             self.cadastroFace.isHidden = true
+            imprimirInformacoes()
         }
+        
+    }
+    
+    func imprimirInformacoes() {
         
     }
     
@@ -201,46 +206,65 @@ class CriarContaViewController: UIViewController {
     
     func get() {
         
-        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Cities")!)
-        request.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                
-            }else {
-                
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                    for dic in json as! [[String: AnyObject]]{
-                        let existe = dic["isVisibled"] as! Int
-                        if existe == 1 {
-                            let cidade = Cidades(nome: dic["name"] as! String?, stateID: dic["statesId"] as! Int, id: dic["id"] as! Int)
-                            
-                            self.cidades.append(cidade)
-                        }
-                    }
+        Helper.GET(urlString: "http://testbed.tap4.com.br:3000/api/Cities") { (result) in
+            print(result)
+            for dic in result as! [[String: AnyObject]]{
+                let existe = dic["isVisibled"] as! Int
+                if existe == 1 {
+                    let cidade = Cidades(nome: dic["name"] as! String?, stateID: dic["statesId"] as! Int, id: dic["id"] as! Int)
                     
-                    print(self.cidades)
-                    DispatchQueue.main.async {
-                        self.tfCidade.text = self.cidades[0].nome
-                        self.visulaEfect.isHidden = true
-                        self.load.stopAnimating()
-                    }
-                    
-
-                } catch let jsonError {
-                    print(jsonError)
+                    self.cidades.append(cidade)
                 }
             }
             
+            print(self.cidades)
+            DispatchQueue.main.async {
+                self.tfCidade.text = self.cidades[0].nome
+                self.visulaEfect.isHidden = true
+                self.load.stopAnimating()
+            }
         }
-        task.resume()
+        
+//        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Cities")!)
+//        request.httpMethod = "GET"
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+//                print("error=\(error)")
+//                return
+//            }
+//            
+//            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//                print("response = \(response)")
+//                
+//            }else {
+//                
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+//                    for dic in json as! [[String: AnyObject]]{
+//                        let existe = dic["isVisibled"] as! Int
+//                        if existe == 1 {
+//                            let cidade = Cidades(nome: dic["name"] as! String?, stateID: dic["statesId"] as! Int, id: dic["id"] as! Int)
+//                            
+//                            self.cidades.append(cidade)
+//                        }
+//                    }
+//                    
+//                    print(self.cidades)
+//                    DispatchQueue.main.async {
+//                        self.tfCidade.text = self.cidades[0].nome
+//                        self.visulaEfect.isHidden = true
+//                        self.load.stopAnimating()
+//                    }
+//                    
+//
+//                } catch let jsonError {
+//                    print(jsonError)
+//                }
+//            }
+//            
+//        }
+//        task.resume()
     }
     
     

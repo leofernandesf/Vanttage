@@ -41,8 +41,18 @@ class HomeTableViewCell: UITableViewCell {
             self.lbEndereco.text = companie?.addres
             
             
-            if let valor = companie?.multiplyGold {
-                self.lbPoint.text = "x\(valor)"
+            if let valor = companie?.multiply {
+                if valor > 1 {
+                    self.lbPoint.isHidden = false
+                    self.pointImage.isHidden = false
+                    self.starimage.isHidden = false
+                    self.lbPoint.text = "x\(valor)"
+                } else {
+                    self.lbPoint.isHidden = true
+                    self.pointImage.isHidden = true
+                    self.starimage.isHidden = true
+                }
+                
             }
             
             
@@ -62,26 +72,29 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func setUpImages(imagens: [[String:Any]]) {
-        var cont = 0
+        //var cont = 0
         print(imagens.count)
+        var images = [String]()
         for im in imagens {
             if let imageFile = im["img"] as? String {
-                if cont == 0 {
-                    companie?.perfil = imageFile
-                } else if cont == 1 {
-                    companie?.logo = imageFile
-                } else if cont == 2 {
-                    companie?.banner1 = imageFile
-                } else if cont == 3 {
-                    companie?.banner2 = imageFile
-                } else if cont == 4 {
-                    companie?.banner3 = imageFile
-                } else if cont == 5 {
-                    companie?.banner4 = imageFile
-                }
-                cont += 1
+                images.append(imageFile)
+//                if cont == 0 {
+//                    companie?.perfil = imageFile
+//                } else if cont == 1 {
+//                    companie?.logo = imageFile
+//                } else if cont == 2 {
+//                    companie?.banner1 = imageFile
+//                } else if cont == 3 {
+//                    companie?.banner2 = imageFile
+//                } else if cont == 4 {
+//                    companie?.banner3 = imageFile
+//                } else if cont == 5 {
+//                    companie?.banner4 = imageFile
+//                }
+               // cont += 1
             }
         }
+        companie?.images = images
     }
     
     func setUpPromocoes(promocoes: [[String : Any]]) {
@@ -129,7 +142,7 @@ class HomeTableViewCell: UITableViewCell {
         
     }
     func setUpImageProfile()  {
-        if let image = companie?.perfil {
+        if let image = companie?.images?[0] {
             print(image)
             //imageProfile.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
             imageProfile.loadImageUsingURL(urlString: "http://testbed.tap4.com.br:3000/\(image)", completion: { (resposta) in
@@ -144,7 +157,8 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func setUpImageThumbNail() {
-        if let image = companie?.banner1 {
+        
+        if let image = companie?.images?[2] {
             //thumbImage.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/companies/\(image)")
             DispatchQueue.main.async {
                 

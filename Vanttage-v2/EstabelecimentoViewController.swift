@@ -29,10 +29,9 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     @IBOutlet weak var pageControll: UIPageControl!
     //var local: Locais?
     var estabelecimento: Companies!
-    var images: [UIImage]?
+    var images = [UIImage]()
     var currentViewController: UIViewController?
     var promocoes : [Promocoes]?
-    
     
     
     lazy var firstChildTabVC: UIViewController? = {
@@ -62,6 +61,8 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         super.viewDidLoad()
         let imagem = layout.sizeImage(width: 18, height: 18, image: #imageLiteral(resourceName: "share_ic"))
         buttonShare.setImage(imagem, for: .normal)
+        print(estabelecimento.promotions?.count)
+        print(estabelecimento.operatingDays)
         // Do any additional setup after loading the view.
     }
     
@@ -72,66 +73,32 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
         myCollection.selectItem(at: index, animated: true, scrollPosition: .left)
         myCollection.delegate = self
         myCollection.dataSource = self
-        //getImages()
+        getImages()
         // myView.frame.height = screenHeight + 215
         
         scroll.delegate = self
         scroll.bounces = false
         
-        //setUpPromocoes()
+        setUpPromocoes()
         //displayCurrentTab(TabIndex.firstChildTab.rawValue)
-        //imagem()
+        imagem()
     }
     
-//    func getImages() {
-//        let image = UIImageView()
-//        
-//        
-//        if let url1 = estabelecimento.banner1 {
-//            print(url1)
-//            if url1 != "banner1" {
-//                image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url1)", completion: { (imagem) in
-//                    self.images = [imagem]
-//                    self.imagem()
-//                    
-//                    if let url2 = self.estabelecimento.banner2 {
-//                        if url2 != "banner2" {
-//                            image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url2)", completion: { (imagem) in
-//                                self.images?.append(image.image!)
-//                                self.imagem()
-//                                
-//                                if let url3 = self.estabelecimento.banner3 {
-//                                    if url3 != "banner3" {
-//                                        image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url3)", completion: { (imagem) in
-//                                            self.images?.append(image.image!)
-//                                            self.imagem()
-//                                            
-//                                            if let url4 = self.estabelecimento.banner4 {
-//                                                if url4 != "undifined" {
-//                                                    image.loadImageUsingURL(urlString: "http://vanttage.com.br:3000/\(url4)", completion: { (imagem) in
-//                                                        self.images?.append(image.image!)
-//                                                        self.imagem()
-//                                                    })
-//                                                }
-//                                            }
-//                                        })
-//                                    }
-//                                }
-//                            })
-//                        }
-//                    }
-//                })
-//            }
-//        }
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        //image.lo
-//    }
+    func getImages() {
+        let image = UIImageView()
+        var cont = 0
+        print(estabelecimento.images)
+        for imagem in estabelecimento.images! {
+            if cont >= 2 {
+                image.loadImageUsingURL(urlString: "http://testbed.tap4.com.br:3000\(imagem)", completion: { (imageDowloaded) in
+                    self.images.append(imageDowloaded)
+                    self.imagem()
+                })
+            }
+            cont += 1
+        }
+
+    }
     
     
     func setView() {
@@ -155,62 +122,73 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     
     
     func setUpPromocoes() {
-        if let ID = self.estabelecimento.id {
-            print(ID)
-            var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies/\(ID)/promotions")!)
-            request.httpMethod = "GET"
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                    print("error=\(error)")
-                    return
-                }
-                
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                    print("response = \(response)")
-                    
-                }else {
-                    
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                        self.promocoes = [Promocoes]()
-                        for dic in json as! [[String: AnyObject]]{
-                            
-                            let promocao = Promocoes()
-                            promocao.id = dic["id"] as! Int?
-                            promocao.isFeatured = dic["isFeatured"] as! Int?
-                            promocao.descricao = dic["description"] as! String?
-                            promocao.value = dic["value"] as! String?
-                            promocao.discount = dic["discount"] as! String?
-                            promocao.howToUse = dic["howToUse"] as! String?
-                            promocao.rules = dic["rules"] as! String?
-                            promocao.status = dic["status"] as! Int?
-                            promocao.dayStart = dic["dayStart"] as! Int?
-                            promocao.dayEnd = dic["dayEnd"] as! Int?
-                            promocao.startHour = dic["startHour"] as! String?
-                            promocao.endHour = dic["endHour"] as! String?
-                            promocao.citiesId = dic["citiesId"] as! Int?
-                            promocao.companiesId = dic["companiesId"] as! Int?
-                            self.promocoes?.append(promocao)
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
-                        }
-                    } catch let jsonError {
-                        print(jsonError)
-                    }
-                }
-            }
-            task.resume()
+        self.promocoes = [Promocoes]()
+        for dic in estabelecimento.promotions! {
+            let promocao = Promocoes()
+            promocao.id = dic["id"] as! Int?
+            promocao.rules = dic["rules"] as! String?
+            promocao.status = dic["status"] as! Int?
+            promocao.companiesId = dic["companiesId"] as! Int?
+            promocao.value = dic["value"] as! String?
+            self.promocoes?.append(promocao)
         }
+        self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
+//        if let ID = self.estabelecimento.id {
+//            print(ID)
+//            var request = URLRequest(url: URL(string: "http://vanttage.com.br:3000/api/Companies/\(ID)/promotions")!)
+//            request.httpMethod = "GET"
+//            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+//                    print("error=\(error)")
+//                    return
+//                }
+//                
+//                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+//                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//                    print("response = \(response)")
+//                    
+//                }else {
+//                    
+//                    do {
+//                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+//                        self.promocoes = [Promocoes]()
+//                        for dic in json as! [[String: AnyObject]]{
+//                            
+//                            let promocao = Promocoes()
+//                            promocao.id = dic["id"] as! Int?
+//                            promocao.isFeatured = dic["isFeatured"] as! Int?
+//                            promocao.descricao = dic["description"] as! String?
+//                            promocao.value = dic["value"] as! String?
+//                            promocao.discount = dic["discount"] as! String?
+//                            promocao.howToUse = dic["howToUse"] as! String?
+//                            promocao.rules = dic["rules"] as! String?
+//                            promocao.status = dic["status"] as! Int?
+//                            promocao.dayStart = dic["dayStart"] as! Int?
+//                            promocao.dayEnd = dic["dayEnd"] as! Int?
+//                            promocao.startHour = dic["startHour"] as! String?
+//                            promocao.endHour = dic["endHour"] as! String?
+//                            promocao.citiesId = dic["citiesId"] as! Int?
+//                            promocao.companiesId = dic["companiesId"] as! Int?
+//                            self.promocoes?.append(promocao)
+//                        }
+//                        
+//                        DispatchQueue.main.async {
+//                            self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
+//                        }
+//                    } catch let jsonError {
+//                        print(jsonError)
+//                    }
+//                }
+//            }
+//            task.resume()
+//        }
         
     }
     
     @IBAction func compartilhar(_ sender: AnyObject) {
         
         print("share")
-        let imageDta = UIImagePNGRepresentation((images?[0])!)
+        let imageDta = UIImagePNGRepresentation((images[self.pageControll.currentPage]))
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("test.jpg")
         do {
             try imageDta?.write(to: fileURL, options: .atomic)
@@ -273,24 +251,24 @@ class EstabelecimentoViewController: UIViewController, UIDocumentInteractionCont
     
     
     func imagem() {
-        print(images)
-        if images != nil {
+        print(images.count)
+        if images.count > 0 {
             print("entrou")
-            self.pageControll.numberOfPages = (images?.count)!
+            self.pageControll.numberOfPages = images.count
             let scrollViewWidth:CGFloat = self.imageScrollView.frame.width
             let scrollViewHeight:CGFloat = self.imageScrollView.frame.height
             
-            let x = images?.count
-            for i in 0..<x! {
+            let x = images.count
+            for i in 0..<x {
                 let novaImagem = UIImageView(frame: CGRect(x: scrollViewWidth*CGFloat(i), y: 0, width: scrollViewWidth, height: scrollViewHeight))
-                novaImagem.image = images?[i]
+                novaImagem.image = images[i]
                 //novaImagem.contentMode = .scaleAspectFit
                 //novaImagem.contentMode = .scaleAspectFill
                 novaImagem.contentMode = .scaleToFill
                 self.imageScrollView.addSubview(novaImagem)
             }
             
-            self.imageScrollView.contentSize = CGSize(width: scrollViewWidth * CGFloat((images?.count)!), height: scrollViewHeight)
+            self.imageScrollView.contentSize = CGSize(width: scrollViewWidth * CGFloat((images.count)), height: scrollViewHeight)
             self.imageScrollView.delegate = self
             self.pageControll.currentPage = 0
         }

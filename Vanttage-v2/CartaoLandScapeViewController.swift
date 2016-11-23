@@ -10,6 +10,9 @@ import UIKit
 
 class CartaoLandScapeViewController: UIViewController {
     
+    @IBOutlet weak var lbNome: UILabel!
+    @IBOutlet weak var lbData: UILabel!
+    @IBOutlet weak var lbN: UILabel!
     @IBOutlet weak var btVoltar: UIButton!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidLoad() {
@@ -17,6 +20,17 @@ class CartaoLandScapeViewController: UIViewController {
         
         let image = layout.sizeImage(width: 32, height: 26, image: #imageLiteral(resourceName: "Change_view_ic"))
         btVoltar.setImage(image, for: .normal)
+        
+        lbNome.text = DAO.userSalvos(str: "name", entityName: "User")
+        lbN.text = DAO.userSalvos(str: "numberCard", entityName: "UserCard")
+        
+        let str = DAO.userSalvos(str: "createdAt", entityName: "UserCard")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.date(from: str)!
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let dateString = dateFormatter.string(from: date)
+        self.lbData.text = dateString
         // Do any additional setup after loading the view.
     }
     

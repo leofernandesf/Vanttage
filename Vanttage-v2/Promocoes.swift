@@ -10,17 +10,8 @@ import UIKit
 
 class Promocoes: NSObject {
     var id: Int?
-    var isFeatured: Int?
-    var descricao: String?
-    var value: String?
-    var discount: String?
-    var howToUse: String?
     var rules: String?
     var status: Int?
-    var dayStart: Int?
-    var dayEnd: Int?
-    var startHour: String?
-    var endHour: String?
-    var citiesId: Int?
     var companiesId: Int?
+    var value: String?
 }

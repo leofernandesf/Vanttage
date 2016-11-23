@@ -13,11 +13,11 @@ class EstabelecimentoTableViewCell: UITableViewCell {
     @IBOutlet weak var lbDescricao: UILabel!
     var promocao: Promocoes? {
         didSet {
-            if let x = promocao?.value {
+            if let x = promocao?.value{
                 self.lbPorcentagem.text = "\(x)%"
             }
             
-            self.lbDescricao.text = promocao?.descricao
+            self.lbDescricao.text = promocao?.rules
         }
     }
     override func awakeFromNib() {

@@ -83,7 +83,7 @@ class Helper {
     }
     
     
-    static func GET(urlString: String,completion: @escaping (_ result: Dictionary<String, AnyObject> )-> Void) {
+    static func GET(urlString: String,completion: @escaping (_ result: Any )-> Void) {
         
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "GET"
@@ -99,7 +99,7 @@ class Helper {
                 
             }else {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, AnyObject>
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
                     //                    let x = json["data"] as! [[String: Any]]
                     //                    for y in x {
                     //                        if let query = y["query"] as? Int {

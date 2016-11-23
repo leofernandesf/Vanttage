@@ -15,6 +15,7 @@ class Companies: NSObject {
     var email: String?
     var isBrand: Bool?
     var logo: String?
+    var images: [String]?
     var banner1: String?
     var banner2: String?
     var banner3: String?
@@ -28,9 +29,9 @@ class Companies: NSObject {
     var phone: String?
     var status: Bool?
     var citiesId: Int?
-    var multiplyGold: Int?
-    var multiplyExclusive: Int?
+    var multiply: Int?
     var comapniesImages: [[String : Any]]?
     var promotions: [[String : Any]]?
+    var operatingDays: [[String : Any]]?
     
 }

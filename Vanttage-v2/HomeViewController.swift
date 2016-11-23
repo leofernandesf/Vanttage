@@ -50,6 +50,17 @@ class HomeViewController: UIViewController {
         if self.revealViewController() != nil {
             layout.acaoMenu(botao: btBack, vc: self)
         }
+        GET()
+//        muCollection.delegate = self
+//        muCollection.dataSource = self
+//        print("entrou no didApear")
+//        viewBusca.layer.cornerRadius = 5
+//        myTextField.delegate = self
+//        viewBusca.clipsToBounds = true
+//        //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
+//        GET()
+//        let index = IndexPath(item: 0, section: 0)
+//        muCollection.selectItem(at: index, animated: true, scrollPosition: .left)
         
     }
     
@@ -61,9 +72,7 @@ class HomeViewController: UIViewController {
         myTextField.delegate = self
         viewBusca.clipsToBounds = true
         //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "header_scroll_bg"), for: .top, barMetrics: .default)
-        let user = UserDefaults.standard
-        print(user.object(forKey: "entrar"))
-        GET()
+        //GET()
         let index = IndexPath(item: 0, section: 0)
         muCollection.selectItem(at: index, animated: true, scrollPosition: .left)
         
@@ -77,63 +86,105 @@ class HomeViewController: UIViewController {
     }
     
     func GET() {
-        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Companies/allCompanies?citiId=256")!)
-        request.httpMethod = "GET"
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            
-            }else {
-                
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                    print(json)
-                    self.companies = [Companies]()
-                    for dic in json as! [[String: AnyObject]]{
-                        let company = dic["company"] as! [String : Any]
-                        
-                        let companie = Companies()
-                        companie.nome = company["socialName"] as? String
-                        companie.phone = company["phoneFix"] as? String
-                        companie.addres = company["address"] as? String
-                        companie.lat = company["lat"] as? String
-                        companie.long = company["lon"] as? String
-                        
-                        companie.multiplyGold = company["multiply"] as? Int
-                        companie.multiplyExclusive = company["multiply"] as? Int
-                        companie.descricao = company["description"] as? String
-                        companie.id = company["id"] as? Int
-                        
-                        
-                        let companieImage = dic["companyImg"] as! [[String : Any]]
-                        companie.comapniesImages = companieImage
-                        
-                        let promotions = dic["promotions"] as! [[String : Any]]
-                        companie.promotions = promotions
-                        self.companies?.append(companie)
-                        
-                        
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
-                    }
-                    
-                    
-                } catch let jsonError {
-                    print(jsonError)
-                }
-            }
-
+        
+        Helper.GET(urlString: "http://testbed.tap4.com.br:3000/api/Companies/allCompanies?citiId=256") { (result) in
+            print(result)
+            self.separaCompanies(json: result)
         }
-        task.resume()
+//        var request = URLRequest(url: URL(string: "http://testbed.tap4.com.br:3000/api/Companies/allCompanies?citiId=256")!)
+//        request.httpMethod = "GET"
+//
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+//                print("error=\(error)")
+//                return
+//            }
+//            
+//            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//                print("response = \(response)")
+//            
+//            }else {
+//                
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+//                    print(json)
+//                    self.companies = [Companies]()
+//                    for dic in json as! [[String: AnyObject]]{
+//                        let company = dic["company"] as! [String : Any]
+//                        
+//                        let companie = Companies()
+//                        companie.nome = company["socialName"] as? String
+//                        companie.phone = company["phoneFix"] as? String
+//                        companie.addres = company["address"] as? String
+//                        companie.lat = company["lat"] as? String
+//                        companie.long = company["lon"] as? String
+//                        
+//                        companie.multiplyGold = company["multiply"] as? Int
+//                        companie.multiplyExclusive = company["multiply"] as? Int
+//                        companie.descricao = company["description"] as? String
+//                        companie.id = company["id"] as? Int
+//                        
+//                        
+//                        let companieImage = dic["companyImg"] as! [[String : Any]]
+//                        companie.comapniesImages = companieImage
+//                        
+//                        let promotions = dic["promotions"] as! [[String : Any]]
+//                        companie.promotions = promotions
+//                        self.companies?.append(companie)
+//                        
+//                        
+//                    }
+//                    
+//                    DispatchQueue.main.async {
+//                        self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
+//                    }
+//                    
+//                    
+//                } catch let jsonError {
+//                    print(jsonError)
+//                }
+//            }
+//
+//        }
+//        task.resume()
+    }
+    
+    func separaCompanies(json : Any) {
+        
+        self.companies = [Companies]()
+        for dic in json as! [[String: AnyObject]]{
+            let company = dic["company"] as! [String : Any]
+            
+            let companie = Companies()
+            companie.nome = company["fantasyName"] as? String
+            companie.phone = company["phoneFix"] as? String
+            companie.addres = company["address"] as? String
+            companie.lat = company["lat"] as? String
+            companie.long = company["lon"] as? String
+            
+            companie.multiply = company["multiply"] as? Int
+            companie.descricao = company["description"] as? String
+            companie.id = company["id"] as? Int
+            
+            
+            let companieImage = dic["companyImg"] as! [[String : Any]]
+            companie.comapniesImages = companieImage
+            
+            let promotions = dic["promotions"] as! [[String : Any]]
+            companie.promotions = promotions
+            
+            let operatingDays = dic["operatingDays"] as! [[String : Any]]
+            companie.operatingDays = operatingDays
+            self.companies?.append(companie)
+            
+            
+        }
+        
+        DispatchQueue.main.async {
+            self.displayCurrentTab(TabIndex.firstChildTab.rawValue)
+        }
+        
     }
     
     
@@ -209,6 +260,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print(collectionView.frame.size.width)
         return CGSize(width: collectionView.frame.size.width/2, height: collectionView.frame.size.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

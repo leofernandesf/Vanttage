@@ -14,9 +14,6 @@ class CartaoViewController: UIViewController {
     @IBOutlet weak var btBack: UIButton!
     @IBOutlet weak var lbData: UILabel!
     @IBOutlet weak var lbN1: UILabel!
-    @IBOutlet weak var lbN2: UILabel!
-    @IBOutlet weak var lbN3: UILabel!
-    @IBOutlet weak var lbN4: UILabel!
     @IBOutlet weak var lbAdesao: UILabel!
     
     var cont = true
@@ -30,7 +27,7 @@ class CartaoViewController: UIViewController {
         }
         
         lbNome.text = DAO.userSalvos(str: "name", entityName: "User")
-        separarNumeros()
+        lbN1.text = DAO.userSalvos(str: "numberCard", entityName: "UserCard")
         
         
         let str = DAO.userSalvos(str: "createdAt", entityName: "UserCard")
@@ -45,15 +42,15 @@ class CartaoViewController: UIViewController {
 
     
     
-    func separarNumeros() {
-        let numberCard = DAO.userSalvos(str: "numberCard", entityName: "UserCard")
-        let ch = Array(numberCard.characters)
-        print(ch.count)
-        lbN1.text = "\(ch[0])\(ch[1])\(ch[2])\(ch[3])"
-        lbN2.text = "\(ch[4])\(ch[5])\(ch[6])\(ch[7])"
-        lbN3.text = "\(ch[8])\(ch[9])\(ch[10])\(ch[11])"
-        //lbN4.text = "\(ch[12])\(ch[13])\(ch[14])\(ch[15])"
-    }
+//    func separarNumeros() {
+//        let numberCard = DAO.userSalvos(str: "numberCard", entityName: "UserCard")
+//        let ch = Array(numberCard.characters)
+//        print(ch.count)
+//        lbN1.text = "\(ch[0])\(ch[1])\(ch[2])\(ch[3])"
+//        lbN2.text = "\(ch[4])\(ch[5])\(ch[6])\(ch[7])"
+//        lbN3.text = "\(ch[8])\(ch[9])\(ch[10])\(ch[11])"
+//        //lbN4.text = "\(ch[12])\(ch[13])\(ch[14])\(ch[15])"
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
